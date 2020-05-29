@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Api", "Xalendar.Api\Xalendar.Api.csproj", "{A912C113-58E9-4D95-BE9E-A8210C553226}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A912C113-58E9-4D95-BE9E-A8210C553226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A912C113-58E9-4D95-BE9E-A8210C553226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A912C113-58E9-4D95-BE9E-A8210C553226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A912C113-58E9-4D95-BE9E-A8210C553226}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
