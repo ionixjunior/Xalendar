@@ -1,8 +1,9 @@
 name: Pull Request Validation
-on: [push,pull_request]
+on: [pull_request]
 
 jobs:
   Tests:
+    name: Run tests Xalendar.Api.Tests
     runs-on: ubuntu-latest
 
     steps:
