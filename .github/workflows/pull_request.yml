@@ -1,0 +1,29 @@
+name: Pull Request Validation
+on: [pull_request]
+
+jobs:
+  Tests:
+    name: Run tests Xalendar.Api.Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run unit tests
+      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n
+
+  Api:
+    name: Build Xalendar.Api project
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.201
+    - name: Install dependencies
+      run: dotnet restore
+      working-directory: 'src/'
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      working-directory: 'src/'
