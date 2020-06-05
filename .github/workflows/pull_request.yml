@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run unit tests
-      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n
+      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true
 
   Api:
     name: Build Xalendar.Api project
