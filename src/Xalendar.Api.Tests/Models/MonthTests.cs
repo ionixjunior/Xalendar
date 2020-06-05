@@ -19,7 +19,7 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
-        public void February2020ShouldBe29Days()
+        public void LeapYearFebruaryShouldBe29Days()
         {
             var dateTime = new DateTime(2020, 2, 1);
             var month = new Month(dateTime);
