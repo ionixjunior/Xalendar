@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run unit tests
-      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true
+      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
       run: bash <(curl -s https://codecov.io/bash)
       env:
