@@ -28,5 +28,28 @@ namespace Xalendar.Api.Tests.Models
 
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void DayIsUnSelected()
+        {
+            var dateTime = DateTime.Today;
+            var day = new Day(dateTime);
+
+            var result = day.IsSelected;
+            
+            Assert.IsFalse(result);
+        }
+        
+        [Test]
+        public void DayIsSelected()
+        {
+            var dateTime = DateTime.Today;
+            var day = new Day(dateTime);
+            day.IsSelected = true;
+
+            var result = day.IsSelected;
+            
+            Assert.IsTrue(result);
+        }
     }
 }

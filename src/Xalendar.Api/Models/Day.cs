@@ -12,5 +12,13 @@ namespace Xalendar.Api.Models
         }
 
         public bool IsToday => DateTime.Now.Day == _dateTime.Day;
+        
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set => _isSelected = value;
+        }
     }
 }
