@@ -1,6 +1,7 @@
 # My gitignore configs
 .DS_Store
 src/Xalendar.Api.Tests/coverage.opencover.xml
+src/.idea/
 
 # Created by https://www.gitignore.io/api/dotnetcore,visualstudio
 # Edit at https://www.gitignore.io/?templates=dotnetcore,visualstudio
