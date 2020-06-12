@@ -81,8 +81,9 @@ namespace Xalendar.Api.Tests.Models
             var dayTwo = new Day(DateTime.Now);
 
             var comparison = dayOne.Equals(dayTwo);
-
+            var hashCodeComparision = dayOne.GetHashCode().Equals(dayTwo.GetHashCode());
             Assert.IsTrue(comparison);
+            Assert.IsTrue(hashCodeComparision);
         }
         
         [Test]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Tests.Models
@@ -14,7 +15,7 @@ namespace Xalendar.Api.Tests.Models
             var dateTime = new DateTime(2020, 6, 4);
             var month = new Month(dateTime);
 
-            var result = month.GetDaysOfMonth();
+            var result = month.Days;
 
             Assert.AreEqual(30, result.Count);
         }
@@ -25,7 +26,7 @@ namespace Xalendar.Api.Tests.Models
             var dateTime = new DateTime(2020, 2, 1);
             var month = new Month(dateTime);
 
-            var result = month.GetDaysOfMonth();
+            var result = month.Days;
 
             Assert.AreEqual(29, result.Count);
         }
