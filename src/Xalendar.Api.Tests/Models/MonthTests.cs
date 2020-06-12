@@ -52,7 +52,7 @@ namespace Xalendar.Api.Tests.Models
 
             var selectedDay = month.GetSelectedDay();
             
-            Assert.AreEqual(day, selectedDay.Value);
+            Assert.AreEqual(day, selectedDay);
         }
 
         [Test]
