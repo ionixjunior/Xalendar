@@ -28,5 +28,72 @@ namespace Xalendar.Api.Tests.Models
 
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void DayIsUnSelected()
+        {
+            var dateTime = DateTime.Today;
+            var day = new Day(dateTime);
+
+            var result = day.IsSelected;
+            
+            Assert.IsFalse(result);
+        }
+        
+        [Test]
+        public void DayIsSelected()
+        {
+            var dateTime = DateTime.Today;
+            var isSelected = true;
+            var day = new Day(dateTime, isSelected);
+
+            var result = day.IsSelected;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void DayIsSelectedWhenChangeState()
+        {
+            var dateTime = DateTime.Today;
+            var day = new Day(dateTime);
+            day.IsSelected = true;
+
+            var result = day.IsSelected;
+            
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void ParameterOfEqualsComparisonShouldNotBeDayClass()
+        {
+            var day = new Day(DateTime.Now);
+
+            var comparison = day.Equals(new DateTime());
+            
+            Assert.IsFalse(comparison);
+        }
+
+        [Test]
+        public void DayShouldBeEquals()
+        {
+            var dayOne = new Day(DateTime.Now);
+            var dayTwo = new Day(DateTime.Now);
+
+            var comparison = dayOne.Equals(dayTwo);
+
+            Assert.IsTrue(comparison);
+        }
+        
+        [Test]
+        public void DayShouldNotBeEquals()
+        {
+            var dayOne = new Day(DateTime.Now);
+            var dayTwo = new Day(DateTime.Now.AddDays(1));
+
+            var comparison = dayOne.Equals(dayTwo);
+
+            Assert.IsFalse(comparison);
+        }
     }
 }
