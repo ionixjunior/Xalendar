@@ -23,5 +23,13 @@ namespace Xalendar.Api.Models
         }
 
         public DateTime DateTime => _dateTime;
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Day dayToCompare)
+                return dayToCompare.DateTime.Date.Ticks == _dateTime.Date.Ticks;
+            
+            return false;
+        }
     }
 }
