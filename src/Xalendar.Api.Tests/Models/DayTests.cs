@@ -44,6 +44,18 @@ namespace Xalendar.Api.Tests.Models
         public void DayIsSelected()
         {
             var dateTime = DateTime.Today;
+            var isSelected = true;
+            var day = new Day(dateTime, isSelected);
+
+            var result = day.IsSelected;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void DayIsSelectedWhenChangeState()
+        {
+            var dateTime = DateTime.Today;
             var day = new Day(dateTime);
             day.IsSelected = true;
 
