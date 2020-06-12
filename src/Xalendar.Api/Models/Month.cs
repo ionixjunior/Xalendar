@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using static Xalendar.Api.Extensions.MonthExtension;
 
 namespace Xalendar.Api.Models
 {
-    public class Month
+    public struct Month : IEquatable<Month>
     {
         public DateTime MonthDateTime {get;}
         public IReadOnlyList<Day> Days {get;}
@@ -12,16 +12,21 @@ namespace Xalendar.Api.Models
         public Month(DateTime dateTime)
         {
             MonthDateTime = dateTime;
-            Days = GenerateDaysOfMonth();
+            Days = GenerateDaysOfMonth(dateTime);
         }
 
-        private List<Day> GenerateDaysOfMonth()
-        {
-            return Enumerable
-                .Range(1, DateTime.DaysInMonth(MonthDateTime.Year, MonthDateTime.Month))
-                .Select(dayValue => new DateTime(MonthDateTime.Year, MonthDateTime.Month, dayValue))
-                .Select(dateTime => new Day(dateTime))
-                .ToList();
-        }
+        public bool Equals(Month other) =>
+            (MonthDateTime, Days) == (other.MonthDateTime, other.Days);
+        
+        public static bool  operator ==(Month left, Month right) =>
+            left.Equals(right);
+        public static bool  operator !=(Month left, Month right) =>
+            !left.Equals(right);
+
+        public override bool Equals(object obj) =>
+            (obj is Month month) && (this.Equals(month));
+        
+        public override int GetHashCode() =>
+            (MonthDateTime, Days).GetHashCode();
     }
 }

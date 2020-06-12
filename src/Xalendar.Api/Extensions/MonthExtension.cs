@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xalendar.Api.Models;
 
@@ -33,6 +35,15 @@ namespace Xalendar.Api.Extensions
         public static Day GetSelectedDay(this Month month)
         {
             return month.Days.FirstOrDefault(day => day.IsSelected);
+        }
+        
+        public static List<Day> GenerateDaysOfMonth(DateTime dateTime)
+        {
+            return Enumerable
+                .Range(1, DateTime.DaysInMonth(dateTime.Year, dateTime.Month))
+                .Select(dayValue => new DateTime(dateTime.Year, dateTime.Month, dayValue))
+                .Select(dateTime => new Day(dateTime))
+                .ToList();
         }
     }
 }
