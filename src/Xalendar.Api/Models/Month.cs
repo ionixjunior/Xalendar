@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace Xalendar.Api.Models
 {
-    public struct Month
+    public class Month
     {
         private readonly DateTime _dateTime;
         private readonly IReadOnlyList<Day> _days;
 
-        public Month(DateTime dateTime) : this()
+        public Month(DateTime dateTime)
         {
             _dateTime = dateTime;
             _days = GenerateDaysOfMonth();
@@ -17,11 +17,9 @@ namespace Xalendar.Api.Models
 
         private List<Day> GenerateDaysOfMonth()
         {
-            DateTime instanceDateTime = _dateTime;
-            
             return Enumerable
-                .Range(1, DateTime.DaysInMonth(instanceDateTime.Year, instanceDateTime.Month))
-                .Select(dayValue => new DateTime(instanceDateTime.Year, instanceDateTime.Month, dayValue))
+                .Range(1, DateTime.DaysInMonth(_dateTime.Year, _dateTime.Month))
+                .Select(dayValue => new DateTime(_dateTime.Year, _dateTime.Month, dayValue))
                 .Select(dateTime => new Day(dateTime))
                 .ToList();
         }

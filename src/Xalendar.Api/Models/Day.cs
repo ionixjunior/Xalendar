@@ -2,14 +2,13 @@
 
 namespace Xalendar.Api.Models
 {
-    public struct Day
+    public class Day
     {
         private readonly DateTime _dateTime;
 
-        public Day(DateTime dateTime, bool isSelected = false)
+        public Day(DateTime dateTime)
         {
             _dateTime = dateTime;
-            _isSelected = isSelected;
         }
 
         public bool IsToday => DateTime.Now.Day == _dateTime.Day;
