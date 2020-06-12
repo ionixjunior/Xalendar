@@ -58,7 +58,17 @@ namespace Xalendar.Api.Tests.Models
         [Test]
         public void SelectedDayShouldBeChanged()
         {
+            var dateTime = new DateTime(2020, 2, 1);
+            var month = new Month(dateTime);
+            var isSelected = true;
+            var day = new Day(dateTime, isSelected);
+            month.SelectDay(day);
+            var newDaySelected = new Day(dateTime.AddDays(10), isSelected);
+            month.SelectDay(newDaySelected);
+
+            var selectedDay = month.GetSelectedDay();
             
+            Assert.AreEqual(newDaySelected, selectedDay);
         }
     }
 }
