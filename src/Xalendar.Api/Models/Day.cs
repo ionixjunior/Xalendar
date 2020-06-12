@@ -21,5 +21,7 @@ namespace Xalendar.Api.Models
             get => _isSelected;
             set => _isSelected = value;
         }
+
+        public DateTime DateTime => _dateTime;
     }
 }
