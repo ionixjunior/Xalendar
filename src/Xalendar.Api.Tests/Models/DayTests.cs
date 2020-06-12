@@ -63,5 +63,15 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void ParameterOfEqualsComparisonShouldNotBeDayClass()
+        {
+            var day = new Day(DateTime.Now);
+
+            var comparison = day.Equals(new DateTime());
+            
+            Assert.IsFalse(comparison);
+        }
     }
 }
