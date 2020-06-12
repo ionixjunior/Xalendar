@@ -42,9 +42,9 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
-        public void SelectedDayShouldBeToday()
+        public void SelectedDayShouldBeTheFirstDayOfMonth()
         {
-            var dateTime = DateTime.Today;
+            var dateTime = new DateTime(2020, 2, 1);
             var month = new Month(dateTime);
             var isSelected = true;
             var day = new Day(dateTime, isSelected);
