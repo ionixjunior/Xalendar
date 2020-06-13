@@ -4,16 +4,16 @@ namespace Xalendar.Api.Models
 {
     public class Day
     {
-        private readonly DateTime _dateTime;
+        public DateTime DateTime { get; }
 
         public Day(DateTime dateTime, bool isSelected = false)
         {
-            _dateTime = dateTime;
+            DateTime = dateTime;
             _isSelected = isSelected;
         }
 
-        public bool IsToday => DateTime.Now.Day == _dateTime.Day;
-        
+        public bool IsToday => DateTime.Now.Day == DateTime.Day;
+
         private bool _isSelected;
 
         public bool IsSelected
@@ -22,14 +22,15 @@ namespace Xalendar.Api.Models
             set => _isSelected = value;
         }
 
-        public DateTime DateTime => _dateTime;
-
         public override bool Equals(object obj)
         {
             if (obj is Day dayToCompare)
-                return dayToCompare.DateTime.Date.Ticks == _dateTime.Date.Ticks;
-            
+                return dayToCompare.DateTime.Date.Ticks == DateTime.Date.Ticks;
+
             return false;
         }
+
+        public override int GetHashCode() =>
+            (DateTime.Date.Ticks).GetHashCode();
     }
 }
