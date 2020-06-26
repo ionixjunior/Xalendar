@@ -5,4 +5,4 @@ Xalendar: a simple CalendarView for Xamarin.Forms.
 
 ## Contributors
 
-- Pedro Jesus @pictos
+- Pedro Jesus [@pictos](https://github.com/pictos)
