@@ -129,5 +129,27 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsFalse(result);
         }
+
+        [Test]
+        public void MonthEqualsOperatorShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 1, 10));
+
+            var result = month1 == month2;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void MonthNotEqualsOperatorNotShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 2, 1));
+
+            var result = month1 != month2;
+            
+            Assert.IsTrue(result);
+        }
     }
 }
