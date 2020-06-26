@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Xalendar.Api.Models
 {
     public class Day
     {
         public DateTime DateTime { get; }
-
+        public IList<Event> Events { get; }
+        
         public Day(DateTime dateTime, bool isSelected = false)
         {
             DateTime = dateTime;
             _isSelected = isSelected;
+            Events = new List<Event>();
         }
 
         public bool IsToday => DateTime.Now.Day == DateTime.Day;

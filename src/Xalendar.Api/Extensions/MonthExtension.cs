@@ -45,5 +45,14 @@ namespace Xalendar.Api.Extensions
                 .Select(dateTime => new Day(dateTime))
                 .ToList();
         }
+
+        public static void AddEvents(this Month month, IList<Event> events)
+        {
+            foreach (var @event in events)
+            {
+                var eventDate = @event.StartDateTime.Date;
+                month.Days.FirstOrDefault(day => day.DateTime.Date.Equals(eventDate))?.AddEvent(@event);
+            }
+        }
     }
 }
