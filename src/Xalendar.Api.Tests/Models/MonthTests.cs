@@ -85,5 +85,97 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsNull(selectedDay);
         }
+
+        [Test]
+        public void MonthsShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 1, 10));
+
+            var result = month1.Equals(month2);
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void MonthsNotShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 2, 1));
+
+            var result = month1.Equals(month2);
+            
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void ObjectsShouldBeEquals()
+        {
+            object object1 = new Month(new DateTime(2020, 1, 1));
+            object object2 = new Month(new DateTime(2020, 1, 10));
+
+            var result = object1.Equals(object2);
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void ObjectsNotShouldBeEquals()
+        {
+            object object1 = new Month(new DateTime(2020, 1, 1));
+            object object2 = new Month(new DateTime(2020, 2, 1));
+
+            var result = object1.Equals(object2);
+            
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void MonthEqualsOperatorShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 1, 10));
+
+            var result = month1 == month2;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void MonthNotEqualsOperatorNotShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 2, 1));
+
+            var result = month1 != month2;
+            
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void HashCodeShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 1, 10));
+            var hashCodeMonth1 = month1.GetHashCode();
+            var hashCodeMonth2 = month2.GetHashCode();
+
+            var result = hashCodeMonth1 == hashCodeMonth2;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void HashCodeNotShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 2, 1));
+            var hashCodeMonth1 = month1.GetHashCode();
+            var hashCodeMonth2 = month2.GetHashCode();
+
+            var result = hashCodeMonth1 == hashCodeMonth2;
+            
+            Assert.IsFalse(result);
+        }
     }
 }

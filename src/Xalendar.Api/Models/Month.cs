@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using static Xalendar.Api.Extensions.MonthExtension;
 
 namespace Xalendar.Api.Models
@@ -15,8 +16,14 @@ namespace Xalendar.Api.Models
             Days = GenerateDaysOfMonth(dateTime);
         }
 
-        public bool Equals(Month other) =>
-            (MonthDateTime, Days) == (other.MonthDateTime, other.Days);
+        public bool Equals(Month other)
+        {
+            var yearValue = MonthDateTime.Year == other.MonthDateTime.Year;
+            var monthValue = MonthDateTime.Month == other.MonthDateTime.Month;
+            var days = Days.SequenceEqual(other.Days);
+            
+            return yearValue && monthValue && days;
+        }
         
         public static bool  operator ==(Month left, Month right) =>
             left.Equals(right);
@@ -25,8 +32,14 @@ namespace Xalendar.Api.Models
 
         public override bool Equals(object obj) =>
             (obj is Month month) && (this.Equals(month));
-        
-        public override int GetHashCode() =>
-            (MonthDateTime, Days).GetHashCode();
+
+        public override int GetHashCode()
+        {
+            var yearValue = MonthDateTime.Year;
+            var monthValue = MonthDateTime.Month;
+            
+            // TODO Comparison should be contains the days like as Equals comparison
+            return (yearValue, monthValue).GetHashCode();
+        }
     }
 }
