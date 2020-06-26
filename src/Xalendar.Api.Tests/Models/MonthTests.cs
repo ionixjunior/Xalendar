@@ -151,5 +151,31 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void HashCodeShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 1, 10));
+            var hashCodeMonth1 = month1.GetHashCode();
+            var hashCodeMonth2 = month2.GetHashCode();
+
+            var result = hashCodeMonth1 == hashCodeMonth2;
+            
+            Assert.IsTrue(result);
+        }
+        
+        [Test]
+        public void HashCodeNotShouldBeEquals()
+        {
+            var month1 = new Month(new DateTime(2020, 1, 1));
+            var month2 = new Month(new DateTime(2020, 2, 1));
+            var hashCodeMonth1 = month1.GetHashCode();
+            var hashCodeMonth2 = month2.GetHashCode();
+
+            var result = hashCodeMonth1 == hashCodeMonth2;
+            
+            Assert.IsFalse(result);
+        }
     }
 }

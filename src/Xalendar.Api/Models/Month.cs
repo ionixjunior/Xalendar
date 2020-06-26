@@ -32,8 +32,14 @@ namespace Xalendar.Api.Models
 
         public override bool Equals(object obj) =>
             (obj is Month month) && (this.Equals(month));
-        
-        public override int GetHashCode() =>
-            (MonthDateTime, Days).GetHashCode();
+
+        public override int GetHashCode()
+        {
+            var yearValue = MonthDateTime.Year;
+            var monthValue = MonthDateTime.Month;
+            
+            // TODO Comparison should be contains the days like as Equals comparison
+            return (yearValue, monthValue).GetHashCode();
+        }
     }
 }
