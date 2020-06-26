@@ -7,8 +7,6 @@ namespace Xalendar.Api.Models
     {
         public DateTime DateTime { get; }
         
-        public IList<Event> Events { get; }
-
         public Day(DateTime dateTime, bool isSelected = false)
         {
             DateTime = dateTime;
@@ -36,5 +34,13 @@ namespace Xalendar.Api.Models
 
         public override int GetHashCode() =>
             (DateTime.Date.Ticks).GetHashCode();
+        
+        public IList<Event> Events { get; }
+
+        public void AddEvents(IList<Event> events)
+        {
+            foreach (var @event in events)
+                Events.Add(@event);
+        }
     }
 }

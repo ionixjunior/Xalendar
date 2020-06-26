@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Xalendar.Api.Models;
 
@@ -105,6 +106,21 @@ namespace Xalendar.Api.Tests.Models
             var events = day.Events;
             
             Assert.IsEmpty(events);
+        }
+
+        [Test]
+        public void EventsShouldBeAdded()
+        {
+            var day = new Day(DateTime.Now);
+            var eventsOfDay = new List<Event>
+            {
+                new Event(1, "Name", DateTime.Now, DateTime.Now, false)
+            };
+            day.AddEvents(eventsOfDay);
+
+            var events = day.Events;
+            
+            Assert.IsNotEmpty(events);
         }
     }
 }
