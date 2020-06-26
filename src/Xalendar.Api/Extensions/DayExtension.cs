@@ -5,10 +5,9 @@ namespace Xalendar.Api.Extensions
 {
     public static class DayExtension
     {
-        public static void AddEvents(this Day day, IList<Event> events)
+        public static void AddEvent(this Day day, Event @event)
         {
-            foreach (var @event in events)
-                day.Events.Add(@event);
+            day.Events.Add(@event);
         }
     }
 }

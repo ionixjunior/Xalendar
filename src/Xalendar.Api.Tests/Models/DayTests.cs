@@ -113,11 +113,8 @@ namespace Xalendar.Api.Tests.Models
         public void EventsShouldBeAdded()
         {
             var day = new Day(DateTime.Now);
-            var eventsOfDay = new List<Event>
-            {
-                new Event(1, "Name", DateTime.Now, DateTime.Now, false)
-            };
-            day.AddEvents(eventsOfDay);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
 
             var events = day.Events;
             
