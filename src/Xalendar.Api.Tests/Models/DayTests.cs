@@ -142,5 +142,16 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsTrue(hasEvents);
         }
+
+        [Test]
+        public void NumberOfDayShouldBeAppearInString()
+        {
+            var datetime = new DateTime(2020, 1, 10);
+            var day = new Day(datetime);
+
+            var result = day.ToString();
+            
+            Assert.AreEqual("10", result);
+        }
     }
 }
