@@ -120,5 +120,27 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsNotEmpty(events);
         }
+
+        [Test]
+        public void DayShouldNotHaveEvents()
+        {
+            var day = new Day(DateTime.Now);
+
+            var hasEvents = day.HasEvents;
+            
+            Assert.IsFalse(hasEvents);
+        }
+        
+        [Test]
+        public void DayShouldHaveEvents()
+        {
+            var day = new Day(DateTime.Now);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
+
+            var hasEvents = day.HasEvents;
+            
+            Assert.IsTrue(hasEvents);
+        }
     }
 }
