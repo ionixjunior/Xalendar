@@ -9,6 +9,13 @@ namespace Xalendar.Api.Models
         public DateTime DateTime { get; }
         public IList<Event> Events { get; }
 
+        public bool IsWeekend => DateTime.DayOfWeek switch
+        {
+            DayOfWeek.Saturday => true,
+            DayOfWeek.Sunday => true,
+            _ => false
+        };
+        
         public bool HasEvents => Events.Any();
         
         public Day(DateTime dateTime, bool isSelected = false)
@@ -28,7 +35,7 @@ namespace Xalendar.Api.Models
             get => _isSelected;
             set => _isSelected = value;
         }
-
+        
         public override bool Equals(object obj)
         {
             if (obj is Day dayToCompare)
