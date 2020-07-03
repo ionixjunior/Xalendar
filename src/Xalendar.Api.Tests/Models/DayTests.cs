@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
@@ -120,5 +119,60 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsNotEmpty(events);
         }
+
+        [Test]
+        public void DayShouldNotHaveEvents()
+        {
+            var day = new Day(DateTime.Now);
+
+            var hasEvents = day.HasEvents;
+            
+            Assert.IsFalse(hasEvents);
+        }
+        
+        [Test]
+        public void DayShouldHaveEvents()
+        {
+            var day = new Day(DateTime.Now);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
+
+            var hasEvents = day.HasEvents;
+            
+            Assert.IsTrue(hasEvents);
+        }
+
+        [Test]
+        public void NumberOfDayShouldBeAppearInString()
+        {
+            var datetime = new DateTime(2020, 1, 10);
+            var day = new Day(datetime);
+
+            var result = day.ToString();
+            
+            Assert.AreEqual("10", result);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(DataWeekendTests))]
+        public void IsWeekendPropertyShouldBeCorrectly(DateTime dateTime, bool expectedResult)
+        {
+            var day = new Day(dateTime);
+
+            var isWeekend = day.IsWeekend;
+            
+            Assert.AreEqual(expectedResult, isWeekend);
+        }
+
+        private static object[] DataWeekendTests =
+        {
+            new object[] { new DateTime(2020, 6, 29), false },
+            new object[] { new DateTime(2020, 6, 30), false },
+            new object[] { new DateTime(2020, 7, 1), false },
+            new object[] { new DateTime(2020, 7, 2), false },
+            new object[] { new DateTime(2020, 7, 3), false },
+            new object[] { new DateTime(2020, 7, 4), true },
+            new object[] { new DateTime(2020, 7, 5), true }
+        };
     }
 }
