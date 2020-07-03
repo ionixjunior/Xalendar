@@ -186,5 +186,27 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsFalse(result);
         }
+        
+        [Test]
+        [TestCaseSource(nameof(DataWeekendTests))]
+        public void IsWeekendPropertyShouldBeCorrectly(DateTime dateTime, bool expectedResult)
+        {
+            var day = new Day(dateTime);
+
+            var isWeekend = day.IsWeekend;
+            
+            Assert.AreEqual(expectedResult, isWeekend);
+        }
+
+        private static object[] DataWeekendTests =
+        {
+            new object[] { new DateTime(2020, 6, 29), false },
+            new object[] { new DateTime(2020, 6, 30), false },
+            new object[] { new DateTime(2020, 7, 1), false },
+            new object[] { new DateTime(2020, 7, 2), false },
+            new object[] { new DateTime(2020, 7, 3), false },
+            new object[] { new DateTime(2020, 7, 4), true },
+            new object[] { new DateTime(2020, 7, 5), true }
+        };
     }
 }
