@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Xalendar.Api.Extensions;
 
 namespace Xalendar.Api.Models
 {
@@ -14,5 +15,8 @@ namespace Xalendar.Api.Models
             _month = new Month(dateTime);
             Days = _month.Days;
         }
+
+        public void SelectDay(Day selectedDay) => _month.SelectDay(selectedDay);
+        public Day GetSelectedDay() => _month.GetSelectedDay();
     }
 }
