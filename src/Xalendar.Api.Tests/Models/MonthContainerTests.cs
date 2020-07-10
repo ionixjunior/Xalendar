@@ -76,5 +76,16 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.AreEqual("January", monthContainer.GetName());
         }
+
+        [Test]
+        public void MonthContainerShouldNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 1, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            monthContainer.Previous();
+            
+            Assert.AreEqual("December", monthContainer.GetName());
+        }
     }
 }

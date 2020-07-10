@@ -28,5 +28,11 @@ namespace Xalendar.Api.Models
             var nextDateTime = _month.MonthDateTime.AddMonths(1);
             _month = new Month(nextDateTime);
         }
+
+        public void Previous()
+        {
+            var previousDateTime = _month.MonthDateTime.AddMonths(-1);
+            _month = new Month(previousDateTime);
+        }
     }
 }
