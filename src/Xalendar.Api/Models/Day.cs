@@ -19,7 +19,7 @@ namespace Xalendar.Api.Models
         public bool HasEvents => Events.Any();
         
         public Day(DateTime dateTime, bool isSelected = false)
-        {
+        {   
             DateTime = dateTime;
             _isSelected = isSelected;
             Events = new List<Event>();

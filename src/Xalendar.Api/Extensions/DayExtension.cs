@@ -1,3 +1,4 @@
+using System;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Extensions
