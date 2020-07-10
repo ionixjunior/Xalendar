@@ -22,5 +22,11 @@ namespace Xalendar.Api.Models
         public Day GetSelectedDay() => _month.GetSelectedDay();
         public void AddEvents(IList<Event> events) => _month.AddEvents(events);
         public string GetName() => _month.MonthDateTime.ToString("MMMM");
+
+        public void Next()
+        {
+            var nextDateTime = _month.MonthDateTime.AddMonths(1);
+            _month = new Month(nextDateTime);
+        }
     }
 }
