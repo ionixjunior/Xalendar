@@ -39,7 +39,7 @@ namespace Xalendar.Api.Tests.Models
             var month = new Month(dateTime);
 
             var selectedDay = month.GetSelectedDay();
-            
+
             Assert.IsNull(selectedDay);
         }
 
@@ -53,7 +53,7 @@ namespace Xalendar.Api.Tests.Models
             month.SelectDay(day);
 
             var selectedDay = month.GetSelectedDay();
-            
+
             Assert.AreEqual(day, selectedDay);
         }
 
@@ -69,7 +69,7 @@ namespace Xalendar.Api.Tests.Models
             month.SelectDay(newDaySelected);
 
             var selectedDay = month.GetSelectedDay();
-            
+
             Assert.AreEqual(newDaySelected, selectedDay);
         }
 
@@ -83,7 +83,7 @@ namespace Xalendar.Api.Tests.Models
             month.SelectDay(day);
 
             var selectedDay = month.GetSelectedDay();
-            
+
             Assert.IsNull(selectedDay);
         }
 
@@ -94,10 +94,12 @@ namespace Xalendar.Api.Tests.Models
             var month2 = new Month(new DateTime(2020, 1, 10));
 
             var result = month1.Equals(month2);
-            
+            var hashCodeResult = month1.GetHashCode() == month2.GetHashCode();
+
             Assert.IsTrue(result);
+            Assert.IsTrue(hashCodeResult);
         }
-        
+
         [Test]
         public void MonthsNotShouldBeEquals()
         {
@@ -105,8 +107,10 @@ namespace Xalendar.Api.Tests.Models
             var month2 = new Month(new DateTime(2020, 2, 1));
 
             var result = month1.Equals(month2);
-            
+            var hashCodeResult = month1.GetHashCode() == month2.GetHashCode();
+
             Assert.IsFalse(result);
+            Assert.IsFalse(hashCodeResult);
         }
 
         [Test]
@@ -116,10 +120,10 @@ namespace Xalendar.Api.Tests.Models
             object object2 = new Month(new DateTime(2020, 1, 10));
 
             var result = object1.Equals(object2);
-            
+
             Assert.IsTrue(result);
         }
-        
+
         [Test]
         public void ObjectsNotShouldBeEquals()
         {
@@ -127,7 +131,7 @@ namespace Xalendar.Api.Tests.Models
             object object2 = new Month(new DateTime(2020, 2, 1));
 
             var result = object1.Equals(object2);
-            
+
             Assert.IsFalse(result);
         }
 
@@ -138,10 +142,10 @@ namespace Xalendar.Api.Tests.Models
             var month2 = new Month(new DateTime(2020, 1, 10));
 
             var result = month1 == month2;
-            
+
             Assert.IsTrue(result);
         }
-        
+
         [Test]
         public void MonthNotEqualsOperatorNotShouldBeEquals()
         {
@@ -149,7 +153,7 @@ namespace Xalendar.Api.Tests.Models
             var month2 = new Month(new DateTime(2020, 2, 1));
 
             var result = month1 != month2;
-            
+
             Assert.IsTrue(result);
         }
 
@@ -162,10 +166,10 @@ namespace Xalendar.Api.Tests.Models
             var hashCodeMonth2 = month2.GetHashCode();
 
             var result = hashCodeMonth1 == hashCodeMonth2;
-            
+
             Assert.IsTrue(result);
         }
-        
+
         [Test]
         public void HashCodeNotShouldBeEquals()
         {
@@ -175,7 +179,7 @@ namespace Xalendar.Api.Tests.Models
             var hashCodeMonth2 = month2.GetHashCode();
 
             var result = hashCodeMonth1 == hashCodeMonth2;
-            
+
             Assert.IsFalse(result);
         }
 
@@ -185,7 +189,7 @@ namespace Xalendar.Api.Tests.Models
             var month = new Month(new DateTime(2020, 1, 1));
 
             var eventsOfMonth = month.Days.Where(day => day.Events.Any());
-            
+
             Assert.IsEmpty(eventsOfMonth);
         }
 
@@ -201,7 +205,7 @@ namespace Xalendar.Api.Tests.Models
             month.AddEvents(events);
 
             var eventsOfMonth = month.Days.Where(day => day.Events.Any());
-            
+
             Assert.IsNotEmpty(eventsOfMonth);
             Assert.AreEqual(1, eventsOfMonth.Count());
         }
@@ -219,7 +223,7 @@ namespace Xalendar.Api.Tests.Models
             month.AddEvents(events);
 
             var eventsOfMonth = month.Days.Where(day => day.Events.Any());
-            
+
             Assert.IsNotEmpty(eventsOfMonth);
             Assert.AreEqual(1, eventsOfMonth.Count());
         }

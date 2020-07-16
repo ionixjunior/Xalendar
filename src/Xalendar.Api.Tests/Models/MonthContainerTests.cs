@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -14,9 +14,9 @@ namespace Xalendar.Api.Tests.Models
         public void MonthContainerShouldContainsDaysOfMonth()
         {
             var dateTime = DateTime.Now;
-            
+
             var monthContainer = new MonthContainer(dateTime);
-            
+
             Assert.IsNotEmpty(monthContainer.Days);
         }
 
@@ -28,7 +28,7 @@ namespace Xalendar.Api.Tests.Models
             var selectedDay = new Day(dateTime, true);
 
             monthContainer.SelectDay(selectedDay);
-            
+
             Assert.AreEqual(selectedDay, monthContainer.GetSelectedDay());
         }
 
@@ -37,10 +37,10 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
-            
+
             Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
         }
-        
+
         [Test]
         public void MonthContainerShouldContainsEvents()
         {
@@ -50,9 +50,9 @@ namespace Xalendar.Api.Tests.Models
             {
                 new Event(1, "Name event", dateTime, dateTime, false)
             };
-            
+
             monthContainer.AddEvents(events);
-            
+
             Assert.IsTrue(monthContainer._month.Days.Any(day => day.HasEvents));
         }
 
@@ -63,8 +63,8 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             var result = monthContainer.GetName();
-            
-            Assert.AreEqual("July", result);
+            var dateTimeName = dateTime.ToString("MMMM");
+            Assert.AreEqual(dateTimeName, result);
         }
 
         [Test]
@@ -74,8 +74,9 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             monthContainer.Next();
-            
-            Assert.AreEqual("January", monthContainer.GetName());
+
+            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
+            Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
 
         [Test]
@@ -85,8 +86,9 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             monthContainer.Previous();
-            
-            Assert.AreEqual("December", monthContainer.GetName());
+
+            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
+            Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
     }
 }
