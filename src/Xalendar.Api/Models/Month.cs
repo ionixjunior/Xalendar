@@ -7,8 +7,8 @@ namespace Xalendar.Api.Models
 {
     public struct Month : IEquatable<Month>
     {
-        public DateTime MonthDateTime {get;}
-        public IReadOnlyList<Day> Days {get;}
+        public DateTime MonthDateTime { get; }
+        public IReadOnlyList<Day> Days { get; }
 
         public Month(DateTime dateTime)
         {
@@ -21,13 +21,13 @@ namespace Xalendar.Api.Models
             var yearValue = MonthDateTime.Year == other.MonthDateTime.Year;
             var monthValue = MonthDateTime.Month == other.MonthDateTime.Month;
             var days = Days.SequenceEqual(other.Days);
-            
+
             return yearValue && monthValue && days;
         }
-        
-        public static bool  operator ==(Month left, Month right) =>
+
+        public static bool operator ==(Month left, Month right) =>
             left.Equals(right);
-        public static bool  operator !=(Month left, Month right) =>
+        public static bool operator !=(Month left, Month right) =>
             !left.Equals(right);
 
         public override bool Equals(object obj) =>
@@ -37,9 +37,25 @@ namespace Xalendar.Api.Models
         {
             var yearValue = MonthDateTime.Year;
             var monthValue = MonthDateTime.Month;
-            
-            // TODO Comparison should be contains the days like as Equals comparison
-            return (yearValue, monthValue).GetHashCode();
+            var dayHash = GetListHasCode(Days);
+
+            return (yearValue, monthValue, dayHash).GetHashCode();
+
+            static int GetListHasCode(IReadOnlyList<Day> days)
+            {
+                var size = days.Count;
+                unchecked
+                {
+                    var hash = 31;
+                    for (var i = 0; i < size; i++)
+                    {
+                        var day = days[i];
+                        hash = 17 * hash + day.GetHashCode();
+                    }
+
+                    return hash;
+                }
+            }
         }
     }
 }
