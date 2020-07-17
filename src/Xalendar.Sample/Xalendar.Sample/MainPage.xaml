@@ -2,14 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Xalendar.Sample"
+             xmlns:xalendar="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View"
              Title="CalendarView Sample"
              x:Class="Xalendar.Sample.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <xalendar:CalendarView />
     </StackLayout>
 
 </ContentPage>

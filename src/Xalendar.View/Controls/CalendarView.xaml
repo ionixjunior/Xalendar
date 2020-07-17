@@ -2,5 +2,5 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Xalendar.View.Controls.CalendarView">
-    <Label Text="CalendarView label"></Label>
+    <Label Text="CalendarView label" FontSize="30"></Label>
 </ContentView>
