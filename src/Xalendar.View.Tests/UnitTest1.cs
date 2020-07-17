@@ -12,7 +12,9 @@ namespace Xalendar.View.Tests
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            var temp = new Temp();
+            
+            Assert.IsTrue(temp.Check());
         }
     }
 }
