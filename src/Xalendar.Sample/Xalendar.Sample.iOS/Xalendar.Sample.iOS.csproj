@@ -106,7 +106,7 @@
         <Reference Include="Xamarin.iOS"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="4.4.0.991640"/>
+        <PackageReference Include="Xamarin.Forms" Version="4.5.0.356"/>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Xalendar.Sample\Xalendar.Sample.csproj">
