@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Api", "Xalendar.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Api.Tests", "Xalendar.Api.Tests\Xalendar.Api.Tests.csproj", "{3E000528-B755-423B-8C06-E3D73FD520E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.View", "Xalendar.View\Xalendar.View.csproj", "{27F252E0-B00C-4E2D-8682-F688DEEEC50C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.View.Tests", "Xalendar.View.Tests\Xalendar.View.Tests.csproj", "{222730F5-170D-4102-A1EB-9834706BEA14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +23,13 @@ Global
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{222730F5-170D-4102-A1EB-9834706BEA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{222730F5-170D-4102-A1EB-9834706BEA14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
