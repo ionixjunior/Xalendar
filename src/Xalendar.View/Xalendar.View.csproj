@@ -29,4 +29,8 @@
       <DependentUpon>CalendarView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" />
+  </ItemGroup>
 </Project>
