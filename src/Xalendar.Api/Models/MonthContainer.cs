@@ -25,15 +25,16 @@ namespace Xalendar.Api.Models
             Days = daysOfContainer;
 
             var cultureInfo = CultureInfo.CurrentCulture;
+            var dateTimeFormat = cultureInfo.DateTimeFormat;
             DaysOfWeek = new List<string>
             {
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Sunday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Monday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Tuesday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Wednesday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Thursday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Friday).Substring(0, 3).ToUpper(),
-                cultureInfo.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Saturday).Substring(0, 3).ToUpper()
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Sunday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Monday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Tuesday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Wednesday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Thursday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Friday).Substring(0, 3).ToUpper(),
+                dateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Saturday).Substring(0, 3).ToUpper()
             };
         }
     }
