@@ -114,7 +114,7 @@ namespace Xalendar.Api.Tests.Models
         {
             new object[] { "pt-BR", "DOM" },
             new object[] { "en-US", "SUN" },
-            new object[] { "fr-FR", "DIM." }
+            new object[] { "fr-FR", "DIM" }
         };
     }
 }
