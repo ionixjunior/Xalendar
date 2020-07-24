@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 using Xalendar.Api.Extensions;
@@ -97,5 +98,23 @@ namespace Xalendar.Api.Tests.Models
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
+
+        [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfWeekTests))]
+        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, string dayOfWeekName)
+        {
+            CultureInfo.CurrentCulture = new CultureInfo(language);
+            var dateTime = DateTime.Today;
+            var monthContainer = new MonthContainer(dateTime);
+            
+            Assert.AreEqual(dayOfWeekName, monthContainer.DaysOfWeek.First());
+        }
+        
+        private static object[] ValuesForDaysOfWeekTests =
+        {
+            new object[] { "pt-BR", "DOM" },
+            new object[] { "en-US", "SUN" },
+            new object[] { "fr-FR", "DIM." }
+        };
     }
 }
