@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Extensions
@@ -20,6 +21,24 @@ namespace Xalendar.Api.Extensions
         {
             var previousDateTime = monthContainer._month.MonthDateTime.AddMonths(-1);
             monthContainer._month = new Month(previousDateTime);
+        }
+        
+        internal static void GetDaysToDiscardAtStartOfMonth(this MonthContainer monthContainer, List<Day?> daysOfContainer)
+        {
+            var firstDay = monthContainer._month.Days.First();
+            var numberOfDaysToDiscard = (int) firstDay!.DateTime.DayOfWeek;
+            
+            for (var index = 0; index < numberOfDaysToDiscard; index++)
+                daysOfContainer.Add(default(Day));
+        }
+        
+        internal static void GetDaysToDiscardAtEndOfMonth(this MonthContainer monthContainer, List<Day?> daysOfContainer)
+        {
+            var lastDay = monthContainer._month.Days.Last();
+            var numberOfDaysToDiscard = 6 - (int) lastDay.DateTime.DayOfWeek;
+            
+            for (var index = 0; index < numberOfDaysToDiscard; index++)
+                daysOfContainer.Add(default(Day));
         }
     }
 }

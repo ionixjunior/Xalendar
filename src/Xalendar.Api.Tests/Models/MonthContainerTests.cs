@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 using Xalendar.Api.Extensions;
@@ -11,14 +12,21 @@ namespace Xalendar.Api.Tests.Models
     public class MonthContainerTests
     {
         [Test]
-        public void MonthContainerShouldContainsDaysOfMonth()
+        [TestCaseSource(nameof(MonthsValuesTests))]
+        public void MonthContainerShouldContainsDaysOfMonthAndPreviousAndNext(DateTime dateTime, int totalOfDays)
         {
-            var dateTime = DateTime.Now;
-
             var monthContainer = new MonthContainer(dateTime);
 
             Assert.IsNotEmpty(monthContainer.Days);
+            Assert.AreEqual(totalOfDays, monthContainer.Days.Count);
         }
+
+        private static object[] MonthsValuesTests =
+        {
+            new object[] { new DateTime(2020, 7, 23), 35 },
+            new object[] { new DateTime(2015, 2, 10), 28 },
+            new object[] { new DateTime(2020, 8, 1), 42 }
+        };
 
         [Test]
         public void MonthContainerCanSelectDay()
@@ -90,5 +98,23 @@ namespace Xalendar.Api.Tests.Models
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
+
+        [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfWeekTests))]
+        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, string dayOfWeekName)
+        {
+            CultureInfo.CurrentCulture = new CultureInfo(language);
+            var dateTime = DateTime.Today;
+            var monthContainer = new MonthContainer(dateTime);
+            
+            Assert.AreEqual(dayOfWeekName, monthContainer.DaysOfWeek.First());
+        }
+        
+        private static object[] ValuesForDaysOfWeekTests =
+        {
+            new object[] { "pt-BR", "DOM" },
+            new object[] { "en-US", "SUN" },
+            new object[] { "fr-FR", "DIM" }
+        };
     }
 }
