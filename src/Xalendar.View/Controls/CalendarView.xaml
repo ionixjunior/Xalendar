@@ -2,11 +2,21 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Xalendar.View.Controls.CalendarView">
-    <FlexLayout BackgroundColor="MediumPurple" BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
-        <BindableLayout.ItemTemplate>
-            <DataTemplate>
-                <Label BackgroundColor="Red" FlexLayout.Basis="14.28%" Text="{Binding .}" FontSize="30" />
-            </DataTemplate>
-        </BindableLayout.ItemTemplate>
-    </FlexLayout>
+    <StackLayout Spacing="0">
+        <FlexLayout BackgroundColor="MediumPurple" BindableLayout.ItemsSource="{Binding DaysOfWeek}" Wrap="Wrap">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label BackgroundColor="Yellow" FlexLayout.Basis="14.28%" Text="{Binding .}" FontSize="16" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+        
+        <FlexLayout BackgroundColor="MediumPurple" BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label BackgroundColor="Red" FlexLayout.Basis="14.28%" Text="{Binding .}" FontSize="30" />
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+    </StackLayout>
 </ContentView>
