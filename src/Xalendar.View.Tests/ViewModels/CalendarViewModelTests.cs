@@ -7,12 +7,13 @@ namespace Xalendar.View.Tests.ViewModels
     public class CalendarViewModelTests
     {
         [Test]
-        public void ConstructorShouldBePopulateDaysAndDaysOfWeek()
+        public void ConstructorShouldBePopulateDefaultProperties()
         {
             var viewModel = new CalendarViewModel();
             
             Assert.NotNull(viewModel.Days);
             Assert.NotNull(viewModel.DaysOfWeek);
+            Assert.NotNull(viewModel.MonthName);
         }
     }
 }
