@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Xalendar.View.Converters;assembly=Xalendar.View"
              x:Class="Xalendar.View.Controls.CalendarView">
     <StackLayout Spacing="0">
-        <FlexLayout BackgroundColor="MediumPurple" BindableLayout.ItemsSource="{Binding DaysOfWeek}" Wrap="Wrap">
+        <FlexLayout BackgroundColor="Red" HeightRequest="56" AlignItems="Center">
+            <Label Text="voltar"></Label>
+            <Label 
+                FontSize="Title"
+                FlexLayout.Grow="1"
+                HorizontalTextAlignment="Center"
+                Text="{Binding MonthName}"></Label>
+            <Label Text="avançar"></Label>
+        </FlexLayout>
+        
+        <FlexLayout BindableLayout.ItemsSource="{Binding DaysOfWeek}" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <Label BackgroundColor="Yellow" FlexLayout.Basis="14.28%" Text="{Binding .}" FontSize="16" />
+                    <Label 
+                        HeightRequest="56" 
+                        FlexLayout.Basis="14.28%" 
+                        HorizontalTextAlignment="Center" 
+                        VerticalTextAlignment="Center" 
+                        Text="{Binding .}" 
+                        FontSize="Body" />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </FlexLayout>
         
-        <FlexLayout BackgroundColor="MediumPurple" BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
+        <FlexLayout BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <Label BackgroundColor="Red" FlexLayout.Basis="14.28%" Text="{Binding .}" FontSize="30" />
+                    <Frame 
+                        CornerRadius="20"
+                        HasShadow="false"
+                        Padding="0"
+                        BackgroundColor="{Binding ., Converter={converters:IsTodayToBackgroundColorConverter}}"
+                        HeightRequest="56"
+                        FlexLayout.Basis="14.28%">
+                        <Grid RowSpacing="0" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="14" />
+                            </Grid.RowDefinitions>
+                            
+                            <Label 
+                                Grid.Row="0"
+                                HorizontalTextAlignment="Center" 
+                                VerticalTextAlignment="Center" 
+                                Text="{Binding .}" 
+                                FontSize="Subtitle" />
+                            
+                            <BoxView 
+                                IsVisible="false"
+                                Grid.Row="1"
+                                WidthRequest="8"
+                                HeightRequest="8"
+                                CornerRadius="4"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Black" />
+                        </Grid>
+                        
+                    </Frame>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </FlexLayout>
