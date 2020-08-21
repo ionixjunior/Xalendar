@@ -81,10 +81,11 @@ namespace Xalendar.Api.Tests.Models
             var dateTime = new DateTime(2020, 12, 9);
             var monthContainer = new MonthContainer(dateTime);
 
-            monthContainer.Next();
+            monthContainer.Previous();
 
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
+            Assert.AreEqual(30, monthContainer.Days.Count(day => day is {}));
         }
 
         [Test]
