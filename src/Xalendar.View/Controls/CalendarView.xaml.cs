@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
@@ -21,18 +22,18 @@ namespace Xalendar.View.Controls
             MonthName.Text = _monthContainer.GetName();
         }
 
-        private void OnPreviousMonthClick(object sender, EventArgs e)
+        private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
-            _monthContainer.Previous();
+            await Task.Run(() => _monthContainer.Previous());
             
             BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
             MonthName.Text = _monthContainer.GetName();
         }
 
-        private void OnNextMonthClick(object sender, EventArgs e)
+        private async void OnNextMonthClick(object sender, EventArgs e)
         {
-            _monthContainer.Next();
-            
+            await Task.Run(() => _monthContainer.Next());
+
             BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
             MonthName.Text = _monthContainer.GetName();
         }
