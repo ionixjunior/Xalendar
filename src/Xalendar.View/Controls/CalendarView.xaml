@@ -38,7 +38,7 @@
             </BindableLayout.ItemTemplate>
         </FlexLayout>
         
-        <FlexLayout BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
+        <FlexLayout x:Name="CalendarDaysContainer" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Frame 
