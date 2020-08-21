@@ -3,23 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:Xalendar.View.Converters;assembly=Xalendar.View"
              x:Class="Xalendar.View.Controls.CalendarView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:IsTodayToBackgroundColorConverter x:Key="IsTodayToBackgroundColorConverter" />
+            <converters:HasEventsToVisibilityConverter x:Key="HasEventsToVisibilityConverter" />
+            <FlexBasis x:Key="DayWidth">14.28%</FlexBasis>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
     <StackLayout Spacing="0">
-        <FlexLayout BackgroundColor="Red" HeightRequest="56" AlignItems="Center">
-            <Label Text="voltar"></Label>
+        <FlexLayout HeightRequest="56" AlignItems="Center" Padding="10,0">
+            <Button Text="◀" Clicked="OnPreviousMonthClick" />
+            
             <Label 
+                x:Name="MonthName"
                 FontSize="Title"
                 FlexLayout.Grow="1"
-                HorizontalTextAlignment="Center"
-                Text="{Binding MonthName}"></Label>
-            <Label Text="avançar"></Label>
+                HorizontalTextAlignment="Center"></Label>
+            
+            <Button Text="▶" Clicked="OnNextMonthClick" />
         </FlexLayout>
         
-        <FlexLayout BindableLayout.ItemsSource="{Binding DaysOfWeek}" Wrap="Wrap">
+        <FlexLayout x:Name="CalendarDaysOfWeekContainer" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Label 
                         HeightRequest="56" 
-                        FlexLayout.Basis="14.28%" 
+                        FlexLayout.Basis="{StaticResource DayWidth}" 
                         HorizontalTextAlignment="Center" 
                         VerticalTextAlignment="Center" 
                         Text="{Binding .}" 
@@ -28,16 +38,16 @@
             </BindableLayout.ItemTemplate>
         </FlexLayout>
         
-        <FlexLayout BindableLayout.ItemsSource="{Binding Days}" Wrap="Wrap">
+        <FlexLayout x:Name="CalendarDaysContainer" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Frame 
                         CornerRadius="20"
                         HasShadow="false"
                         Padding="0"
-                        BackgroundColor="{Binding ., Converter={converters:IsTodayToBackgroundColorConverter}}"
+                        BackgroundColor="{Binding ., Converter={StaticResource IsTodayToBackgroundColorConverter}}"
                         HeightRequest="56"
-                        FlexLayout.Basis="14.28%">
+                        FlexLayout.Basis="{StaticResource DayWidth}" >
                         <Grid RowSpacing="0" VerticalOptions="Center">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -52,7 +62,7 @@
                                 FontSize="Subtitle" />
                             
                             <BoxView 
-                                IsVisible="false"
+                                IsVisible="{Binding ., Converter={StaticResource HasEventsToVisibilityConverter}}"
                                 Grid.Row="1"
                                 WidthRequest="8"
                                 HeightRequest="8"

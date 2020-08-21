@@ -31,6 +31,18 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
+        public void DayNotShouldBeTodayWhenIsAnotherMonth()
+        {
+            var currentDateTime = new DateTime(2020, 8, 20);
+            var nextMonth = new DateTime(2020, 9, 20);
+            var day = new Day(nextMonth, currentDateTime);
+
+            var result = day.IsToday;
+            
+            Assert.IsFalse(result);
+        }
+
+        [Test]
         public void DayIsUnSelected()
         {
             var dateTime = DateTime.Today;
