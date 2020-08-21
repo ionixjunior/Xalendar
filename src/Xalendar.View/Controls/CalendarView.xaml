@@ -16,10 +16,10 @@
             <Button Text="◀" Command="{Binding NavigateToPreviousMonthCommand}" />
             
             <Label 
+                x:Name="MonthName"
                 FontSize="Title"
                 FlexLayout.Grow="1"
-                HorizontalTextAlignment="Center"
-                Text="{Binding MonthName}"></Label>
+                HorizontalTextAlignment="Center"></Label>
             
             <Button Text="▶" Command="{Binding NavigateToNextMonthCommand}" />
         </FlexLayout>

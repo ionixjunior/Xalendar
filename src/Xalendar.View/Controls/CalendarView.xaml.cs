@@ -1,4 +1,5 @@
 using System;
+using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
 using Xalendar.View.ViewModels;
 using Xamarin.Forms;
@@ -18,6 +19,7 @@ namespace Xalendar.View.Controls
             _monthContainer = new MonthContainer(DateTime.Today);
             BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
+            MonthName.Text = _monthContainer.GetName();
 
             BindingContext = new CalendarViewModel();
         }
