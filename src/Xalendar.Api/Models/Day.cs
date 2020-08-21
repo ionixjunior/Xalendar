@@ -6,6 +6,7 @@ namespace Xalendar.Api.Models
 {
     public class Day
     {
+        private DateTime _currentDateTime;
         public DateTime DateTime { get; }
         public IList<Event> Events { get; }
 
@@ -20,12 +21,21 @@ namespace Xalendar.Api.Models
         
         public Day(DateTime dateTime, bool isSelected = false)
         {   
+            _currentDateTime = DateTime.Now;
             DateTime = dateTime;
             _isSelected = isSelected;
             Events = new List<Event>();
         }
 
-        public bool IsToday => DateTime.Now.Day == DateTime.Day;
+        public Day(DateTime dateTime, DateTime currentDateTime, bool isSelected = false)
+        {
+            _currentDateTime = currentDateTime;
+            DateTime = dateTime;
+            _isSelected = isSelected;
+            Events = new List<Event>();
+        }
+
+        public bool IsToday => _currentDateTime.Date == DateTime.Date;
         
 
         private bool _isSelected;
