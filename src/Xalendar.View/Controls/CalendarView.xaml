@@ -7,6 +7,7 @@
         <ResourceDictionary>
             <converters:IsTodayToBackgroundColorConverter x:Key="IsTodayToBackgroundColorConverter" />
             <converters:HasEventsToVisibilityConverter x:Key="HasEventsToVisibilityConverter" />
+            <FlexBasis x:Key="DayWidth">14.28%</FlexBasis>
         </ResourceDictionary>
     </ContentView.Resources>
     
@@ -26,7 +27,7 @@
                 <DataTemplate>
                     <Label 
                         HeightRequest="56" 
-                        FlexLayout.Basis="14.28%" 
+                        FlexLayout.Basis="{StaticResource DayWidth}" 
                         HorizontalTextAlignment="Center" 
                         VerticalTextAlignment="Center" 
                         Text="{Binding .}" 
@@ -44,7 +45,7 @@
                         Padding="0"
                         BackgroundColor="{Binding ., Converter={StaticResource IsTodayToBackgroundColorConverter}}"
                         HeightRequest="56"
-                        FlexLayout.Basis="14.28%">
+                        FlexLayout.Basis="{StaticResource DayWidth}" >
                         <Grid RowSpacing="0" VerticalOptions="Center">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
