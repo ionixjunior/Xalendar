@@ -17,6 +17,7 @@ namespace Xalendar.View.Controls
             
             _monthContainer = new MonthContainer(DateTime.Today);
             BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
+            BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
 
             BindingContext = new CalendarViewModel();
         }
