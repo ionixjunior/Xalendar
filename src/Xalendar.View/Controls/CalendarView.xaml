@@ -13,7 +13,7 @@
     
     <StackLayout Spacing="0">
         <FlexLayout HeightRequest="56" AlignItems="Center" Padding="10,0">
-            <Button Text="◀" Command="{Binding NavigateToPreviousMonthCommand}" />
+            <Button Text="◀" Clicked="OnPreviousMonthClick" />
             
             <Label 
                 x:Name="MonthName"
@@ -21,7 +21,7 @@
                 FlexLayout.Grow="1"
                 HorizontalTextAlignment="Center"></Label>
             
-            <Button Text="▶" Command="{Binding NavigateToNextMonthCommand}" />
+            <Button Text="▶" Clicked="OnNextMonthClick" />
         </FlexLayout>
         
         <FlexLayout x:Name="CalendarDaysOfWeekContainer" Wrap="Wrap">
