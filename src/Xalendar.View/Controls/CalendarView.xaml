@@ -12,14 +12,16 @@
     </ContentView.Resources>
     
     <StackLayout Spacing="0">
-        <FlexLayout BackgroundColor="Red" HeightRequest="56" AlignItems="Center">
-            <Label Text="voltar"></Label>
+        <FlexLayout HeightRequest="56" AlignItems="Center" Padding="10,0">
+            <Button Text="◀" Command="{Binding NavigateToPreviousMonthCommand}" />
+            
             <Label 
                 FontSize="Title"
                 FlexLayout.Grow="1"
                 HorizontalTextAlignment="Center"
                 Text="{Binding MonthName}"></Label>
-            <Label Text="avançar"></Label>
+            
+            <Button Text="▶" Command="{Binding NavigateToNextMonthCommand}" />
         </FlexLayout>
         
         <FlexLayout BindableLayout.ItemsSource="{Binding DaysOfWeek}" Wrap="Wrap">
