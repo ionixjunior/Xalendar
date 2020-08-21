@@ -52,7 +52,7 @@
                                 FontSize="Subtitle" />
                             
                             <BoxView 
-                                IsVisible="false"
+                                IsVisible="{Binding ., Converter={converters:HasEventsToVisibilityConverter}}"
                                 Grid.Row="1"
                                 WidthRequest="8"
                                 HeightRequest="8"
