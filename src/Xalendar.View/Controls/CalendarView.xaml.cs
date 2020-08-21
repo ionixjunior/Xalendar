@@ -23,12 +23,18 @@ namespace Xalendar.View.Controls
 
         private void OnPreviousMonthClick(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("CLICOU NO BOTÃO PARA MÊS ANTERIOR");
+            _monthContainer.Previous();
+            
+            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
+            MonthName.Text = _monthContainer.GetName();
         }
 
         private void OnNextMonthClick(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("CLICOU NO BOTÃO PARA PRÓXIMO MÊS");
+            _monthContainer.Next();
+            
+            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
+            MonthName.Text = _monthContainer.GetName();
         }
     }
 }
