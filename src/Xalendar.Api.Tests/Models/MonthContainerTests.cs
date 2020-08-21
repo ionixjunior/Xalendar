@@ -71,7 +71,7 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             var result = monthContainer.GetName();
-            var dateTimeName = dateTime.ToString("MMMM");
+            var dateTimeName = dateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, result);
         }
 
@@ -83,7 +83,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Previous();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
+            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
             Assert.AreEqual(30, monthContainer.Days.Count(day => day is {}));
         }
@@ -96,7 +96,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Previous();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM");
+            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
 
