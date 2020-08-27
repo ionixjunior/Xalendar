@@ -24,18 +24,34 @@ namespace Xalendar.View.Controls
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
-            await Task.Run(() => _monthContainer.Previous());
-            
-            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
-            MonthName.Text = _monthContainer.GetName();
+            var result = await Task.Run(() =>
+            {
+                _monthContainer.Previous();
+                
+                var days = _monthContainer.Days;
+                var monthName = _monthContainer.GetName();
+
+                return (days, monthName);
+            });
+
+            BindableLayout.SetItemsSource(CalendarDaysContainer, result.days);
+            MonthName.Text = result.monthName;
         }
 
         private async void OnNextMonthClick(object sender, EventArgs e)
         {
-            await Task.Run(() => _monthContainer.Next());
+            var result = await Task.Run(() =>
+            {
+                _monthContainer.Next();
+                
+                var days = _monthContainer.Days;
+                var monthName = _monthContainer.GetName();
 
-            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
-            MonthName.Text = _monthContainer.GetName();
+                return (days, monthName);
+            });
+
+            BindableLayout.SetItemsSource(CalendarDaysContainer, result.days);
+            MonthName.Text = result.monthName;
         }
     }
 }
