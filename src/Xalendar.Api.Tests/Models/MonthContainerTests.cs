@@ -78,14 +78,14 @@ namespace Xalendar.Api.Tests.Models
         [Test]
         public void MonthContainerShouldNavigateToNextMonth()
         {
-            var dateTime = new DateTime(2020, 12, 9);
+            var dateTime = new DateTime(2020, 11, 9);
             var monthContainer = new MonthContainer(dateTime);
 
-            monthContainer.Previous();
+            monthContainer.Next();
 
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
-            Assert.AreEqual(30, monthContainer.Days.Count(day => day is {}));
+            Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
         }
 
         [Test]
