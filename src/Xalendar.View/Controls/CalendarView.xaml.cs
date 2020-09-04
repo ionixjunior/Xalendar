@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
@@ -34,8 +35,8 @@ namespace Xalendar.View.Controls
                 return (days, monthName);
             });
 
-            BindableLayout.SetItemsSource(CalendarDaysContainer, result.days);
             MonthName.Text = result.monthName;
+            RecycleDays(result.days);
         }
 
         private async void OnNextMonthClick(object sender, EventArgs e)
@@ -49,9 +50,19 @@ namespace Xalendar.View.Controls
 
                 return (days, monthName);
             });
-
-            BindableLayout.SetItemsSource(CalendarDaysContainer, result.days);
+            
             MonthName.Text = result.monthName;
+            RecycleDays(result.days);
+        }
+
+        private void RecycleDays(IReadOnlyList<Day?> days)
+        {
+            for (var index = 0; index < CalendarDaysContainer.Children.Count; index++)
+            {
+                var dayContainer = days[index];
+                var dayView = CalendarDaysContainer.Children[index];
+                dayView.BindingContext = dayContainer;
+            }
         }
     }
 }
