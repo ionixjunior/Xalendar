@@ -39,6 +39,10 @@ namespace Xalendar.Api.Extensions
             
             for (var index = 0; index < numberOfDaysToDiscard; index++)
                 daysOfContainer.Add(default(Day));
+
+            if (daysOfContainer.Count < 42)
+                for (var index = daysOfContainer.Count; index < 42; index++)
+                    daysOfContainer.Add(default(Day));
         }
     }
 }
