@@ -101,7 +101,7 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
-        [TestCaseSource(nameof(ValuesForDaysOfWeekTests))]
+        [TestCaseSource(nameof(ValuesForTheDaysOfWeekInSpecificLanguagesTests))]
         public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, string dayOfWeekName)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
@@ -111,7 +111,7 @@ namespace Xalendar.Api.Tests.Models
             Assert.AreEqual(dayOfWeekName, monthContainer.DaysOfWeek.First());
         }
         
-        private static object[] ValuesForDaysOfWeekTests =
+        private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
         {
             new object[] { "pt-BR", "DOM" },
             new object[] { "en-US", "SUN" },
