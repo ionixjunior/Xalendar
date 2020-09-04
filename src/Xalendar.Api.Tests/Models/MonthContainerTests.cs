@@ -78,14 +78,14 @@ namespace Xalendar.Api.Tests.Models
         [Test]
         public void MonthContainerShouldNavigateToNextMonth()
         {
-            var dateTime = new DateTime(2020, 12, 9);
+            var dateTime = new DateTime(2020, 11, 9);
             var monthContainer = new MonthContainer(dateTime);
 
-            monthContainer.Previous();
+            monthContainer.Next();
 
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
-            Assert.AreEqual(30, monthContainer.Days.Count(day => day is {}));
+            Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
-        [TestCaseSource(nameof(ValuesForDaysOfWeekTests))]
+        [TestCaseSource(nameof(ValuesForTheDaysOfWeekInSpecificLanguagesTests))]
         public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, string dayOfWeekName)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
@@ -111,7 +111,7 @@ namespace Xalendar.Api.Tests.Models
             Assert.AreEqual(dayOfWeekName, monthContainer.DaysOfWeek.First());
         }
         
-        private static object[] ValuesForDaysOfWeekTests =
+        private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
         {
             new object[] { "pt-BR", "DOM" },
             new object[] { "en-US", "SUN" },
