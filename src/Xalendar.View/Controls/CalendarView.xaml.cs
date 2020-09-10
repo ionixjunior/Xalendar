@@ -11,6 +11,20 @@ namespace Xalendar.View.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarView : ContentView
     {
+        public static BindableProperty EventsProperty =
+            BindableProperty.Create(
+                nameof(Events),
+                typeof(IList<Event>),
+                typeof(CalendarView),
+                null,
+                BindingMode.OneWay);
+
+        public IList<Event> Events
+        {
+            get => (IList<Event>)GetValue(EventsProperty);
+            set => SetValue(EventsProperty, value);
+        }
+        
         private readonly MonthContainer _monthContainer;
         
         public CalendarView()
