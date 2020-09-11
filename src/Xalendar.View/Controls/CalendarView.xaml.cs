@@ -44,10 +44,15 @@ namespace Xalendar.View.Controls
             InitializeComponent();
             
             _monthContainer = new MonthContainer(DateTime.Today);
-            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
+
+            var days = _monthContainer.Days;
+            _numberOfDaysInContainer = days.Count;
+            foreach (var _ in days)
+                CalendarDaysContainer.Children.Add(new CalendarDay());
+            RecycleDays(days);
+            
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
             MonthName.Text = _monthContainer.GetName();
-            _numberOfDaysInContainer = CalendarDaysContainer.Children.Count;
         }
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)

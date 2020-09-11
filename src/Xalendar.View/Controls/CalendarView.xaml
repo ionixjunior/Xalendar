@@ -43,12 +43,6 @@
             </BindableLayout.ItemTemplate>
         </FlexLayout>
 
-        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysContainer">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <controls:CalendarDay />
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysContainer" />
     </StackLayout>
 </ContentView>
