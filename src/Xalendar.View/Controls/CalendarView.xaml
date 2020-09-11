@@ -46,6 +46,7 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Frame
+                        x:Name="DayContainer"
                         BackgroundColor="{Binding ., Converter={StaticResource IsTodayToBackgroundColorConverter}}"
                         CornerRadius="20"
                         FlexLayout.Basis="{StaticResource DayWidth}"
