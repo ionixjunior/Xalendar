@@ -17,12 +17,22 @@ namespace Xalendar.View.Controls
                 typeof(IList<Event>),
                 typeof(CalendarView),
                 null,
-                BindingMode.OneWay);
-
+                BindingMode.OneWay,
+                propertyChanged: OnEventsChanged);
+        
         public IList<Event> Events
         {
             get => (IList<Event>)GetValue(EventsProperty);
             set => SetValue(EventsProperty, value);
+        }
+        
+        private static void OnEventsChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (bindable is CalendarView calendarView && newvalue is IList<Event> events)
+            {
+                calendarView._monthContainer.AddEvents(events);
+                calendarView.RecycleDays(calendarView._monthContainer.Days);
+            }
         }
         
         private readonly MonthContainer _monthContainer;
@@ -73,9 +83,12 @@ namespace Xalendar.View.Controls
         {
             for (var index = 0; index < CalendarDaysContainer.Children.Count; index++)
             {
-                var dayContainer = days[index];
-                var dayView = CalendarDaysContainer.Children[index];
-                dayView.BindingContext = dayContainer;
+                var day = days[index];
+                var view = CalendarDaysContainer.Children[index];
+                view.BindingContext = day;
+
+                if (view.FindByName<BoxView>("HasEventsElement") is {} hasEventsElement)
+                    hasEventsElement.IsVisible = day?.HasEvents ?? false;
             }
         }
     }

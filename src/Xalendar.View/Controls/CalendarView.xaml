@@ -73,7 +73,8 @@
                                 HorizontalOptions="Center"
                                 IsVisible="{Binding ., Converter={StaticResource HasEventsToVisibilityConverter}}"
                                 VerticalOptions="Center"
-                                WidthRequest="8" />
+                                WidthRequest="8"
+                                x:Name="HasEventsElement" />
                         </Grid>
                     </Frame>
                 </DataTemplate>
