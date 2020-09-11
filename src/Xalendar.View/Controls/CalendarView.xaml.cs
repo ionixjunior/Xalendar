@@ -88,7 +88,6 @@ namespace Xalendar.View.Controls
             {
                 var day = days[index];
                 var view = CalendarDaysContainer.Children[index];
-                view.BindingContext = day;
 
                 if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
                     hasEventsElement.IsVisible = day?.HasEvents ?? false;
