@@ -5,6 +5,7 @@ using Xalendar.Api.Extensions;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XView = Xamarin.Forms.View;
 
 namespace Xalendar.View.Controls
 {
@@ -89,7 +90,7 @@ namespace Xalendar.View.Controls
                 var view = CalendarDaysContainer.Children[index];
                 view.BindingContext = day;
 
-                if (view.FindByName<BoxView>("HasEventsElement") is {} hasEventsElement)
+                if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
                     hasEventsElement.IsVisible = day?.HasEvents ?? false;
             }
         }
