@@ -36,6 +36,7 @@ namespace Xalendar.View.Controls
         }
         
         private readonly MonthContainer _monthContainer;
+        private readonly int _numberOfDaysInContainer;
         
         public CalendarView()
         {
@@ -45,6 +46,7 @@ namespace Xalendar.View.Controls
             BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
             MonthName.Text = _monthContainer.GetName();
+            _numberOfDaysInContainer = CalendarDaysContainer.Children.Count;
         }
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
@@ -81,7 +83,7 @@ namespace Xalendar.View.Controls
 
         private void RecycleDays(IReadOnlyList<Day?> days)
         {
-            for (var index = 0; index < CalendarDaysContainer.Children.Count; index++)
+            for (var index = 0; index < _numberOfDaysInContainer; index++)
             {
                 var day = days[index];
                 var view = CalendarDaysContainer.Children[index];
