@@ -95,6 +95,9 @@ namespace Xalendar.View.Controls
 
                 if (view.FindByName<XView>("DayContainer") is {} dayContainer)
                     dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
+
+                if (view.FindByName<Label>("DayElement") is {} dayElement)
+                    dayElement.Text = day?.ToString();
             }
         }
     }

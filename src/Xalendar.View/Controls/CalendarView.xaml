@@ -46,13 +46,13 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Frame
-                        x:Name="DayContainer"
                         BackgroundColor="{Binding ., Converter={StaticResource IsTodayToBackgroundColorConverter}}"
                         CornerRadius="20"
                         FlexLayout.Basis="{StaticResource DayWidth}"
                         HasShadow="false"
                         HeightRequest="56"
-                        Padding="0">
+                        Padding="0"
+                        x:Name="DayContainer">
                         <Grid RowSpacing="0" VerticalOptions="Center">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -64,7 +64,8 @@
                                 Grid.Row="0"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding .}"
-                                VerticalTextAlignment="Center" />
+                                VerticalTextAlignment="Center"
+                                x:Name="DayElement" />
 
                             <BoxView
                                 BackgroundColor="Black"
