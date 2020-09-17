@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xalendar.Api.Interfaces;
 
 namespace Xalendar.Api.Models
 {
@@ -8,7 +9,7 @@ namespace Xalendar.Api.Models
     {
         private DateTime _currentDateTime;
         public DateTime DateTime { get; }
-        public IList<Event> Events { get; }
+        public IList<ICalendarViewEvent> Events { get; }
 
         public bool IsWeekend => DateTime.DayOfWeek switch
         {
@@ -24,7 +25,7 @@ namespace Xalendar.Api.Models
             _currentDateTime = DateTime.Now;
             DateTime = dateTime;
             _isSelected = isSelected;
-            Events = new List<Event>();
+            Events = new List<ICalendarViewEvent>();
         }
 
         public Day(DateTime dateTime, DateTime currentDateTime, bool isSelected = false)
@@ -32,7 +33,7 @@ namespace Xalendar.Api.Models
             _currentDateTime = currentDateTime;
             DateTime = dateTime;
             _isSelected = isSelected;
-            Events = new List<Event>();
+            Events = new List<ICalendarViewEvent>();
         }
 
         public bool IsToday => _currentDateTime.Date == DateTime.Date;

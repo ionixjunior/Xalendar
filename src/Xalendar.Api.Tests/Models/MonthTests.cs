@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Xalendar.Api.Extensions;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Tests.Models
@@ -198,7 +199,7 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
-            var events = new List<Event>
+            var events = new List<ICalendarViewEvent>
             {
                 new Event(1, "Name", dateTime, dateTime, false)
             };
@@ -215,7 +216,7 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
-            var events = new List<Event>
+            var events = new List<ICalendarViewEvent>
             {
                 new Event(1, "Name", dateTime, dateTime, false),
                 new Event(2, "Name", dateTime.AddMonths(1), dateTime.AddMonths(1), false)

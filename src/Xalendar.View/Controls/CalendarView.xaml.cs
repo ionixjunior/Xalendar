@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,21 +16,21 @@ namespace Xalendar.View.Controls
         public static BindableProperty EventsProperty =
             BindableProperty.Create(
                 nameof(Events),
-                typeof(IList<Event>),
+                typeof(IList<ICalendarViewEvent>),
                 typeof(CalendarView),
                 null,
                 BindingMode.OneWay,
                 propertyChanged: OnEventsChanged);
         
-        public IList<Event> Events
+        public IList<ICalendarViewEvent> Events
         {
-            get => (IList<Event>)GetValue(EventsProperty);
+            get => (IList<ICalendarViewEvent>)GetValue(EventsProperty);
             set => SetValue(EventsProperty, value);
         }
         
         private static void OnEventsChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            if (bindable is CalendarView calendarView && newvalue is IList<Event> events)
+            if (bindable is CalendarView calendarView && newvalue is IList<ICalendarViewEvent> events)
             {
                 calendarView._monthContainer.AddEvents(events);
                 calendarView.RecycleDays(calendarView._monthContainer.Days);
