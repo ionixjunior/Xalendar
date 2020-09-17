@@ -1,8 +1,9 @@
 using System;
+using Xalendar.Api.Interfaces;
 
 namespace Xalendar.Api.Models
 {
-    public class Event
+    public class Event : ICalendarViewEvent
     {
         public object Id { get; private set; }
         public string Name { get; private set; }
