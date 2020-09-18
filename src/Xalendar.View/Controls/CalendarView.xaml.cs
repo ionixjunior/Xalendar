@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Interfaces;
@@ -45,11 +46,7 @@ namespace Xalendar.View.Controls
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
-                    var notifiedEvents = new List<ICalendarViewEvent>();
-                    
-                    foreach (ICalendarViewEvent item in args.NewItems)
-                        notifiedEvents.Add(item);
-                    
+                    var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
                     UpdateEvents(calendarView, notifiedEvents);
                 }
             }
