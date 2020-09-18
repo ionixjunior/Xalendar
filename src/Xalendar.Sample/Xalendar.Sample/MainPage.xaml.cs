@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using Xalendar.Api.Interfaces;
-using Xalendar.Api.Models;
 using Xamarin.Forms;
 
 namespace Xalendar.Sample
@@ -14,16 +10,39 @@ namespace Xalendar.Sample
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel();
+        }
+        
+        private void OnRandomButtonClick(object sender, EventArgs e)
+        {
+            if (BindingContext is MainPageViewModel viewModel)
+                viewModel.AddRandomEvent();
+        }
+    }
 
-            var events = new List<ICalendarViewEvent>();
-
+    public class MainPageViewModel
+    {
+        public ObservableCollection<ICalendarViewEvent> Events { get; }
+    
+        public MainPageViewModel()
+        {
+            Events = new ObservableCollection<ICalendarViewEvent>();
+    
             for (var index = 1; index <= 10; index++)
             {
                 var eventDate = new DateTime(2020, 9, index);
-                events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
+                Events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
             }
-            
-            Calendar.Events = events;
+        }
+    
+        private int _dayEventToStart = 11;
+        
+        public void AddRandomEvent()
+        {
+            var eventDate = new DateTime(2020, 9, _dayEventToStart);
+            var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
+            Events.Add(customEvent);
+            _dayEventToStart++;
         }
     }
 
