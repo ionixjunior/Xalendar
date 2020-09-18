@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
@@ -17,15 +18,15 @@ namespace Xalendar.View.Controls
         public static BindableProperty EventsProperty =
             BindableProperty.Create(
                 nameof(Events),
-                typeof(IList<ICalendarViewEvent>),
+                typeof(IEnumerable<ICalendarViewEvent>),
                 typeof(CalendarView),
                 null,
                 BindingMode.OneWay,
                 propertyChanged: OnEventsChanged);
         
-        public IList<ICalendarViewEvent> Events
+        public IEnumerable<ICalendarViewEvent> Events
         {
-            get => (IList<ICalendarViewEvent>)GetValue(EventsProperty);
+            get => (IEnumerable<ICalendarViewEvent>)GetValue(EventsProperty);
             set => SetValue(EventsProperty, value);
         }
         
@@ -39,7 +40,7 @@ namespace Xalendar.View.Controls
                 if (newvalue is INotifyCollectionChanged newEvents)
                     newEvents.CollectionChanged += OnEventsCollectionChanged;
 
-                if (newvalue is IList<ICalendarViewEvent> events)
+                if (newvalue is IEnumerable<ICalendarViewEvent> events)
                 {
                     calendarView._monthContainer.AddEvents(events);
                     calendarView.RecycleDays(calendarView._monthContainer.Days);

@@ -47,7 +47,7 @@ namespace Xalendar.Api.Extensions
                 .ToList();
         }
 
-        public static void AddEvents(this Month month, IList<ICalendarViewEvent> events)
+        public static void AddEvents(this Month month, IEnumerable<ICalendarViewEvent> events)
         {
             foreach (var @event in events)
             {
