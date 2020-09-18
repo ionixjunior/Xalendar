@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Interfaces;
@@ -30,13 +31,34 @@ namespace Xalendar.View.Controls
         
         private static void OnEventsChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            if (bindable is CalendarView calendarView && newvalue is IList<ICalendarViewEvent> events)
+            if (bindable is CalendarView calendarView)
             {
-                calendarView._monthContainer.AddEvents(events);
-                calendarView.RecycleDays(calendarView._monthContainer.Days);
+                if (oldvalue is INotifyCollectionChanged oldEvents)
+                    oldEvents.CollectionChanged -= OnEventsCollectionChanged;
+                    
+                if (newvalue is INotifyCollectionChanged newEvents)
+                    newEvents.CollectionChanged += OnEventsCollectionChanged;
+
+                if (newvalue is IList<ICalendarViewEvent> events)
+                {
+                    calendarView._monthContainer.AddEvents(events);
+                    calendarView.RecycleDays(calendarView._monthContainer.Days);
+                }
+                
+                void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+                {
+                    var notifiedEvents = new List<ICalendarViewEvent>();
+                    
+                    foreach (ICalendarViewEvent item in args.NewItems)
+                        notifiedEvents.Add(item);
+                    
+                    calendarView._monthContainer.AddEvents(notifiedEvents);
+                    calendarView.RecycleDays(calendarView._monthContainer.Days);
+                }
             }
         }
-        
+
+
         private readonly MonthContainer _monthContainer;
         private readonly int _numberOfDaysInContainer;
         
