@@ -41,10 +41,7 @@ namespace Xalendar.View.Controls
                     newEvents.CollectionChanged += OnEventsCollectionChanged;
 
                 if (newvalue is IEnumerable<ICalendarViewEvent> events)
-                {
-                    calendarView._monthContainer.AddEvents(events);
-                    calendarView.RecycleDays(calendarView._monthContainer.Days);
-                }
+                    UpdateEvents(calendarView, events);
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
@@ -53,10 +50,15 @@ namespace Xalendar.View.Controls
                     foreach (ICalendarViewEvent item in args.NewItems)
                         notifiedEvents.Add(item);
                     
-                    calendarView._monthContainer.AddEvents(notifiedEvents);
-                    calendarView.RecycleDays(calendarView._monthContainer.Days);
+                    UpdateEvents(calendarView, notifiedEvents);
                 }
             }
+        }
+        
+        private static void UpdateEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
+        {
+            calendarView._monthContainer.AddEvents(events);
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
 
