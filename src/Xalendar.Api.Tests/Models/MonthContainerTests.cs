@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 using Xalendar.Api.Extensions;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Tests.Models
@@ -54,7 +55,7 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
-            var events = new List<Event>
+            var events = new List<ICalendarViewEvent>
             {
                 new Event(1, "Name event", dateTime, dateTime, false)
             };

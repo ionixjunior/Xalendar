@@ -2,6 +2,7 @@
 <ContentView
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:controls="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View"
     xmlns:converters="clr-namespace:Xalendar.View.Converters;assembly=Xalendar.View"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Resources>
@@ -42,42 +43,6 @@
             </BindableLayout.ItemTemplate>
         </FlexLayout>
 
-        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysContainer">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Frame
-                        BackgroundColor="{Binding ., Converter={StaticResource IsTodayToBackgroundColorConverter}}"
-                        CornerRadius="20"
-                        FlexLayout.Basis="{StaticResource DayWidth}"
-                        HasShadow="false"
-                        HeightRequest="56"
-                        Padding="0">
-                        <Grid RowSpacing="0" VerticalOptions="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="14" />
-                            </Grid.RowDefinitions>
-
-                            <Label
-                                FontSize="Subtitle"
-                                Grid.Row="0"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding .}"
-                                VerticalTextAlignment="Center" />
-
-                            <BoxView
-                                BackgroundColor="Black"
-                                CornerRadius="4"
-                                Grid.Row="1"
-                                HeightRequest="8"
-                                HorizontalOptions="Center"
-                                IsVisible="{Binding ., Converter={StaticResource HasEventsToVisibilityConverter}}"
-                                VerticalOptions="Center"
-                                WidthRequest="8" />
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysContainer" />
     </StackLayout>
 </ContentView>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Extensions
@@ -46,7 +47,7 @@ namespace Xalendar.Api.Extensions
                 .ToList();
         }
 
-        public static void AddEvents(this Month month, IList<Event> events)
+        public static void AddEvents(this Month month, IEnumerable<ICalendarViewEvent> events)
         {
             foreach (var @event in events)
             {

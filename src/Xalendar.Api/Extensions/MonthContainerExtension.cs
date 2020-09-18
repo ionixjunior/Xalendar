@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Extensions
@@ -8,7 +9,7 @@ namespace Xalendar.Api.Extensions
     {
         public static void SelectDay(this MonthContainer monthContainer, Day selectedDay) => monthContainer._month.SelectDay(selectedDay);
         public static Day GetSelectedDay(this MonthContainer monthContainer) => monthContainer._month.GetSelectedDay();
-        public static void AddEvents(this MonthContainer monthContainer, IList<Event> events) => monthContainer._month.AddEvents(events);
+        public static void AddEvents(this MonthContainer monthContainer, IEnumerable<ICalendarViewEvent> events) => monthContainer._month.AddEvents(events);
         public static string GetName(this MonthContainer monthContainer) => monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
 
         public static void Next(this MonthContainer monthContainer)

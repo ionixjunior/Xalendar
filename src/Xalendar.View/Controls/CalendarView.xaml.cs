@@ -1,24 +1,79 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
+using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XView = Xamarin.Forms.View;
 
 namespace Xalendar.View.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarView : ContentView
     {
+        public static BindableProperty EventsProperty =
+            BindableProperty.Create(
+                nameof(Events),
+                typeof(IEnumerable<ICalendarViewEvent>),
+                typeof(CalendarView),
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnEventsChanged);
+        
+        public IEnumerable<ICalendarViewEvent> Events
+        {
+            get => (IEnumerable<ICalendarViewEvent>)GetValue(EventsProperty);
+            set => SetValue(EventsProperty, value);
+        }
+        
+        private static void OnEventsChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (bindable is CalendarView calendarView)
+            {
+                if (oldvalue is INotifyCollectionChanged oldEvents)
+                    oldEvents.CollectionChanged -= OnEventsCollectionChanged;
+                    
+                if (newvalue is INotifyCollectionChanged newEvents)
+                    newEvents.CollectionChanged += OnEventsCollectionChanged;
+
+                if (newvalue is IEnumerable<ICalendarViewEvent> events)
+                    UpdateEvents(calendarView, events);
+                
+                void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+                {
+                    var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
+                    UpdateEvents(calendarView, notifiedEvents);
+                }
+            }
+        }
+        
+        private static void UpdateEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
+        {
+            calendarView._monthContainer.AddEvents(events);
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
+
+
         private readonly MonthContainer _monthContainer;
+        private readonly int _numberOfDaysInContainer;
         
         public CalendarView()
         {
             InitializeComponent();
             
             _monthContainer = new MonthContainer(DateTime.Today);
-            BindableLayout.SetItemsSource(CalendarDaysContainer, _monthContainer.Days);
+
+            var days = _monthContainer.Days;
+            _numberOfDaysInContainer = days.Count;
+            foreach (var _ in days)
+                CalendarDaysContainer.Children.Add(new CalendarDay());
+            RecycleDays(days);
+            
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
             MonthName.Text = _monthContainer.GetName();
         }
@@ -57,11 +112,19 @@ namespace Xalendar.View.Controls
 
         private void RecycleDays(IReadOnlyList<Day?> days)
         {
-            for (var index = 0; index < CalendarDaysContainer.Children.Count; index++)
+            for (var index = 0; index < _numberOfDaysInContainer; index++)
             {
-                var dayContainer = days[index];
-                var dayView = CalendarDaysContainer.Children[index];
-                dayView.BindingContext = dayContainer;
+                var day = days[index];
+                var view = CalendarDaysContainer.Children[index];
+
+                if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
+                    hasEventsElement.IsVisible = day?.HasEvents ?? false;
+
+                if (view.FindByName<XView>("DayContainer") is {} dayContainer)
+                    dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
+
+                if (view.FindByName<Label>("DayElement") is {} dayElement)
+                    dayElement.Text = day?.ToString();
             }
         }
     }
