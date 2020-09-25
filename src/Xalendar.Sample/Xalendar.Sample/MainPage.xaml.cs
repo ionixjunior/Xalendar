@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xamarin.Forms;
 
@@ -17,6 +18,12 @@ namespace Xalendar.Sample
         {
             if (BindingContext is MainPageViewModel viewModel)
                 viewModel.AddRandomEvent();
+        }
+
+        private void OnRemoveButtonClick(object sender, EventArgs e)
+        {
+            if (BindingContext is MainPageViewModel viewModel)
+                viewModel.RemoveEvent();
         }
     }
 
@@ -43,6 +50,14 @@ namespace Xalendar.Sample
             var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
             Events.Add(customEvent);
             _dayEventToStart++;
+        }
+
+        public void RemoveEvent()
+        {
+            var firstEvent = Events.FirstOrDefault();
+
+            if (firstEvent != null)
+                Events.Remove(firstEvent);
         }
     }
 
