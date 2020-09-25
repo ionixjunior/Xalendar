@@ -46,10 +46,14 @@ namespace Xalendar.Sample
         
         public void AddRandomEvent()
         {
-            var eventDate = new DateTime(2020, 9, _dayEventToStart);
-            var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
-            Events.Add(customEvent);
-            _dayEventToStart++;
+            try
+            {
+                var eventDate = new DateTime(2020, 9, _dayEventToStart);
+                var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
+                Events.Add(customEvent);
+                _dayEventToStart++;
+            }
+            catch (Exception) { }
         }
 
         public void RemoveEvent()
