@@ -10,6 +10,10 @@ namespace Xalendar.Api.Extensions
         public static void SelectDay(this MonthContainer monthContainer, Day selectedDay) => monthContainer._month.SelectDay(selectedDay);
         public static Day GetSelectedDay(this MonthContainer monthContainer) => monthContainer._month.GetSelectedDay();
         public static void AddEvents(this MonthContainer monthContainer, IEnumerable<ICalendarViewEvent> events) => monthContainer._month.AddEvents(events);
+
+        public static void RemoveEvent(this MonthContainer monthContainer, ICalendarViewEvent calendarViewEvent) =>
+            monthContainer._month.RemoveEvent(calendarViewEvent);
+        
         public static string GetName(this MonthContainer monthContainer) => monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
 
         public static void Next(this MonthContainer monthContainer)

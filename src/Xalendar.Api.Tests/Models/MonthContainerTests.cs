@@ -118,5 +118,19 @@ namespace Xalendar.Api.Tests.Models
             new object[] { "en-US", "SUN" },
             new object[] { "fr-FR", "DIM" }
         };
+
+        [Test]
+        public void EventsShouldBeRemovedFromMonthContainer()
+        {
+            var dateTime = new DateTime(2020, 7, 9);
+            var monthContainer = new MonthContainer(dateTime);
+            var calendarViewEvent = new Event(1, "Name event", dateTime, dateTime, false);
+            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            monthContainer.AddEvents(events);
+            
+            monthContainer.RemoveEvent(calendarViewEvent);
+
+            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+        }
     }
 }
