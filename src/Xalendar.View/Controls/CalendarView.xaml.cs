@@ -51,16 +51,29 @@ namespace Xalendar.View.Controls
                         var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
                         AddEvents(calendarView, notifiedEvents);
                     }
+
+                    if (args.Action == NotifyCollectionChangedAction.Remove)
+                    {
+                        var notifiedEvents = args.OldItems.Cast<ICalendarViewEvent>();
+                        RemoveEvents(calendarView, notifiedEvents);
+                    }
                 }
             }
         }
-        
+
         private static void AddEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
         {
             calendarView._monthContainer.AddEvents(events);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
+        private static void RemoveEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> notifiedEvents)
+        {
+            foreach (var calendarViewEvent in notifiedEvents)
+                calendarView._monthContainer.RemoveEvent(calendarViewEvent);
+            
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
 
         private readonly MonthContainer _monthContainer;
         private readonly int _numberOfDaysInContainer;
