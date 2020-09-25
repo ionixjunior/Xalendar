@@ -46,6 +46,8 @@ namespace Xalendar.View.Controls
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
+                    System.Diagnostics.Debug.WriteLine(args.Action);
+                    
                     if (args.Action == NotifyCollectionChangedAction.Add)
                     {
                         var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
