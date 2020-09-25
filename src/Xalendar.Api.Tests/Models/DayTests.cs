@@ -198,5 +198,17 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsEmpty(day.Events);
         }
+
+        [Test]
+        public void AllEventsShouldBeRemoved()
+        {
+            var day = new Day(DateTime.Now);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
+            
+            day.RemoveAllEvents();
+            
+            Assert.IsEmpty(day.Events);
+        }
     }
 }

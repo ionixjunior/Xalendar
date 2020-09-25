@@ -15,5 +15,10 @@ namespace Xalendar.Api.Extensions
         {
             day.Events.Remove(@event);
         }
+
+        public static void RemoveAllEvents(this Day day)
+        {
+            day.Events.Clear();
+        }
     }
 }
