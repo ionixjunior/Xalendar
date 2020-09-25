@@ -55,5 +55,11 @@ namespace Xalendar.Api.Extensions
                 month.Days.FirstOrDefault(day => day.DateTime.Date.Equals(eventDate))?.AddEvent(@event);
             }
         }
+
+        public static void RemoveEvent(this Month month, ICalendarViewEvent calendarViewEvent)
+        {
+            var eventDate = calendarViewEvent.StartDateTime.Date;
+            month.Days.FirstOrDefault(day => day.DateTime.Date.Equals(eventDate))?.RemoveEvent(calendarViewEvent);
+        }
     }
 }

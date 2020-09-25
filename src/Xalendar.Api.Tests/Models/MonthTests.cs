@@ -228,5 +228,49 @@ namespace Xalendar.Api.Tests.Models
             Assert.IsNotEmpty(eventsOfMonth);
             Assert.AreEqual(1, eventsOfMonth.Count());
         }
+
+        [Test]
+        public void EventsFromCurrentMonthShouldBeRemoved()
+        {
+            var dateTime = new DateTime(2020, 1, 1);
+            var month = new Month(dateTime);
+            var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
+            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            month.AddEvents(events);
+            
+            month.RemoveEvent(calendarViewEvent);
+            
+            var eventsOfMonth = month.Days.Where(day => day.Events.Any());
+            Assert.IsEmpty(eventsOfMonth);
+        }
+
+        [Test]
+        public void EventsFromAnotherMonthNotShouldBeRemoved()
+        {
+            var dateTime = new DateTime(2020, 1, 1);
+            var month = new Month(dateTime);
+            var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
+            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            month.AddEvents(events);
+            var eventFromPreviousMonth = new Event(1, "Name", dateTime.AddMonths(-1), dateTime.AddMonths(-1), false);
+            
+            month.RemoveEvent(eventFromPreviousMonth);
+            
+            var eventsOfMonth = month.Days.Where(day => day.Events.Any());
+            Assert.IsNotEmpty(eventsOfMonth);
+        }
+
+        [Test]
+        public void EventsNotAddedNotShouldBeRemoved()
+        {
+            var dateTime = new DateTime(2020, 1, 1);
+            var month = new Month(dateTime);
+            var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
+            
+            month.RemoveEvent(calendarViewEvent);
+            
+            var eventsOfMonth = month.Days.Where(day => day.Events.Any());
+            Assert.IsEmpty(eventsOfMonth);
+        }
     }
 }
