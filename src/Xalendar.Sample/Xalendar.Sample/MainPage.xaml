@@ -6,14 +6,37 @@
     xmlns:local="clr-namespace:Xalendar.Sample"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xalendar="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View">
-    <StackLayout>
-        <xalendar:CalendarView Events="{Binding Events}" />
+    <ScrollView>
+        <StackLayout>
+            <xalendar:CalendarView Events="{Binding Events}" />
 
-        <Button
-            BackgroundColor="DodgerBlue"
-            Clicked="OnRandomButtonClick"
-            Margin="20,0"
-            Text="Add random event"
-            TextColor="White" />
-    </StackLayout>
+            <Button
+                BackgroundColor="DodgerBlue"
+                Clicked="OnRandomButtonClick"
+                Margin="20,0"
+                Text="Add random event"
+                TextColor="White" />
+
+            <Button
+                BackgroundColor="Red"
+                Clicked="OnRemoveButtonClick"
+                Margin="20,0"
+                Text="Remove event"
+                TextColor="White" />
+
+            <Button
+                BackgroundColor="Indigo"
+                Command="{Binding RemoveAllEventsCommand}"
+                Margin="20,0"
+                Text="Remove all events"
+                TextColor="White" />
+
+            <Button
+                BackgroundColor="Goldenrod"
+                Command="{Binding ReplaceEventCommand}"
+                Margin="20,0"
+                Text="Replace event"
+                TextColor="White" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

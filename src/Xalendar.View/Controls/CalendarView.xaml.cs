@@ -42,22 +42,62 @@ namespace Xalendar.View.Controls
                     newEvents.CollectionChanged += OnEventsCollectionChanged;
 
                 if (newvalue is IEnumerable<ICalendarViewEvent> events)
-                    UpdateEvents(calendarView, events);
+                    AddEvents(calendarView, events);
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
-                    var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
-                    UpdateEvents(calendarView, notifiedEvents);
+                    if (args.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
+                        AddEvents(calendarView, notifiedEvents);
+                    }
+
+                    if (args.Action == NotifyCollectionChangedAction.Remove)
+                    {
+                        var notifiedEvents = args.OldItems.Cast<ICalendarViewEvent>();
+                        RemoveEvents(calendarView, notifiedEvents);
+                    }
+
+                    if (args.Action == NotifyCollectionChangedAction.Reset)
+                        RemoveAllEvents(calendarView);
+
+                    if (args.Action == NotifyCollectionChangedAction.Replace)
+                    {
+                        var oldEventsNotified = args.OldItems.Cast<ICalendarViewEvent>();
+                        var newEventsNotified = args.NewItems.Cast<ICalendarViewEvent>();
+                        ReplaceEvents(calendarView, oldEventsNotified, newEventsNotified);
+                    }
                 }
             }
         }
-        
-        private static void UpdateEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
+
+        private static void AddEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
         {
             calendarView._monthContainer.AddEvents(events);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
+        private static void RemoveEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> notifiedEvents)
+        {
+            foreach (var calendarViewEvent in notifiedEvents)
+                calendarView._monthContainer.RemoveEvent(calendarViewEvent);
+            
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
+
+        private static void RemoveAllEvents(CalendarView calendarView)
+        {
+            calendarView._monthContainer.RemoveAllEvents();
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
+
+        private static void ReplaceEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> oldEventsNotified,
+            IEnumerable<ICalendarViewEvent> newEventsNotified)
+        {
+            RemoveEvents(calendarView, oldEventsNotified);
+            AddEvents(calendarView, newEventsNotified);
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
 
         private readonly MonthContainer _monthContainer;
         private readonly int _numberOfDaysInContainer;

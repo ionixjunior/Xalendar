@@ -186,5 +186,29 @@ namespace Xalendar.Api.Tests.Models
             new object[] { new DateTime(2020, 7, 4), true },
             new object[] { new DateTime(2020, 7, 5), true }
         };
+
+        [Test]
+        public void EventsShouldBeRemoved()
+        {
+            var day = new Day(DateTime.Now);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
+            
+            day.RemoveEvent(@event);
+            
+            Assert.IsEmpty(day.Events);
+        }
+
+        [Test]
+        public void AllEventsShouldBeRemoved()
+        {
+            var day = new Day(DateTime.Now);
+            var @event = new Event(1, "Name", DateTime.Now, DateTime.Now, false);
+            day.AddEvent(@event);
+            
+            day.RemoveAllEvents();
+            
+            Assert.IsEmpty(day.Events);
+        }
     }
 }

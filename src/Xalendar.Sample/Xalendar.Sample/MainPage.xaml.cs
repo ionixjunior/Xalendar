@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xamarin.Forms;
 
@@ -18,15 +19,27 @@ namespace Xalendar.Sample
             if (BindingContext is MainPageViewModel viewModel)
                 viewModel.AddRandomEvent();
         }
+
+        private void OnRemoveButtonClick(object sender, EventArgs e)
+        {
+            if (BindingContext is MainPageViewModel viewModel)
+                viewModel.RemoveEvent();
+        }
     }
 
     public class MainPageViewModel
     {
         public ObservableCollection<ICalendarViewEvent> Events { get; }
+        
+        public Command RemoveAllEventsCommand { get; }
+        public Command ReplaceEventCommand { get; }
     
         public MainPageViewModel()
         {
             Events = new ObservableCollection<ICalendarViewEvent>();
+
+            RemoveAllEventsCommand = new Command(RemoveAllEvents);
+            ReplaceEventCommand = new Command(ReplaceEvent);
     
             for (var index = 1; index <= 10; index++)
             {
@@ -34,15 +47,41 @@ namespace Xalendar.Sample
                 Events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
             }
         }
-    
+
+        private void RemoveAllEvents() => Events.Clear();
+
+        private void ReplaceEvent()
+        {
+            var firstEvent = Events.FirstOrDefault();
+            
+            if (firstEvent is null)
+                return;
+            
+            var eventDate = new DateTime(2020, 9, 24);
+            var newEvent = new CustomEvent(firstEvent.Id, firstEvent.Name, eventDate, eventDate, firstEvent.IsAllDay);
+            Events[0] = newEvent;
+        }
+
         private int _dayEventToStart = 11;
         
         public void AddRandomEvent()
         {
-            var eventDate = new DateTime(2020, 9, _dayEventToStart);
-            var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
-            Events.Add(customEvent);
-            _dayEventToStart++;
+            try
+            {
+                var eventDate = new DateTime(2020, 9, _dayEventToStart);
+                var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
+                Events.Add(customEvent);
+                _dayEventToStart++;
+            }
+            catch (Exception) { }
+        }
+
+        public void RemoveEvent()
+        {
+            var firstEvent = Events.FirstOrDefault();
+
+            if (firstEvent != null)
+                Events.Remove(firstEvent);
         }
     }
 
