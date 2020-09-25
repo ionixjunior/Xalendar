@@ -46,8 +46,11 @@ namespace Xalendar.View.Controls
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
-                    var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
-                    AddEvents(calendarView, notifiedEvents);
+                    if (args.Action == NotifyCollectionChangedAction.Add)
+                    {
+                        var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
+                        AddEvents(calendarView, notifiedEvents);
+                    }
                 }
             }
         }
