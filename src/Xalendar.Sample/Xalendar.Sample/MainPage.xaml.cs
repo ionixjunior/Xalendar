@@ -32,12 +32,14 @@ namespace Xalendar.Sample
         public ObservableCollection<ICalendarViewEvent> Events { get; }
         
         public Command RemoveAllEventsCommand { get; }
+        public Command ReplaceEventCommand { get; }
     
         public MainPageViewModel()
         {
             Events = new ObservableCollection<ICalendarViewEvent>();
 
             RemoveAllEventsCommand = new Command(RemoveAllEvents);
+            ReplaceEventCommand = new Command(ReplaceEvent);
     
             for (var index = 1; index <= 10; index++)
             {
@@ -47,6 +49,18 @@ namespace Xalendar.Sample
         }
 
         private void RemoveAllEvents() => Events.Clear();
+
+        private void ReplaceEvent()
+        {
+            var firstEvent = Events.FirstOrDefault();
+            
+            if (firstEvent is null)
+                return;
+            
+            var eventDate = new DateTime(2020, 9, 24);
+            var newEvent = new CustomEvent(firstEvent.Id, firstEvent.Name, eventDate, eventDate, firstEvent.IsAllDay);
+            Events[0] = newEvent;
+        }
 
         private int _dayEventToStart = 11;
         

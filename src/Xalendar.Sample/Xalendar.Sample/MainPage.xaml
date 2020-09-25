@@ -30,6 +30,13 @@
                 Margin="20,0"
                 Text="Remove all events"
                 TextColor="White" />
+
+            <Button
+                BackgroundColor="Goldenrod"
+                Command="{Binding ReplaceEventCommand}"
+                Margin="20,0"
+                Text="Replace event"
+                TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
