@@ -62,6 +62,13 @@ namespace Xalendar.View.Controls
 
                     if (args.Action == NotifyCollectionChangedAction.Reset)
                         RemoveAllEvents(calendarView);
+
+                    if (args.Action == NotifyCollectionChangedAction.Replace)
+                    {
+                        var oldEventsNotified = args.OldItems.Cast<ICalendarViewEvent>();
+                        var newEventsNotified = args.NewItems.Cast<ICalendarViewEvent>();
+                        ReplaceEvents(calendarView, oldEventsNotified, newEventsNotified);
+                    }
                 }
             }
         }
@@ -83,6 +90,14 @@ namespace Xalendar.View.Controls
         private static void RemoveAllEvents(CalendarView calendarView)
         {
             calendarView._monthContainer.RemoveAllEvents();
+            calendarView.RecycleDays(calendarView._monthContainer.Days);
+        }
+
+        private static void ReplaceEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> oldEventsNotified,
+            IEnumerable<ICalendarViewEvent> newEventsNotified)
+        {
+            RemoveEvents(calendarView, oldEventsNotified);
+            AddEvents(calendarView, newEventsNotified);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
