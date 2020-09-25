@@ -30,10 +30,14 @@ namespace Xalendar.Sample
     public class MainPageViewModel
     {
         public ObservableCollection<ICalendarViewEvent> Events { get; }
+        
+        public Command RemoveAllEventsCommand { get; }
     
         public MainPageViewModel()
         {
             Events = new ObservableCollection<ICalendarViewEvent>();
+
+            RemoveAllEventsCommand = new Command(RemoveAllEvents);
     
             for (var index = 1; index <= 10; index++)
             {
@@ -41,7 +45,9 @@ namespace Xalendar.Sample
                 Events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
             }
         }
-    
+
+        private void RemoveAllEvents() => Events.Clear();
+
         private int _dayEventToStart = 11;
         
         public void AddRandomEvent()

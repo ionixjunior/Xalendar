@@ -23,6 +23,13 @@
                 Margin="20,0"
                 Text="Remove event"
                 TextColor="White" />
+
+            <Button
+                BackgroundColor="Indigo"
+                Command="{Binding RemoveAllEventsCommand}"
+                Margin="20,0"
+                Text="Remove all events"
+                TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
