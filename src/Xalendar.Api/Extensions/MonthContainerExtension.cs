@@ -13,6 +13,9 @@ namespace Xalendar.Api.Extensions
 
         public static void RemoveEvent(this MonthContainer monthContainer, ICalendarViewEvent calendarViewEvent) =>
             monthContainer._month.RemoveEvent(calendarViewEvent);
+
+        public static void RemoveAllEvents(this MonthContainer monthContainer) =>
+            monthContainer._month.RemoveAllEvents();
         
         public static string GetName(this MonthContainer monthContainer) => monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
 
