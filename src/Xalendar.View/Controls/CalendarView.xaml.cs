@@ -42,17 +42,17 @@ namespace Xalendar.View.Controls
                     newEvents.CollectionChanged += OnEventsCollectionChanged;
 
                 if (newvalue is IEnumerable<ICalendarViewEvent> events)
-                    UpdateEvents(calendarView, events);
+                    AddEvents(calendarView, events);
                 
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
                     var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
-                    UpdateEvents(calendarView, notifiedEvents);
+                    AddEvents(calendarView, notifiedEvents);
                 }
             }
         }
         
-        private static void UpdateEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
+        private static void AddEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
         {
             calendarView._monthContainer.AddEvents(events);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
