@@ -10,5 +10,10 @@ namespace Xalendar.Api.Extensions
         {
             day.Events.Add(@event);
         }
+
+        public static void RemoveEvent(this Day day, ICalendarViewEvent @event)
+        {
+            day.Events.Remove(@event);
+        }
     }
 }
