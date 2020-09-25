@@ -272,5 +272,20 @@ namespace Xalendar.Api.Tests.Models
             var eventsOfMonth = month.Days.Where(day => day.Events.Any());
             Assert.IsEmpty(eventsOfMonth);
         }
+        
+        [Test]
+        public void AllEventsOfMonthShouldBeRemoved()
+        {
+            var dateTime = new DateTime(2020, 1, 1);
+            var month = new Month(dateTime);
+            var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
+            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            month.AddEvents(events);
+            
+            month.RemoveAllEvents();
+            
+            var eventsOfMonth = month.Days.Where(day => day.Events.Any());
+            Assert.IsEmpty(eventsOfMonth);
+        }
     }
 }

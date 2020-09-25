@@ -61,5 +61,11 @@ namespace Xalendar.Api.Extensions
             var eventDate = calendarViewEvent.StartDateTime.Date;
             month.Days.FirstOrDefault(day => day.DateTime.Date.Equals(eventDate))?.RemoveEvent(calendarViewEvent);
         }
+
+        public static void RemoveAllEvents(this Month month)
+        {
+            foreach (var day in month.Days)
+                day.RemoveAllEvents();
+        }
     }
 }
