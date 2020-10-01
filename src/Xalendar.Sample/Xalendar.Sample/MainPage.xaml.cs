@@ -25,6 +25,11 @@ namespace Xalendar.Sample
             if (BindingContext is MainPageViewModel viewModel)
                 viewModel.RemoveEvent();
         }
+
+        private void OnMonthChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Mudou de mês");
+        }
     }
 
     public class MainPageViewModel

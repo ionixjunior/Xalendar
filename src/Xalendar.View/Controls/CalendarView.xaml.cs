@@ -96,6 +96,8 @@ namespace Xalendar.View.Controls
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
+        public event EventHandler MonthChanged;
+
         private readonly MonthContainer _monthContainer;
         private readonly int _numberOfDaysInContainer;
         
@@ -129,6 +131,7 @@ namespace Xalendar.View.Controls
 
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
+            MonthChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private async void OnNextMonthClick(object sender, EventArgs e)
@@ -145,6 +148,7 @@ namespace Xalendar.View.Controls
             
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
+            MonthChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void RecycleDays(IReadOnlyList<Day?> days)
