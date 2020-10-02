@@ -2,37 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xalendar.Api.Interfaces;
-using Xalendar.View.Controls;
+using Xalendar.Sample.Models;
 using Xamarin.Forms;
 
-namespace Xalendar.Sample
+namespace Xalendar.Sample.ViewModels
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel();
-        }
-        
-        private void OnRandomButtonClick(object sender, EventArgs e)
-        {
-            if (BindingContext is MainPageViewModel viewModel)
-                viewModel.AddRandomEvent();
-        }
-
-        private void OnRemoveButtonClick(object sender, EventArgs e)
-        {
-            if (BindingContext is MainPageViewModel viewModel)
-                viewModel.RemoveEvent();
-        }
-
-        private void OnMonthChanged(object sender, MonthRangeEventArgs args)
-        {
-            System.Diagnostics.Debug.WriteLine($"Range de {args.Start} até {args.End}");
-        }
-    }
-
     public class MainPageViewModel
     {
         public ObservableCollection<ICalendarViewEvent> Events { get; }
@@ -88,24 +62,6 @@ namespace Xalendar.Sample
 
             if (firstEvent != null)
                 Events.Remove(firstEvent);
-        }
-    }
-
-    public class CustomEvent : ICalendarViewEvent
-    {
-        public object Id { get; }
-        public string Name { get; }
-        public DateTime StartDateTime { get; }
-        public DateTime EndDateTime { get; }
-        public bool IsAllDay { get; }
-        
-        public CustomEvent(object id, string name, DateTime startDateTime, DateTime endDateTime, bool isAllDay)
-        {
-            Id = id;
-            Name = name;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-            IsAllDay = isAllDay;
         }
     }
 }

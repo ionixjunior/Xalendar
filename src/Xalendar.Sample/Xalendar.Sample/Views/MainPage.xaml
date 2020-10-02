@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     Title="CalendarView Sample"
-    x:Class="Xalendar.Sample.MainPage"
+    x:Class="Xalendar.Sample.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:local="clr-namespace:Xalendar.Sample"
+    xmlns:local="clr-namespace:Xalendar.Sample.Views"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xal="http://xalendar.com/schemas/xaml">
     <ScrollView>
