@@ -30,7 +30,8 @@ namespace Xalendar.Sample.Views
 
         private void OnMonthChanged(object sender, MonthRangeEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine($"Range de {args.Start} até {args.End}");
+            if (BindingContext is MainPageViewModel viewModel)
+                viewModel.GetEventsByRange(args.Start, args.End);
         }
     }
 }

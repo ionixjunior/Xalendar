@@ -61,5 +61,13 @@ namespace Xalendar.Sample.ViewModels
             if (firstEvent != null)
                 Events.Remove(firstEvent);
         }
+
+        public void GetEventsByRange(DateTime start, DateTime end)
+        {
+            Events.Clear();
+            
+            foreach (var customEvent in EventService.Instance.GetEventsByRange(start, end))
+                Events.Add(customEvent);
+        }
     }
 }
