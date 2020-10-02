@@ -159,7 +159,7 @@ namespace Xalendar.Api.Tests.Models
         }
 
         [Test]
-        public void ShouldBeGetFirstDayOfMonthContainer()
+        public void ShouldGetFirstDayOfMonthContainer()
         {
             var dateTime = new DateTime(2020, 10, 1);
             var monthContainer = new MonthContainer(dateTime);
@@ -167,6 +167,17 @@ namespace Xalendar.Api.Tests.Models
             var firstDay = monthContainer.FirstDay;
 
             Assert.AreEqual(new DateTime(2020, 10, 1, 0, 0, 0), firstDay);
+        }
+
+        [Test]
+        public void ShouldGetLastDayOfMonthContainer()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            var lastDay = monthContainer.LastDay;
+            
+            Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
         }
     }
 }

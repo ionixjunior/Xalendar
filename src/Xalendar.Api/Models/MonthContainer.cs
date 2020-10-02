@@ -18,6 +18,8 @@ namespace Xalendar.Api.Models
 
         public DateTime FirstDay => Days.First(day => day is {})!.DateTime;
 
+        public DateTime LastDay => Days.Last(day => day is {})!.DateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
+
         public MonthContainer(DateTime dateTime)
         {
             _month = new Month(dateTime);
