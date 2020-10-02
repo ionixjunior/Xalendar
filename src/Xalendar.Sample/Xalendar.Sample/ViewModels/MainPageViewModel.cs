@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xalendar.Sample.Models;
+using Xalendar.Sample.Services;
 using Xamarin.Forms;
 
 namespace Xalendar.Sample.ViewModels
@@ -21,11 +22,8 @@ namespace Xalendar.Sample.ViewModels
             RemoveAllEventsCommand = new Command(RemoveAllEvents);
             ReplaceEventCommand = new Command(ReplaceEvent);
     
-            for (var index = 1; index <= 10; index++)
-            {
-                var eventDate = new DateTime(2020, 9, index);
-                Events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
-            }
+            foreach (var customEvent in EventService.Instance.GetEvents())
+                Events.Add(customEvent);
         }
 
         private void RemoveAllEvents() => Events.Clear();
@@ -37,7 +35,7 @@ namespace Xalendar.Sample.ViewModels
             if (firstEvent is null)
                 return;
             
-            var eventDate = new DateTime(2020, 9, 24);
+            var eventDate = new DateTime(2020, 10, 24);
             var newEvent = new CustomEvent(firstEvent.Id, firstEvent.Name, eventDate, eventDate, firstEvent.IsAllDay);
             Events[0] = newEvent;
         }
@@ -48,7 +46,7 @@ namespace Xalendar.Sample.ViewModels
         {
             try
             {
-                var eventDate = new DateTime(2020, 9, _dayEventToStart);
+                var eventDate = new DateTime(2020, 10, _dayEventToStart);
                 var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
                 Events.Add(customEvent);
                 _dayEventToStart++;
