@@ -18,18 +18,6 @@ namespace Xalendar.Api.Extensions
             monthContainer._month.RemoveAllEvents();
         
         public static string GetName(this MonthContainer monthContainer) => monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
-
-        public static void Next(this MonthContainer monthContainer)
-        {
-            var nextDateTime = monthContainer._month.MonthDateTime.AddMonths(1);
-            monthContainer._month = new Month(nextDateTime);
-        }
-
-        public static void Previous(this MonthContainer monthContainer)
-        {
-            var previousDateTime = monthContainer._month.MonthDateTime.AddMonths(-1);
-            monthContainer._month = new Month(previousDateTime);
-        }
         
         internal static void GetDaysToDiscardAtStartOfMonth(this MonthContainer monthContainer, List<Day?> daysOfContainer)
         {

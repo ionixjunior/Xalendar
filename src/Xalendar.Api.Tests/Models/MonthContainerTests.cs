@@ -146,5 +146,16 @@ namespace Xalendar.Api.Tests.Models
 
             Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
         }
+
+        [Test]
+        public void DaysAttributeShouldBePopulateOneTime()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            var days = monthContainer.Days;
+            
+            Assert.AreEqual(days.GetHashCode(), monthContainer.Days.GetHashCode());
+        }
     }
 }
