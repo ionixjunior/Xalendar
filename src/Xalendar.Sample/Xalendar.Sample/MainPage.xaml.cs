@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xalendar.Api.Interfaces;
+using Xalendar.View.Controls;
 using Xamarin.Forms;
 
 namespace Xalendar.Sample
@@ -26,9 +27,9 @@ namespace Xalendar.Sample
                 viewModel.RemoveEvent();
         }
 
-        private void OnMonthChanged(object sender, EventArgs e)
+        private void OnMonthChanged(object sender, MonthRangeEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("Mudou de mês");
+            System.Diagnostics.Debug.WriteLine($"Range de {args.Start} até {args.End}");
         }
     }
 
