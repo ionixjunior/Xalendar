@@ -21,9 +21,6 @@ namespace Xalendar.Sample.ViewModels
 
             RemoveAllEventsCommand = new Command(RemoveAllEvents);
             ReplaceEventCommand = new Command(ReplaceEvent);
-    
-            foreach (var customEvent in EventService.Instance.GetEvents())
-                Events.Add(customEvent);
         }
 
         private void RemoveAllEvents() => Events.Clear();

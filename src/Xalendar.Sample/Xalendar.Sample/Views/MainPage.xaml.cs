@@ -28,7 +28,7 @@ namespace Xalendar.Sample.Views
                 viewModel.RemoveEvent();
         }
 
-        private void OnMonthChanged(object sender, MonthRangeEventArgs args)
+        private void OnMonthChanged(MonthRange args)
         {
             if (BindingContext is MainPageViewModel viewModel)
                 viewModel.GetEventsByRange(args.Start, args.End);
