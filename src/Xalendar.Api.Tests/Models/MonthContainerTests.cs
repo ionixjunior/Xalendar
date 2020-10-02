@@ -157,5 +157,16 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.AreEqual(days.GetHashCode(), monthContainer.Days.GetHashCode());
         }
+
+        [Test]
+        public void ShouldBeGetFirstDayOfMonthContainer()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            var firstDay = monthContainer.FirstDay;
+
+            Assert.AreEqual(new DateTime(2020, 10, 1, 0, 0, 0), firstDay);
+        }
     }
 }
