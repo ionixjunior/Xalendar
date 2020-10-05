@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" />
     <ProjectReference Include="..\Xalendar.View\Xalendar.View.csproj" />
   </ItemGroup>
 </Project>
