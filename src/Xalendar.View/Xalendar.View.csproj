@@ -4,7 +4,7 @@
     <LangVersion>8.0</LangVersion>
     <PackageVersion>1.0.0</PackageVersion>
     <Nullable>enable</Nullable>
-    <PackageId>Xalendar</PackageId>
+    <PackageId> Xalendar</PackageId>
     <Title>Xalander - Xamarin.Forms Calendar</Title>
     <Authors>Pedro Jesus</Authors>
     <Description>Simple Calendar component for Xamarin.Forms apps. Works cross-platform on Android and iOS.</Description>
