@@ -14,7 +14,7 @@ Install Xalendar using NuGet with the following command line to your shared libr
 > dotnet add package Xalender
 ```
 
-To use the Xalender component, you'll need to add the following namespace to the top of your XAML views.
+To use the Xalendar component, you'll need to add the following namespace to the top of your XAML views.
 
 ```xml
 xmlns:xalendar="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View"
