@@ -1,8 +1,8 @@
 # Xalendar [![codecov](https://codecov.io/gh/ionixjunior/Xalendar/branch/master/graph/badge.svg)](https://codecov.io/gh/ionixjunior/Xalendar)
 
-![xalander logo](./assets/logo.png)
+![Xalendar logo](./assets/logo.png)
 
-Xalender is a calendar view for Xamarin.Forms applications.
+Xalendar is a calendar view for Xamarin.Forms applications.
 
 ![screenshot](./assets/screenshot.png)
 
