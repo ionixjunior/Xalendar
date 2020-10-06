@@ -8,7 +8,7 @@
     <Title>Xalendar - Xamarin.Forms Calendar</Title>
     <Authors>Souza Junior</Authors>
     <Description>Simple Calendar component for Xamarin.Forms apps. Works cross-platform on Android and iOS.</Description>
-    <Copyright>2020 Pedro Jesus</Copyright>
+    <Copyright>2020 Souza Junior</Copyright>
     <PackageProjectUrl>https://github.com/ionixjunior/Xalendar</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/ionixjunior/Xalendar/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/ionixjunior/Xalendar</RepositoryUrl>
