@@ -2,7 +2,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Nullable>enable</Nullable>
+    <PackageId> Xalendar</PackageId>
+    <Title>Xalendar - Xamarin.Forms Calendar</Title>
+    <Authors>Souza Junior</Authors>
+    <Description>Simple Calendar component for Xamarin.Forms apps. Works cross-platform on Android and iOS.</Description>
+    <Copyright>2020 Souza Junior</Copyright>
+    <PackageProjectUrl>https://github.com/ionixjunior/Xalendar</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ionixjunior/Xalendar/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/ionixjunior/Xalendar</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>xamarin, android, ios</PackageTags>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -20,7 +32,7 @@
   <ItemGroup>
     <EmbeddedResource Update="Controls\CalendarView.xaml">
       <SubType>Designer</SubType>
-      <Generator></Generator>
+      <Generator/>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -31,6 +43,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" />
+    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" >
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <IncludeAssets>Xalendar.Api.dll</IncludeAssets>
+    </ProjectReference>
   </ItemGroup>
+
+  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+    </ItemGroup>
+  </Target>
+  
 </Project>
