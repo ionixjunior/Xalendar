@@ -1,4 +1,5 @@
 ﻿using System;
+using Xalendar.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +11,7 @@ namespace Xalendar.Sample
     {
         public App()
         {
+            XalendarView.UseSchema();
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());

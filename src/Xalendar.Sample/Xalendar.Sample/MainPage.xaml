@@ -5,10 +5,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:local="clr-namespace:Xalendar.Sample"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xalendar="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View">
+    xmlns:xal="http://xalendar.com/schemas/xaml">
     <ScrollView>
         <StackLayout>
-            <xalendar:CalendarView Events="{Binding Events}" />
+            <xal:CalendarView Events="{Binding Events}" />
 
             <Button
                 BackgroundColor="DodgerBlue"

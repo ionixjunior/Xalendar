@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,12 +7,10 @@ using Xalendar.Api.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using XView = Xamarin.Forms.View;
 
 namespace Xalendar.View.Controls
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CalendarView : ContentView
     {
         public static BindableProperty EventsProperty =
