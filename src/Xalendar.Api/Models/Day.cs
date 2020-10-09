@@ -19,13 +19,9 @@ namespace Xalendar.Api.Models
         };
         
         public bool HasEvents => Events.Any();
-        
-        public Day(DateTime dateTime, bool isSelected = false)
-        {   
-            _currentDateTime = DateTime.Now;
-            DateTime = dateTime;
-            _isSelected = isSelected;
-            Events = new List<ICalendarViewEvent>();
+
+        public Day(DateTime dateTime, bool isSelected = false) : this(dateTime, DateTime.Now, isSelected)
+        {
         }
 
         public Day(DateTime dateTime, DateTime currentDateTime, bool isSelected = false)
@@ -37,7 +33,6 @@ namespace Xalendar.Api.Models
         }
 
         public bool IsToday => _currentDateTime.Date == DateTime.Date;
-        
 
         private bool _isSelected;
 
@@ -55,8 +50,7 @@ namespace Xalendar.Api.Models
             return false;
         }
 
-        public override int GetHashCode() =>
-            (DateTime.Date.Ticks).GetHashCode();
+        public override int GetHashCode() => DateTime.Date.Ticks.GetHashCode();
 
         public override string ToString() => DateTime.Day.ToString();
     }
