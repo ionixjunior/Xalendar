@@ -2,18 +2,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>0.0.1-pre</PackageVersion>
     <Nullable>enable</Nullable>
-    <PackageId> Xalendar</PackageId>
-    <Title>Xalendar - Xamarin.Forms Calendar</Title>
-    <Authors>Souza Junior</Authors>
+    <PackageId>Xalendar</PackageId>
+    <Title>Xalendar - A CalendarView for Xamarin.Forms</Title>
+    <Authors>Ione Souza Junior</Authors>
     <Description>Simple Calendar component for Xamarin.Forms apps. Works cross-platform on Android and iOS.</Description>
-    <Copyright>2020 Souza Junior</Copyright>
+    <Copyright>2020 Ione Souza Junior</Copyright>
     <PackageProjectUrl>https://github.com/ionixjunior/Xalendar</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ionixjunior/Xalendar/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/ionixjunior/Xalendar</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>xamarin, android, ios</PackageTags>
+    <PackageIcon>standalone-logo.png</PackageIcon>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
@@ -54,5 +55,16 @@
       <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+    <None Include="..\..\assets\standalone-logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
   
 </Project>
