@@ -48,3 +48,6 @@ public ObservableCollection<ICalendarViewEvent> Events { get; }
 ## Contributors
 
 - Pedro Jesus [@pictos](https://github.com/pictos)
+- Felipe Baltazar [@felipebaltazar](https://github.com/felipebaltazar)
+- Khalid Abuhakmeh [@khalidabuhakmeh](https://github.com/khalidabuhakmeh)
+- Brendon Barreto [@brendonbarreto](https://github.com/brendonbarreto)
