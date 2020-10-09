@@ -2,7 +2,7 @@
 
 ![Xalendar logo](./assets/logo.png)
 
-Xalendar is a calendar view for Xamarin.Forms applications.
+Xalendar is a calendar view for Xamarin.Forms applications. This plugin is under development.
 
 ![screenshot](./assets/screenshot.png)
 
