@@ -8,10 +8,7 @@
     xmlns:xal="http://xalendar.com/schemas/xaml">
     <ScrollView>
         <StackLayout>
-            <xal:CalendarView
-                Events="{Binding Events}"
-                MonthChanged="OnMonthChanged"
-                x:Name="calendar" />
+            <xal:CalendarView Events="{Binding Events}" MonthChanged="OnMonthChanged" />
 
             <Button
                 BackgroundColor="DodgerBlue"

@@ -13,7 +13,6 @@ namespace Xalendar.Sample.Views
         public MainPage()
         {
             InitializeComponent();
-            calendar.SetPage(this);
             BindingContext = new MainPageViewModel();
         }
         

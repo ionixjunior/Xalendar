@@ -130,17 +130,6 @@ namespace Xalendar.View.Controls
             }
         }
 
-        public void SetPage(Page page)
-        {
-            page.Appearing += OnPageAppearing;
-            
-            void OnPageAppearing(object _, EventArgs __)
-            {
-                page.Appearing -= OnPageAppearing;
-                MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
-            }
-        }
-        
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
             var result = await Task.Run(() =>
