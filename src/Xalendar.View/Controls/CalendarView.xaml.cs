@@ -115,14 +115,9 @@ namespace Xalendar.View.Controls
             
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
             MonthName.Text = _monthContainer.GetName();
-
-            this.LayoutChanged += (sender, args) =>
-            {
-                MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
-            };
             
             this.LayoutChanged += OnLayoutChanged;
-            
+
             void OnLayoutChanged(object _, EventArgs __)
             {
                 this.LayoutChanged -= OnLayoutChanged;
