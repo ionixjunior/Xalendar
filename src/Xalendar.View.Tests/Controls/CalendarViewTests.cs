@@ -32,5 +32,20 @@ namespace Xalendar.View.Tests.Controls
             
             button.SendClicked();
         }
+
+        [Test]
+        public void ShouldChangeMonthNameWhenNextButtonClicked()
+        {
+            var button = _calendarView.FindByName<Button>("NextButton");
+            var monthName = _calendarView.FindByName<Label>("MonthName");
+
+            _calendarView.MonthChanged += _ =>
+            {
+                var nextMonth = DateTime.Today.AddMonths(1);
+                Assert.AreEqual(nextMonth.ToString("MMMM yyyy"), monthName.Text);
+            };
+            
+            button.SendClicked();
+        }
     }
 }

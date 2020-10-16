@@ -29,7 +29,10 @@
                 HorizontalTextAlignment="Center"
                 x:Name="MonthName" />
 
-            <Button Clicked="OnNextMonthClick" Text="▶" />
+            <Button
+                Clicked="OnNextMonthClick"
+                Text="▶"
+                x:Name="NextButton" />
         </FlexLayout>
 
         <FlexLayout Wrap="Wrap" x:Name="CalendarDaysOfWeekContainer">
