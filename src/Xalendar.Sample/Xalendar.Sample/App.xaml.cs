@@ -1,5 +1,6 @@
 ﻿using System;
 using Xalendar.View;
+using Xalendar.Sample.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

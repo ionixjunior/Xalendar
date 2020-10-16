@@ -12,9 +12,14 @@ namespace Xalendar.Api.Models
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Month _month;
 
-        public IReadOnlyList<Day?> Days => GetDaysOfContainer();
+        private IReadOnlyList<Day?>? _days;
+        public IReadOnlyList<Day?> Days => _days ??= GetDaysOfContainer();
         public IReadOnlyList<string> DaysOfWeek { get; }
-        
+
+        public DateTime FirstDay => Days.First(day => day is {})!.DateTime;
+
+        public DateTime LastDay => Days.Last(day => day is {})!.DateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
+
         public MonthContainer(DateTime dateTime)
         {
             _month = new Month(dateTime);
@@ -37,6 +42,20 @@ namespace Xalendar.Api.Models
             daysOfContainer.AddRange(_month.Days);
             this.GetDaysToDiscardAtEndOfMonth(daysOfContainer);
             return daysOfContainer;
+        }
+        
+        public void Next()
+        {
+            var nextDateTime = _month.MonthDateTime.AddMonths(1);
+            _month = new Month(nextDateTime);
+            _days = null;
+        }
+
+        public void Previous()
+        {
+            var previousDateTime = _month.MonthDateTime.AddMonths(-1);
+            _month = new Month(previousDateTime);
+            _days = null;
         }
     }
 }

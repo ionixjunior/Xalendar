@@ -2,31 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xalendar.Api.Interfaces;
+using Xalendar.Sample.Models;
+using Xalendar.Sample.Services;
 using Xamarin.Forms;
 
-namespace Xalendar.Sample
+namespace Xalendar.Sample.ViewModels
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-            BindingContext = new MainPageViewModel();
-        }
-        
-        private void OnRandomButtonClick(object sender, EventArgs e)
-        {
-            if (BindingContext is MainPageViewModel viewModel)
-                viewModel.AddRandomEvent();
-        }
-
-        private void OnRemoveButtonClick(object sender, EventArgs e)
-        {
-            if (BindingContext is MainPageViewModel viewModel)
-                viewModel.RemoveEvent();
-        }
-    }
-
     public class MainPageViewModel
     {
         public ObservableCollection<ICalendarViewEvent> Events { get; }
@@ -40,12 +21,6 @@ namespace Xalendar.Sample
 
             RemoveAllEventsCommand = new Command(RemoveAllEvents);
             ReplaceEventCommand = new Command(ReplaceEvent);
-    
-            for (var index = 1; index <= 10; index++)
-            {
-                var eventDate = new DateTime(2020, 9, index);
-                Events.Add(new CustomEvent(index, "Nome evento", eventDate, eventDate, false));
-            }
         }
 
         private void RemoveAllEvents() => Events.Clear();
@@ -57,7 +32,7 @@ namespace Xalendar.Sample
             if (firstEvent is null)
                 return;
             
-            var eventDate = new DateTime(2020, 9, 24);
+            var eventDate = new DateTime(2020, 10, 24);
             var newEvent = new CustomEvent(firstEvent.Id, firstEvent.Name, eventDate, eventDate, firstEvent.IsAllDay);
             Events[0] = newEvent;
         }
@@ -68,7 +43,7 @@ namespace Xalendar.Sample
         {
             try
             {
-                var eventDate = new DateTime(2020, 9, _dayEventToStart);
+                var eventDate = new DateTime(2020, 10, _dayEventToStart);
                 var customEvent = new CustomEvent(_dayEventToStart, "Nome evento", eventDate, eventDate, false);
                 Events.Add(customEvent);
                 _dayEventToStart++;
@@ -83,23 +58,13 @@ namespace Xalendar.Sample
             if (firstEvent != null)
                 Events.Remove(firstEvent);
         }
-    }
 
-    public class CustomEvent : ICalendarViewEvent
-    {
-        public object Id { get; }
-        public string Name { get; }
-        public DateTime StartDateTime { get; }
-        public DateTime EndDateTime { get; }
-        public bool IsAllDay { get; }
-        
-        public CustomEvent(object id, string name, DateTime startDateTime, DateTime endDateTime, bool isAllDay)
+        public void GetEventsByRange(DateTime start, DateTime end)
         {
-            Id = id;
-            Name = name;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-            IsAllDay = isAllDay;
+            Events.Clear();
+            
+            foreach (var customEvent in EventService.Instance.GetEventsByRange(start, end))
+                Events.Add(customEvent);
         }
     }
 }

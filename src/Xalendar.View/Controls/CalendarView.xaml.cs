@@ -96,6 +96,8 @@ namespace Xalendar.View.Controls
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
 
+        public event Action<MonthRange>? MonthChanged;
+
         private readonly MonthContainer _monthContainer;
         private readonly int _numberOfDaysInContainer;
         
@@ -113,6 +115,14 @@ namespace Xalendar.View.Controls
             
             BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
             MonthName.Text = _monthContainer.GetName();
+            
+            this.LayoutChanged += OnLayoutChanged;
+
+            void OnLayoutChanged(object _, EventArgs __)
+            {
+                this.LayoutChanged -= OnLayoutChanged;
+                MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
+            }
         }
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
@@ -123,12 +133,15 @@ namespace Xalendar.View.Controls
                 
                 var days = _monthContainer.Days;
                 var monthName = _monthContainer.GetName();
+                var firstDay = _monthContainer.FirstDay;
+                var lastDay = _monthContainer.LastDay;
 
-                return (days, monthName);
+                return (days, monthName, firstDay, lastDay);
             });
 
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
+            MonthChanged?.Invoke(new MonthRange(result.firstDay, result.lastDay));
         }
 
         private async void OnNextMonthClick(object sender, EventArgs e)
@@ -139,12 +152,15 @@ namespace Xalendar.View.Controls
                 
                 var days = _monthContainer.Days;
                 var monthName = _monthContainer.GetName();
+                var firstDay = _monthContainer.FirstDay;
+                var lastDay = _monthContainer.LastDay;
 
-                return (days, monthName);
+                return (days, monthName, firstDay, lastDay);
             });
             
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
+            MonthChanged?.Invoke(new MonthRange(result.firstDay, result.lastDay));
         }
 
         private void RecycleDays(IReadOnlyList<Day?> days)
@@ -163,6 +179,18 @@ namespace Xalendar.View.Controls
                 if (view.FindByName<Label>("DayElement") is {} dayElement)
                     dayElement.Text = day?.ToString();
             }
+        }
+    }
+
+    public readonly struct MonthRange
+    {
+        public DateTime Start { get; }
+        public DateTime End { get; }
+
+        public MonthRange(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
         }
     }
 }
