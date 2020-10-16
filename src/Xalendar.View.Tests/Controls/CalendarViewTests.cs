@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using Xalendar.View.Controls;
 using Xamarin.Forms;
@@ -18,15 +19,18 @@ namespace Xalendar.View.Tests.Controls
         }
 
         [Test]
-        public void ShouldNavigateToPreviousMonthWhenPreviousButtonClick()
+        public void ShouldChangeMonthNameWhenPreviousButtonClicked()
         {
             var button = _calendarView.FindByName<Button>("PreviousButton");
             var monthName = _calendarView.FindByName<Label>("MonthName");
+
+            _calendarView.MonthChanged += _ =>
+            {
+                var previousMonth = DateTime.Today.AddMonths(-1);
+                Assert.AreEqual(previousMonth.ToString("MMMM yyyy"), monthName.Text);
+            };
             
             button.SendClicked();
-
-            var previousMonth = DateTime.Today.AddMonths(-1);
-            Assert.AreEqual(previousMonth.ToString("MMMM yyyy"), monthName.Text);
         }
     }
 }
