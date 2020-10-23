@@ -3,6 +3,7 @@
 src/*.Tests/coverage.opencover.xml
 src/Xalendar.Sample/Xalendar.Sample.Android/Resources/Resource.designer.cs
 src/.idea/
+coverage/
 
 # Created by https://www.gitignore.io/api/dotnetcore,visualstudio
 # Edit at https://www.gitignore.io/?templates=dotnetcore,visualstudio
