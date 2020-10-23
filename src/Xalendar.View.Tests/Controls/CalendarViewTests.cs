@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Xalendar.View.Controls;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 namespace Xalendar.View.Tests.Controls
 {
     [TestFixture]
-    public class CalendarViewTests
+    public class CalendarViewTests : BaseTests
     {
         private CalendarView _calendarView;
         
@@ -19,33 +20,31 @@ namespace Xalendar.View.Tests.Controls
         }
 
         [Test]
-        public void ShouldChangeMonthNameWhenPreviousButtonClicked()
+        public async Task ShouldChangeMonthNameWhenPreviousButtonClicked()
         {
             var button = _calendarView.FindByName<Button>("PreviousButton");
             var monthName = _calendarView.FindByName<Label>("MonthName");
-
-            _calendarView.MonthChanged += _ =>
-            {
-                var previousMonth = DateTime.Today.AddMonths(-1);
-                Assert.AreEqual(previousMonth.ToString("MMMM yyyy"), monthName.Text);
-            };
+            var previousMonth = DateTime.Today.AddMonths(-1);
+            var taskCompletionSource = CreateTaskCompletionSource<string>();
+            _calendarView.MonthChanged += _ => taskCompletionSource.SetResult(monthName.Text);
             
             button.SendClicked();
+            
+            Assert.AreEqual(previousMonth.ToString("MMMM yyyy"), await taskCompletionSource.Task);
         }
 
         [Test]
-        public void ShouldChangeMonthNameWhenNextButtonClicked()
+        public async Task ShouldChangeMonthNameWhenNextButtonClicked()
         {
             var button = _calendarView.FindByName<Button>("NextButton");
             var monthName = _calendarView.FindByName<Label>("MonthName");
-
-            _calendarView.MonthChanged += _ =>
-            {
-                var nextMonth = DateTime.Today.AddMonths(1);
-                Assert.AreEqual(nextMonth.ToString("MMMM yyyy"), monthName.Text);
-            };
+            var nextMonth = DateTime.Today.AddMonths(1);
+            var taskCompletionSource = CreateTaskCompletionSource<string>();
+            _calendarView.MonthChanged += _ => taskCompletionSource.SetResult(monthName.Text);
             
             button.SendClicked();
+
+            Assert.AreEqual(nextMonth.ToString("MMMM yyyy"), await taskCompletionSource.Task);
         }
     }
 }
