@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -50,13 +51,15 @@ namespace Xalendar.View.Tests.Controls
         }
 
         [Test]
-        public void ShouldBeCreateEventsInCalendarView()
+        public void ShouldCreateIndicatorOfEvent()
         {
-            var eventsBinding = new Binding {Source = GenerateEvents()};
+            var dayOfTheEvent = 1;
+            var events = GenerateEvents(dayOfTheEvent);
             
-            _calendarView.SetBinding(CalendarView.EventsProperty, eventsBinding);
+            _calendarView.Events = events;
             
-            Assert.IsNotEmpty(_calendarView.Events);
+            var calendarDay = FindCalendarDayByNumber(_calendarView, dayOfTheEvent.ToString());
+            Assert.IsTrue(calendarDay.FindByName<BoxView>("HasEventsElement").IsVisible);
         }
     }
 }

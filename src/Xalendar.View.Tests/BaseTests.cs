@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xalendar.Api.Interfaces;
+using Xalendar.View.Controls;
+using Xamarin.Forms;
 
 namespace Xalendar.View.Tests
 {
@@ -17,14 +20,33 @@ namespace Xalendar.View.Tests
             return taskCompletionSource;
         }
         
-        protected List<ICalendarViewEvent> GenerateEvents()
+        protected List<ICalendarViewEvent> GenerateEvents(int dayOfTheEvent)
         {
+            var today = DateTime.Today;
+            
             return new List<ICalendarViewEvent>
             {
-                new MyEvent(1, "Event name", DateTime.Now, DateTime.Now, false),
-                new MyEvent(2, "Event name", DateTime.Now, DateTime.Now, false),
-                new MyEvent(3, "Event name", DateTime.Now, DateTime.Now, false)
+                new MyEvent(1, "Event name", new DateTime(today.Year, today.Month, dayOfTheEvent), new DateTime(today.Year, today.Month, 1), false)
             };
+        }
+
+        protected CalendarDay FindCalendarDayByNumber(CalendarView calendarView, string number)
+        {
+            var calendarDaysContainer = calendarView.FindByName<FlexLayout>("CalendarDaysContainer");
+            
+            return (CalendarDay) calendarDaysContainer.Children.First(calendarDay =>
+            {
+                if (calendarDay is {})
+                {
+                    if (calendarDay.FindByName<Label>("DayElement") is {} dayElement)
+                    {
+                        if (dayElement.Text == number)
+                            return true;
+                    }
+                }
+
+                return false;
+            });
         }
     }
 
