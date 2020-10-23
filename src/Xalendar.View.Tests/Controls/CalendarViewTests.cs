@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Xalendar.Api.Interfaces;
 using Xalendar.View.Controls;
 using Xamarin.Forms;
 
@@ -45,6 +47,16 @@ namespace Xalendar.View.Tests.Controls
             button.SendClicked();
 
             Assert.AreEqual(nextMonth.ToString("MMMM yyyy"), await taskCompletionSource.Task);
+        }
+
+        [Test]
+        public void ShouldBeCreateEventsInCalendarView()
+        {
+            var eventsBinding = new Binding {Source = GenerateEvents()};
+            
+            _calendarView.SetBinding(CalendarView.EventsProperty, eventsBinding);
+            
+            Assert.IsNotEmpty(_calendarView.Events);
         }
     }
 }
