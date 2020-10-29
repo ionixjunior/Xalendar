@@ -18,7 +18,10 @@
             AlignItems="Center"
             HeightRequest="56"
             Padding="10,0">
-            <Button Clicked="OnPreviousMonthClick" Text="◀" />
+            <Button
+                Clicked="OnPreviousMonthClick"
+                Text="◀"
+                x:Name="PreviousButton" />
 
             <Label
                 FlexLayout.Grow="1"
@@ -26,7 +29,10 @@
                 HorizontalTextAlignment="Center"
                 x:Name="MonthName" />
 
-            <Button Clicked="OnNextMonthClick" Text="▶" />
+            <Button
+                Clicked="OnNextMonthClick"
+                Text="▶"
+                x:Name="NextButton" />
         </FlexLayout>
 
         <FlexLayout Wrap="Wrap" x:Name="CalendarDaysOfWeekContainer">
