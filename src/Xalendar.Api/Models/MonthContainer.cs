@@ -20,9 +20,12 @@ namespace Xalendar.Api.Models
 
         public DateTime LastDay => Days.Last(day => day is {})!.DateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
 
+        private DayOfWeek _firstDayOfWeek;
+        
         public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday)
         {
             _month = new Month(dateTime);
+            _firstDayOfWeek = firstDayOfWeek;
 
             DaysOfWeek = GenerateDaysOfWeek(firstDayOfWeek)
                 .Select(GetDayOfWeekAbbreviated)
