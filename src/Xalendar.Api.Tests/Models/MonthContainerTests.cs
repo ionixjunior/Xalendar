@@ -203,5 +203,51 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
         }
+
+        [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek))]
+        public void DaysOfMonthShouldStartBasedOnFirstDayOfWeek(DateTime dateTime, DayOfWeek firstDayOfWeek, List<Day?> expectedDays)
+        {
+            var monthContainer = new MonthContainer(dateTime, firstDayOfWeek);
+
+            var days = monthContainer.Days;
+            
+            CollectionAssert.AreEqual(expectedDays, days);
+        }
+
+        private static object[] ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek =
+        {
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Sunday, GenerateDaysOfSeptember2020(2, 3) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Monday, GenerateDaysOfSeptember2020(1, 4) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Tuesday, GenerateDaysOfSeptember2020(0, 5) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, GenerateDaysOfSeptember2020(0, 5) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, GenerateDaysOfSeptember2020(0, 5) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, GenerateDaysOfSeptember2020(0, 5) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, GenerateDaysOfSeptember2020(0, 5) }
+        };
+
+        private static List<Day?> GenerateDaysOfSeptember2020(int daysToDiscardAtStart, int daysToDiscardAtEnd)
+        {
+            var days = new List<Day?>();
+            
+            for (var index = 0; index < daysToDiscardAtStart; index++)
+                days.Add(default(Day));
+
+            var dateTime = new DateTime(2020, 9, 1);
+            for (var index = 1; index <= 30; index++)
+            {
+                days.Add(new Day(dateTime));
+                dateTime = dateTime.AddDays(1);
+            }
+            
+            for (var index = 0; index < daysToDiscardAtEnd; index++)
+                days.Add(default(Day));
+            
+            if (days.Count < 42)
+                for (var index = days.Count; index < 42; index++)
+                    days.Add(default(Day));
+            
+            return days;
+        }
     }
 }
