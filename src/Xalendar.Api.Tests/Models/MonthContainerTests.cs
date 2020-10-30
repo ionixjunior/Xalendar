@@ -125,7 +125,7 @@ namespace Xalendar.Api.Tests.Models
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
             var dateTime = DateTime.Today;
-            var monthContainer = new MonthContainer(dateTime);
+            var monthContainer = new MonthContainer(dateTime, firstDayOfWeek);
 
             var daysOfWeek = monthContainer.DaysOfWeek;
 
