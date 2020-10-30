@@ -120,6 +120,30 @@ namespace Xalendar.Api.Tests.Models
         };
 
         [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfWeekShouldStartWithSpecificDay))]
+        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, List<string> expectedDaysOfWeek)
+        {
+            CultureInfo.CurrentCulture = new CultureInfo(language);
+            var dateTime = DateTime.Today;
+            var monthContainer = new MonthContainer(dateTime);
+
+            var daysOfWeek = monthContainer.DaysOfWeek;
+
+            CollectionAssert.AreEqual(expectedDaysOfWeek, daysOfWeek.ToList());
+        }
+
+        private static object[] ValuesForDaysOfWeekShouldStartWithSpecificDay =
+        {
+            new object[] { "en-US", DayOfWeek.Sunday, new List<string> { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" } },
+            new object[] { "en-US", DayOfWeek.Monday, new List<string> { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" } },
+            new object[] { "en-US", DayOfWeek.Tuesday, new List<string> { "TUE", "WED", "THU", "FRI", "SAT", "SUN", "MON" } },
+            new object[] { "en-US", DayOfWeek.Wednesday, new List<string> { "WED", "THU", "FRI", "SAT", "SUN", "MON", "TUE" } },
+            new object[] { "en-US", DayOfWeek.Thursday, new List<string> { "THU", "FRI", "SAT", "SUN", "MON", "TUE", "WED" } },
+            new object[] { "en-US", DayOfWeek.Friday, new List<string> { "FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU" } },
+            new object[] { "en-US", DayOfWeek.Saturday, new List<string> { "SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI" } }
+        };
+
+        [Test]
         public void EventsShouldBeRemovedFromMonthContainer()
         {
             var dateTime = new DateTime(2020, 7, 9);
