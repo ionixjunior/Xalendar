@@ -24,9 +24,22 @@ namespace Xalendar.Api.Models
         {
             _month = new Month(dateTime);
 
-            DaysOfWeek = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>()
+            DaysOfWeek = GenerateDaysOfWeek(firstDayOfWeek)
                 .Select(GetDayOfWeekAbbreviated)
                 .ToList();
+        }
+
+        private IEnumerable<DayOfWeek> GenerateDaysOfWeek(DayOfWeek firstDayOfWeek)
+        {
+            var daysOfWeek = new List<DayOfWeek>();
+
+            for (var index = (int)firstDayOfWeek; index <= 6; index++)
+                daysOfWeek.Add((DayOfWeek)index);
+            
+            for (var index = 0; index < (int)firstDayOfWeek; index++)
+                daysOfWeek.Add((DayOfWeek)index);
+
+            return daysOfWeek;
         }
 
         private string GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek)
