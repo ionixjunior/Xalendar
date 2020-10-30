@@ -120,6 +120,30 @@ namespace Xalendar.Api.Tests.Models
         };
 
         [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfWeekShouldStartWithSpecificDay))]
+        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, List<string> expectedDaysOfWeek)
+        {
+            CultureInfo.CurrentCulture = new CultureInfo(language);
+            var dateTime = DateTime.Today;
+            var monthContainer = new MonthContainer(dateTime, firstDayOfWeek);
+
+            var daysOfWeek = monthContainer.DaysOfWeek;
+
+            CollectionAssert.AreEqual(expectedDaysOfWeek, daysOfWeek.ToList());
+        }
+
+        private static object[] ValuesForDaysOfWeekShouldStartWithSpecificDay =
+        {
+            new object[] { "en-US", DayOfWeek.Sunday, new List<string> { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" } },
+            new object[] { "en-US", DayOfWeek.Monday, new List<string> { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" } },
+            new object[] { "en-US", DayOfWeek.Tuesday, new List<string> { "TUE", "WED", "THU", "FRI", "SAT", "SUN", "MON" } },
+            new object[] { "en-US", DayOfWeek.Wednesday, new List<string> { "WED", "THU", "FRI", "SAT", "SUN", "MON", "TUE" } },
+            new object[] { "en-US", DayOfWeek.Thursday, new List<string> { "THU", "FRI", "SAT", "SUN", "MON", "TUE", "WED" } },
+            new object[] { "en-US", DayOfWeek.Friday, new List<string> { "FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU" } },
+            new object[] { "en-US", DayOfWeek.Saturday, new List<string> { "SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI" } }
+        };
+
+        [Test]
         public void EventsShouldBeRemovedFromMonthContainer()
         {
             var dateTime = new DateTime(2020, 7, 9);
@@ -178,6 +202,52 @@ namespace Xalendar.Api.Tests.Models
             var lastDay = monthContainer.LastDay;
             
             Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek))]
+        public void DaysOfMonthShouldStartBasedOnFirstDayOfWeek(DateTime dateTime, DayOfWeek firstDayOfWeek, List<Day?> expectedDays)
+        {
+            var monthContainer = new MonthContainer(dateTime, firstDayOfWeek);
+
+            var days = monthContainer.Days;
+            
+            CollectionAssert.AreEqual(expectedDays, days);
+        }
+
+        private static object[] ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek =
+        {
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Sunday, GenerateDaysOfSeptember2020(2, 3) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Monday, GenerateDaysOfSeptember2020(1, 4) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Tuesday, GenerateDaysOfSeptember2020(0, 5) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, GenerateDaysOfSeptember2020(6, 6) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, GenerateDaysOfSeptember2020(5, 7) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, GenerateDaysOfSeptember2020(4, 1) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, GenerateDaysOfSeptember2020(3, 2) }
+        };
+
+        private static List<Day?> GenerateDaysOfSeptember2020(int daysToDiscardAtStart, int daysToDiscardAtEnd)
+        {
+            var days = new List<Day?>();
+            
+            for (var index = 0; index < daysToDiscardAtStart; index++)
+                days.Add(default(Day));
+
+            var dateTime = new DateTime(2020, 9, 1);
+            for (var index = 1; index <= 30; index++)
+            {
+                days.Add(new Day(dateTime));
+                dateTime = dateTime.AddDays(1);
+            }
+            
+            for (var index = 0; index < daysToDiscardAtEnd; index++)
+                days.Add(default(Day));
+            
+            if (days.Count < 42)
+                for (var index = days.Count; index < 42; index++)
+                    days.Add(default(Day));
+            
+            return days;
         }
     }
 }

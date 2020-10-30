@@ -20,13 +20,29 @@ namespace Xalendar.Api.Models
 
         public DateTime LastDay => Days.Last(day => day is {})!.DateTime.AddHours(23).AddMinutes(59).AddSeconds(59);
 
-        public MonthContainer(DateTime dateTime)
+        private DayOfWeek _firstDayOfWeek;
+        
+        public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday)
         {
             _month = new Month(dateTime);
+            _firstDayOfWeek = firstDayOfWeek;
 
-            DaysOfWeek = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>()
+            DaysOfWeek = GenerateDaysOfWeek(firstDayOfWeek)
                 .Select(GetDayOfWeekAbbreviated)
                 .ToList();
+        }
+
+        private IEnumerable<DayOfWeek> GenerateDaysOfWeek(DayOfWeek firstDayOfWeek)
+        {
+            var daysOfWeek = new List<DayOfWeek>();
+
+            for (var index = (int)firstDayOfWeek; index <= 6; index++)
+                daysOfWeek.Add((DayOfWeek)index);
+            
+            for (var index = 0; index < (int)firstDayOfWeek; index++)
+                daysOfWeek.Add((DayOfWeek)index);
+
+            return daysOfWeek;
         }
 
         private string GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek)
@@ -42,6 +58,23 @@ namespace Xalendar.Api.Models
             daysOfContainer.AddRange(_month.Days);
             this.GetDaysToDiscardAtEndOfMonth(daysOfContainer);
             return daysOfContainer;
+        }
+        
+        private void GetDaysToDiscardAtStartOfMonth(List<Day?> daysOfContainer)
+        {
+            var firstDay = _month.Days.First();
+            var differenceOfDays = ((int)_firstDayOfWeek - (int) firstDay!.DateTime.DayOfWeek);
+            var numberOfDaysToDiscard = differenceOfDays <= 0 ? Math.Abs(differenceOfDays) : 7 - differenceOfDays;  
+            
+            for (var index = 0; index < numberOfDaysToDiscard; index++)
+                daysOfContainer.Add(default(Day));
+        }
+        
+        private void GetDaysToDiscardAtEndOfMonth(List<Day?> daysOfContainer)
+        {
+            if (daysOfContainer.Count < 42)
+                for (var index = daysOfContainer.Count; index < 42; index++)
+                    daysOfContainer.Add(default(Day));
         }
         
         public void Next()
