@@ -60,6 +60,28 @@ namespace Xalendar.Api.Models
             return daysOfContainer;
         }
         
+        private void GetDaysToDiscardAtStartOfMonth(List<Day?> daysOfContainer)
+        {
+            var firstDay = _month.Days.First();
+            var numberOfDaysToDiscard = (int) firstDay!.DateTime.DayOfWeek;
+            
+            for (var index = 0; index < numberOfDaysToDiscard; index++)
+                daysOfContainer.Add(default(Day));
+        }
+        
+        private void GetDaysToDiscardAtEndOfMonth(List<Day?> daysOfContainer)
+        {
+            var lastDay = _month.Days.Last();
+            var numberOfDaysToDiscard = 6 - (int) lastDay.DateTime.DayOfWeek;
+            
+            for (var index = 0; index < numberOfDaysToDiscard; index++)
+                daysOfContainer.Add(default(Day));
+
+            if (daysOfContainer.Count < 42)
+                for (var index = daysOfContainer.Count; index < 42; index++)
+                    daysOfContainer.Add(default(Day));
+        }
+        
         public void Next()
         {
             var nextDateTime = _month.MonthDateTime.AddMonths(1);
