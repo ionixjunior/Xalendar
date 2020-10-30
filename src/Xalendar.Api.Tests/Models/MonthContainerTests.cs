@@ -220,10 +220,10 @@ namespace Xalendar.Api.Tests.Models
             new object[] { new DateTime(2020, 9, 1), DayOfWeek.Sunday, GenerateDaysOfSeptember2020(2, 3) },
             new object[] { new DateTime(2020, 9, 1), DayOfWeek.Monday, GenerateDaysOfSeptember2020(1, 4) },
             new object[] { new DateTime(2020, 9, 1), DayOfWeek.Tuesday, GenerateDaysOfSeptember2020(0, 5) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, GenerateDaysOfSeptember2020(0, 5) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, GenerateDaysOfSeptember2020(0, 5) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, GenerateDaysOfSeptember2020(0, 5) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, GenerateDaysOfSeptember2020(0, 5) }
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, GenerateDaysOfSeptember2020(6, 6) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, GenerateDaysOfSeptember2020(5, 7) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, GenerateDaysOfSeptember2020(4, 1) },
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, GenerateDaysOfSeptember2020(3, 2) }
         };
 
         private static List<Day?> GenerateDaysOfSeptember2020(int daysToDiscardAtStart, int daysToDiscardAtEnd)
