@@ -95,6 +95,26 @@ namespace Xalendar.View.Controls
             AddEvents(calendarView, newEventsNotified);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
+        
+        public static BindableProperty FirstDayOfWeekProperty =
+            BindableProperty.Create(
+                nameof(FirstDayOfWeek),
+                typeof(DayOfWeek),
+                typeof(CalendarView),
+                DayOfWeek.Sunday,
+                BindingMode.OneTime,
+                propertyChanged: OnFirstDayOfWeekChanged);
+        
+        public DayOfWeek FirstDayOfWeek
+        {
+            get => (DayOfWeek)GetValue(FirstDayOfWeekProperty);
+            set => SetValue(FirstDayOfWeekProperty, value);
+        }
+
+        private static void OnFirstDayOfWeekChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            System.Diagnostics.Debug.WriteLine($"Old value: {oldvalue} - New value {newvalue}");
+        }
 
         public event Action<MonthRange>? MonthChanged;
 
