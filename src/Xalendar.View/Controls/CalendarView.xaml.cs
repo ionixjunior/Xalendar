@@ -70,6 +70,9 @@ namespace Xalendar.View.Controls
 
         private static void AddEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
         {
+            if (calendarView._monthContainer is null)
+                return;
+            
             calendarView._monthContainer.AddEvents(events);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
@@ -118,31 +121,41 @@ namespace Xalendar.View.Controls
 
         public event Action<MonthRange>? MonthChanged;
 
-        private readonly MonthContainer _monthContainer;
-        private readonly int _numberOfDaysInContainer;
-        
+        private MonthContainer _monthContainer;
+        private int _numberOfDaysInContainer;
+
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == "Renderer")
+            {
+                System.Diagnostics.Debug.WriteLine($"Nome da propriedade: {propertyName}");
+                
+                _monthContainer = new MonthContainer(DateTime.Today);
+
+                var days = _monthContainer.Days;
+                _numberOfDaysInContainer = days.Count;
+                foreach (var _ in days)
+                    CalendarDaysContainer.Children.Add(new CalendarDay());
+                RecycleDays(days);
+                
+                BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
+                MonthName.Text = _monthContainer.GetName();
+                
+                this.LayoutChanged += OnLayoutChanged;
+
+                void OnLayoutChanged(object _, EventArgs __)
+                {
+                    this.LayoutChanged -= OnLayoutChanged;
+                    MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
+                }
+            }
+        }
+
         public CalendarView()
         {
             InitializeComponent();
-            
-            _monthContainer = new MonthContainer(DateTime.Today);
-
-            var days = _monthContainer.Days;
-            _numberOfDaysInContainer = days.Count;
-            foreach (var _ in days)
-                CalendarDaysContainer.Children.Add(new CalendarDay());
-            RecycleDays(days);
-            
-            BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
-            MonthName.Text = _monthContainer.GetName();
-            
-            this.LayoutChanged += OnLayoutChanged;
-
-            void OnLayoutChanged(object _, EventArgs __)
-            {
-                this.LayoutChanged -= OnLayoutChanged;
-                MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
-            }
         }
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
