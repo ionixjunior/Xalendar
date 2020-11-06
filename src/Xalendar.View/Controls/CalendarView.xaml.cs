@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
+using Xalendar.View.Extensions;
 using Xamarin.Forms;
 using XView = Xamarin.Forms.View;
 
@@ -126,6 +127,9 @@ namespace Xalendar.View.Controls
             if (propertyName == "Renderer")
             {
                 _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek);
+                
+                if (!Events.IsNullOrEmpty())
+                    _monthContainer.AddEvents(Events);
 
                 var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
