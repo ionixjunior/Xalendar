@@ -105,18 +105,12 @@ namespace Xalendar.View.Controls
                 typeof(DayOfWeek),
                 typeof(CalendarView),
                 DayOfWeek.Sunday,
-                BindingMode.OneTime,
-                propertyChanged: OnFirstDayOfWeekChanged);
+                BindingMode.OneTime);
         
         public DayOfWeek FirstDayOfWeek
         {
             get => (DayOfWeek)GetValue(FirstDayOfWeekProperty);
             set => SetValue(FirstDayOfWeekProperty, value);
-        }
-
-        private static void OnFirstDayOfWeekChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            System.Diagnostics.Debug.WriteLine($"Old value: {oldvalue} - New value {newvalue}");
         }
 
         public event Action<MonthRange>? MonthChanged;
@@ -127,12 +121,11 @@ namespace Xalendar.View.Controls
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+            System.Diagnostics.Debug.WriteLine($"Nome da propriedade: {propertyName}");
 
             if (propertyName == "Renderer")
             {
-                System.Diagnostics.Debug.WriteLine($"Nome da propriedade: {propertyName}");
-                
-                _monthContainer = new MonthContainer(DateTime.Today);
+                _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek);
 
                 var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
