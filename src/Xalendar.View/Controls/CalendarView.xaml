@@ -3,12 +3,9 @@
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:controls="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View"
-    xmlns:converters="clr-namespace:Xalendar.View.Converters;assembly=Xalendar.View"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Resources>
         <ResourceDictionary>
-            <converters:IsTodayToBackgroundColorConverter x:Key="IsTodayToBackgroundColorConverter" />
-            <converters:HasEventsToVisibilityConverter x:Key="HasEventsToVisibilityConverter" />
             <FlexBasis x:Key="DayWidth">14.28%</FlexBasis>
         </ResourceDictionary>
     </ContentView.Resources>
