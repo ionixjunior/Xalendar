@@ -122,7 +122,6 @@ namespace Xalendar.View.Controls
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
-            System.Diagnostics.Debug.WriteLine($"Nome da propriedade: {propertyName}");
 
             if (propertyName == "Renderer")
             {
