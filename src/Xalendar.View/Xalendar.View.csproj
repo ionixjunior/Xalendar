@@ -33,7 +33,7 @@
   <ItemGroup>
     <EmbeddedResource Update="Controls\CalendarView.xaml">
       <SubType>Designer</SubType>
-      <Generator/>
+      <Generator />
     </EmbeddedResource>
   </ItemGroup>
 
@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" >
+    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj">
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
       <IncludeAssets>Xalendar.Api.dll</IncludeAssets>
     </ProjectReference>
@@ -52,7 +52,7 @@
 
   <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
     <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
     </ItemGroup>
   </Target>
 
