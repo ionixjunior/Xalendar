@@ -11,6 +11,7 @@
 
     <ContentView.Content>
         <Frame
+            BackgroundColor="Transparent"
             CornerRadius="20"
             HasShadow="false"
             HeightRequest="56"
@@ -41,4 +42,20 @@
             </Grid>
         </Frame>
     </ContentView.Content>
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState x:Name="Selected">
+                <VisualState.Setters>
+                    <Setter Property="BackgroundColor" Value="LightGray" />
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="UnSelected">
+                <VisualState.Setters>
+                    <Setter Property="BackgroundColor" Value="Transparent" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
 </ContentView>

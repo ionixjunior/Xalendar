@@ -11,7 +11,7 @@ namespace Xalendar.View.Controls
 {
     public partial class CalendarDay : ContentView
     {
-        public event Action<Day?> DaySelected;
+        public event Action<CalendarDay?> DaySelected;
         public Day? Day { get; set; }
         
         public CalendarDay()
@@ -19,7 +19,11 @@ namespace Xalendar.View.Controls
             InitializeComponent();
         }
         
-        private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(Day);
+        private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(this);
+
+        public void Select() => VisualStateManager.GoToState(this, "Selected");
+
+        public void UnSelect() => VisualStateManager.GoToState(this, "UnSelected");
     }
 }
 

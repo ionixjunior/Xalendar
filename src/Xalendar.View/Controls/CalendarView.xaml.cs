@@ -136,6 +136,7 @@ namespace Xalendar.View.Controls
                 {
                     var calendarDay = new CalendarDay();
                     calendarDay.DaySelected += CalendarDayOnDaySelected;
+                    calendarDay.UnSelect();
                     CalendarDaysContainer.Children.Add(calendarDay);
                 }
                 RecycleDays(days);
@@ -146,9 +147,19 @@ namespace Xalendar.View.Controls
             }
         }
 
-        private void CalendarDayOnDaySelected(Day? selectedDay)
+        private CalendarDay _selectedDay;
+
+        private void CalendarDayOnDaySelected(CalendarDay calendarDay)
         {
-            System.Diagnostics.Debug.WriteLine($"O evento de selecionar o dia chegou no CalendarView e o dia selecionado é {selectedDay?.DateTime}");
+            if (_selectedDay == calendarDay)
+                return;
+
+            if (calendarDay.Day is null)
+                return;
+            
+            _selectedDay?.UnSelect();
+            calendarDay.Select();
+            _selectedDay = calendarDay;
         }
 
         public CalendarView()
@@ -158,6 +169,8 @@ namespace Xalendar.View.Controls
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
+            _selectedDay?.UnSelect();
+            
             var result = await Task.Run(() =>
             {
                 _monthContainer.Previous();
@@ -177,6 +190,8 @@ namespace Xalendar.View.Controls
 
         private async void OnNextMonthClick(object sender, EventArgs e)
         {
+            _selectedDay?.UnSelect();
+            
             var result = await Task.Run(() =>
             {
                 _monthContainer.Next();
