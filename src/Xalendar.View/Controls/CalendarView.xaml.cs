@@ -133,13 +133,22 @@ namespace Xalendar.View.Controls
                 var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
                 foreach (var _ in days)
-                    CalendarDaysContainer.Children.Add(new CalendarDay());
+                {
+                    var calendarDay = new CalendarDay();
+                    calendarDay.DaySelected += CalendarDayOnDaySelected;
+                    CalendarDaysContainer.Children.Add(calendarDay);
+                }
                 RecycleDays(days);
                 
                 BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
                 MonthName.Text = _monthContainer.GetName();
                 MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
             }
+        }
+
+        private void CalendarDayOnDaySelected(Day? selectedDay)
+        {
+            System.Diagnostics.Debug.WriteLine($"O evento de selecionar o dia chegou no CalendarView e o dia selecionado é {selectedDay?.DateTime}");
         }
 
         public CalendarView()
@@ -190,16 +199,21 @@ namespace Xalendar.View.Controls
             for (var index = 0; index < _numberOfDaysInContainer; index++)
             {
                 var day = days[index];
-                var view = CalendarDaysContainer.Children[index];
 
-                if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
-                    hasEventsElement.IsVisible = day?.HasEvents ?? false;
+                if (CalendarDaysContainer.Children[index] is CalendarDay view)
+                {
+                    view.Day = day;
+                    
+                    if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
+                        hasEventsElement.IsVisible = day?.HasEvents ?? false;
 
-                if (view.FindByName<XView>("DayContainer") is {} dayContainer)
-                    dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
+                    if (view.FindByName<XView>("DayContainer") is {} dayContainer)
+                        dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
 
-                if (view.FindByName<Label>("DayElement") is {} dayElement)
-                    dayElement.Text = day?.ToString();
+                    if (view.FindByName<Label>("DayElement") is {} dayElement)
+                        dayElement.Text = day?.ToString();
+                }
+
             }
         }
     }

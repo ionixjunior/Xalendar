@@ -5,6 +5,10 @@
     x:Class="Xalendar.View.Controls.CalendarDay"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer Tapped="OnDaySelected" />
+    </ContentView.GestureRecognizers>
+
     <ContentView.Content>
         <Frame
             CornerRadius="20"
