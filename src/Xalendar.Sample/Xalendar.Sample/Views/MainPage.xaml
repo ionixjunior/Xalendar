@@ -9,6 +9,7 @@
     <ScrollView>
         <StackLayout>
             <xal:CalendarView
+                DaySelected="OnDaySelected"
                 Events="{Binding Events}"
                 FirstDayOfWeek="Monday"
                 MonthChanged="OnMonthChanged" />
