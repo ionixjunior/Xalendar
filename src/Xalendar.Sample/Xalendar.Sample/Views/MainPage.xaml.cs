@@ -34,9 +34,9 @@ namespace Xalendar.Sample.Views
                 viewModel.GetEventsByRange(args.Start, args.End);
         }
 
-        private void OnDaySelected(object obj)
+        private void OnDaySelected(DaySelected args)
         {
-            
+            System.Diagnostics.Debug.WriteLine($"Dia selecionado: {args.DateTime}; Eventos: {args.Events.Count()}");
         }
     }
 }
