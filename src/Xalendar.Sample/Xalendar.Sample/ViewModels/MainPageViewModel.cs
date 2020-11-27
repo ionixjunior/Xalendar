@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xalendar.Api.Interfaces;
@@ -11,6 +12,7 @@ namespace Xalendar.Sample.ViewModels
     public class MainPageViewModel
     {
         public ObservableCollection<ICalendarViewEvent> Events { get; }
+        public ObservableCollection<ICalendarViewEvent> EventsOfDay { get; }
         
         public Command RemoveAllEventsCommand { get; }
         public Command ReplaceEventCommand { get; }
@@ -18,6 +20,7 @@ namespace Xalendar.Sample.ViewModels
         public MainPageViewModel()
         {
             Events = new ObservableCollection<ICalendarViewEvent>();
+            EventsOfDay = new ObservableCollection<ICalendarViewEvent>();
 
             RemoveAllEventsCommand = new Command(RemoveAllEvents);
             ReplaceEventCommand = new Command(ReplaceEvent);
@@ -65,6 +68,14 @@ namespace Xalendar.Sample.ViewModels
             
             foreach (var customEvent in EventService.Instance.GetEventsByRange(start, end))
                 Events.Add(customEvent);
+        }
+
+        public void AddEventsOfDay(IEnumerable<ICalendarViewEvent> events)
+        {
+            EventsOfDay.Clear();
+            
+            foreach (var calendarEvent in events)
+                EventsOfDay.Add(calendarEvent);
         }
     }
 }

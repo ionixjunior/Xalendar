@@ -3,15 +3,35 @@
     Title="CalendarView Sample"
     x:Class="Xalendar.Sample.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:converters="clr-namespace:Xalendar.Sample.Converters"
     xmlns:local="clr-namespace:Xalendar.Sample.Views"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xal="http://xalendar.com/schemas/xaml">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ScrollView>
         <StackLayout>
             <xal:CalendarView
+                DaySelected="OnDaySelected"
                 Events="{Binding Events}"
                 FirstDayOfWeek="Monday"
                 MonthChanged="OnMonthChanged" />
+
+            <ListView
+                Footer=""
+                HeightRequest="140"
+                IsVisible="{Binding EventsOfDay.Count, Converter={StaticResource IntToBooleanConverter}}"
+                ItemsSource="{Binding EventsOfDay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
             <Button
                 BackgroundColor="DodgerBlue"

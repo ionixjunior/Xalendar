@@ -115,6 +115,7 @@ namespace Xalendar.View.Controls
         }
 
         public event Action<MonthRange>? MonthChanged;
+        public event Action<DaySelected>? DaySelected;
 
         private MonthContainer _monthContainer;
         private int _numberOfDaysInContainer;
@@ -147,7 +148,7 @@ namespace Xalendar.View.Controls
             }
         }
 
-        private CalendarDay _selectedDay;
+        private CalendarDay? _selectedDay;
 
         private void CalendarDayOnDaySelected(CalendarDay calendarDay)
         {
@@ -160,6 +161,7 @@ namespace Xalendar.View.Controls
             _selectedDay?.UnSelect();
             calendarDay.Select();
             _selectedDay = calendarDay;
+            DaySelected?.Invoke(new DaySelected(calendarDay.Day.DateTime, calendarDay.Day.Events));
         }
 
         public CalendarView()
@@ -170,6 +172,7 @@ namespace Xalendar.View.Controls
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
             _selectedDay?.UnSelect();
+            _selectedDay = null;
             
             var result = await Task.Run(() =>
             {
@@ -191,6 +194,7 @@ namespace Xalendar.View.Controls
         private async void OnNextMonthClick(object sender, EventArgs e)
         {
             _selectedDay?.UnSelect();
+            _selectedDay = null;
             
             var result = await Task.Run(() =>
             {
@@ -242,6 +246,18 @@ namespace Xalendar.View.Controls
         {
             Start = start;
             End = end;
+        }
+    }
+
+    public readonly struct DaySelected
+    {
+        public DateTime DateTime { get; }
+        public IEnumerable<ICalendarViewEvent> Events { get; }
+
+        public DaySelected(DateTime dateTime, IEnumerable<ICalendarViewEvent> events)
+        {
+            DateTime = dateTime;
+            Events = events;
         }
     }
 }

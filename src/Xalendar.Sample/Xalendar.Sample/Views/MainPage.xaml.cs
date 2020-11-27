@@ -33,5 +33,11 @@ namespace Xalendar.Sample.Views
             if (BindingContext is MainPageViewModel viewModel)
                 viewModel.GetEventsByRange(args.Start, args.End);
         }
+
+        private void OnDaySelected(DaySelected args)
+        {
+            if (BindingContext is MainPageViewModel viewModel)
+                viewModel.AddEventsOfDay(args.Events);
+        }
     }
 }
