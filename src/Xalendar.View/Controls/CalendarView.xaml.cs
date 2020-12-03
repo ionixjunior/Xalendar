@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xalendar.Api.Extensions;
 using Xalendar.Api.Interfaces;
@@ -120,7 +121,7 @@ namespace Xalendar.View.Controls
         private MonthContainer _monthContainer;
         private int _numberOfDaysInContainer;
 
-        protected override void OnPropertyChanged(string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 
