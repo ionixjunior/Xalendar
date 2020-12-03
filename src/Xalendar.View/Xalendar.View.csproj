@@ -65,6 +65,8 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <Compile Remove="build\*.cs" />
+    <None Include="build\**\*.cs;build\**\*.targets" Pack="true" PackagePath="build" />
   </ItemGroup>
   
 </Project>
