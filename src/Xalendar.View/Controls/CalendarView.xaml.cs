@@ -316,7 +316,6 @@ namespace Xalendar.View.Controls
         }
     }
 
-
     public readonly struct MonthRange
     {
         public DateTime Start { get; }
