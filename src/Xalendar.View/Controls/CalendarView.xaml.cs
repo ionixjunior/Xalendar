@@ -151,12 +151,12 @@ namespace Xalendar.View.Controls
 
         private CalendarDay? _selectedDay;
 
-        private void CalendarDayOnDaySelected(CalendarDay calendarDay)
+        private void CalendarDayOnDaySelected(CalendarDay? calendarDay)
         {
             if (_selectedDay == calendarDay)
                 return;
 
-            if (calendarDay.Day is null)
+            if (calendarDay?.Day is null)
                 return;
             
             _selectedDay?.UnSelect();
