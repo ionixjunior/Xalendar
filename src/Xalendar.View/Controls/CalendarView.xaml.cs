@@ -23,26 +23,26 @@ namespace Xalendar.View.Controls
                 null,
                 BindingMode.OneWay,
                 propertyChanged: OnEventsChanged);
-        
+
         public IEnumerable<ICalendarViewEvent> Events
         {
             get => (IEnumerable<ICalendarViewEvent>)GetValue(EventsProperty);
             set => SetValue(EventsProperty, value);
         }
-        
+
         private static void OnEventsChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             if (bindable is CalendarView calendarView)
             {
                 if (oldvalue is INotifyCollectionChanged oldEvents)
                     oldEvents.CollectionChanged -= OnEventsCollectionChanged;
-                    
+
                 if (newvalue is INotifyCollectionChanged newEvents)
                     newEvents.CollectionChanged += OnEventsCollectionChanged;
 
                 if (newvalue is IEnumerable<ICalendarViewEvent> events)
                     AddEvents(calendarView, events);
-                
+
                 void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
                 {
                     if (args.Action == NotifyCollectionChangedAction.Add)
@@ -72,44 +72,44 @@ namespace Xalendar.View.Controls
 
         private static void AddEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> events)
         {
-            if (calendarView._monthContainer is null)
+            if (calendarView._lazyContainer.IsNull())
                 return;
-            
-            calendarView._monthContainer.AddEvents(events);
-            calendarView.RecycleDays(calendarView._monthContainer.Days);
+
+            calendarView._lazyContainer.Set(m => m.AddEvents(events));
+            calendarView.RecycleDays(calendarView._lazyContainer.Get(m => m.Days));
         }
 
         private static void RemoveEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> notifiedEvents)
         {
-            if (calendarView._monthContainer is null)
+            if (calendarView._lazyContainer.IsNull())
                 return;
-            
+
             foreach (var calendarViewEvent in notifiedEvents)
-                calendarView._monthContainer.RemoveEvent(calendarViewEvent);
-            
-            calendarView.RecycleDays(calendarView._monthContainer.Days);
+                calendarView._lazyContainer.Set(m => m.RemoveEvent(calendarViewEvent));
+
+            calendarView.RecycleDays(calendarView._lazyContainer.Get(m => m.Days));
         }
 
         private static void RemoveAllEvents(CalendarView calendarView)
         {
-            if (calendarView._monthContainer is null)
+            if (calendarView._lazyContainer.IsNull())
                 return;
-            
-            calendarView._monthContainer.RemoveAllEvents();
-            calendarView.RecycleDays(calendarView._monthContainer.Days);
+
+            calendarView._lazyContainer.Set(m => m.RemoveAllEvents());
+            calendarView.RecycleDays(calendarView._lazyContainer.Get(m => m.Days));
         }
 
         private static void ReplaceEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> oldEventsNotified,
             IEnumerable<ICalendarViewEvent> newEventsNotified)
         {
-            if (calendarView._monthContainer is null)
+            if (calendarView._lazyContainer.IsNull())
                 return;
-            
+
             RemoveEvents(calendarView, oldEventsNotified);
             AddEvents(calendarView, newEventsNotified);
-            calendarView.RecycleDays(calendarView._monthContainer.Days);
+            calendarView.RecycleDays(calendarView._lazyContainer.Get(m => m.Days));
         }
-        
+
         public static BindableProperty FirstDayOfWeekProperty =
             BindableProperty.Create(
                 nameof(FirstDayOfWeek),
@@ -117,7 +117,7 @@ namespace Xalendar.View.Controls
                 typeof(CalendarView),
                 DayOfWeek.Sunday,
                 BindingMode.OneTime);
-        
+
         public DayOfWeek FirstDayOfWeek
         {
             get => (DayOfWeek)GetValue(FirstDayOfWeekProperty);
@@ -127,7 +127,8 @@ namespace Xalendar.View.Controls
         public event Action<MonthRange>? MonthChanged;
         public event Action<DaySelected>? DaySelected;
 
-        private MonthContainer? _monthContainer;
+        //Agora pode ser readonly
+        private readonly LazyMonthContainer _lazyContainer;
         private int _numberOfDaysInContainer;
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -136,12 +137,11 @@ namespace Xalendar.View.Controls
 
             if (propertyName == "Renderer")
             {
-                _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek);
-                
-                if (!Events.IsNullOrEmpty())
-                    _monthContainer.AddEvents(Events);
+                //Com esse encapsulamento da pra criar uma sintaxe fluente (apenas demo nao repassei o resto do codigo)
+                var days = _lazyContainer.Build()
+                    .AddEvents(Events)
+                    .Get(m => m.Days);
 
-                var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
                 foreach (var _ in days)
                 {
@@ -150,11 +150,14 @@ namespace Xalendar.View.Controls
                     calendarDay.UnSelect();
                     CalendarDaysContainer.Children.Add(calendarDay);
                 }
+
                 RecycleDays(days);
-                
-                BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
-                MonthName.Text = _monthContainer.GetName();
-                MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
+
+                _lazyContainer.Set(m =>
+                    BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, m.DaysOfWeek));
+
+                MonthName.Text = _lazyContainer.Get(m => m.GetName());
+                MonthChanged?.Invoke(new MonthRange(_lazyContainer.Get(m => m.FirstDay), _lazyContainer.Get(m => m.LastDay)));
             }
         }
 
@@ -167,7 +170,7 @@ namespace Xalendar.View.Controls
 
             if (calendarDay?.Day is null)
                 return;
-            
+
             _selectedDay?.UnSelect();
             calendarDay.Select();
             _selectedDay = calendarDay;
@@ -176,6 +179,7 @@ namespace Xalendar.View.Controls
 
         public CalendarView()
         {
+            _lazyContainer = new LazyMonthContainer(() => FirstDayOfWeek);
             InitializeComponent();
         }
 
@@ -183,18 +187,18 @@ namespace Xalendar.View.Controls
         {
             _selectedDay?.UnSelect();
             _selectedDay = null;
-            
+
             var result = await Task.Run(() =>
             {
-                if (_monthContainer is null)
+                if (_lazyContainer.IsNull())
                     return default;
-                
-                _monthContainer.Previous();
-                
-                var days = _monthContainer.Days;
-                var monthName = _monthContainer.GetName();
-                var firstDay = _monthContainer.FirstDay;
-                var lastDay = _monthContainer.LastDay;
+
+                _lazyContainer.Set(m => m.Previous());
+
+                var days = _lazyContainer.Get(m => m.Days);
+                var monthName = _lazyContainer.Get(m => m.GetName());
+                var firstDay = _lazyContainer.Get(m => m.FirstDay);
+                var lastDay = _lazyContainer.Get(m => m.LastDay);
 
                 return (days, monthName, firstDay, lastDay);
             });
@@ -211,25 +215,25 @@ namespace Xalendar.View.Controls
         {
             _selectedDay?.UnSelect();
             _selectedDay = null;
-            
+
             var result = await Task.Run(() =>
             {
-                if (_monthContainer is null)
+                if (_lazyContainer.IsNull())
                     return default;
-                
-                _monthContainer.Next();
-                
-                var days = _monthContainer.Days;
-                var monthName = _monthContainer.GetName();
-                var firstDay = _monthContainer.FirstDay;
-                var lastDay = _monthContainer.LastDay;
+
+                _lazyContainer.Set(m => m.Next());
+
+                var days = _lazyContainer.Get(m => m.Days);
+                var monthName = _lazyContainer.Get(m => m.GetName());
+                var firstDay = _lazyContainer.Get(m => m.FirstDay);
+                var lastDay = _lazyContainer.Get(m => m.LastDay);
 
                 return (days, monthName, firstDay, lastDay);
             });
-            
+
             if (result.Equals(default))
                 return;
-            
+
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
             MonthChanged?.Invoke(new MonthRange(result.firstDay, result.lastDay));
@@ -244,20 +248,74 @@ namespace Xalendar.View.Controls
                 if (CalendarDaysContainer.Children[index] is CalendarDay view)
                 {
                     view.Day = day;
-                    
-                    if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
+
+                    if (view.FindByName<XView>("HasEventsElement") is { } hasEventsElement)
                         hasEventsElement.IsVisible = day?.HasEvents ?? false;
 
-                    if (view.FindByName<XView>("DayContainer") is {} dayContainer)
-                        dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
+                    if (view.FindByName<XView>("DayContainer") is { } dayContainer)
+                        dayContainer.BackgroundColor = day is { } && day.IsToday ? Color.Red : Color.Transparent;
 
-                    if (view.FindByName<Label>("DayElement") is {} dayElement)
+                    if (view.FindByName<Label>("DayElement") is { } dayElement)
                         dayElement.Text = day?.ToString();
                 }
 
             }
         }
+
+        /// <summary>
+        /// Encapsula o acesso ao MonthContainer, deixa thread safe
+        /// e deixa o month container com inicialização tardia
+        /// </summary>
+        private readonly struct LazyMonthContainer
+        {
+            private readonly Lazy<MonthContainer> _monthContainer;
+
+            public LazyMonthContainer(Func<DayOfWeek> dayOfWeekGetter)
+            {
+                _monthContainer = new Lazy<MonthContainer>(() =>
+                        new MonthContainer(DateTime.Today, dayOfWeekGetter()), true/*vantagem que podemos fazer o acesso ao membro thread safe*/);
+            }
+
+            /// Se não gostar do Set/Get da pra usar:
+            /// public MonthContainer GetContainer()
+            /// {
+            ///     return _monthContainer.Value;
+            /// }
+            public LazyMonthContainer Set(Action<MonthContainer> setter)
+            {
+                if (_monthContainer.IsValueCreated)
+                {
+                    setter.Invoke(_monthContainer.Value);
+                }
+
+                return this;
+            }
+
+            public TResult Get<TResult>(Func<MonthContainer, TResult> getter) =>
+                getter.Invoke(_monthContainer.Value);
+
+            public LazyMonthContainer AddEvents(IEnumerable<ICalendarViewEvent> events)
+            {
+                if (!events.IsNullOrEmpty())
+                {
+                    Set(m => m.AddEvents(events));
+                }
+
+                return this;
+            }
+
+            public LazyMonthContainer Build()
+            {
+                _ = _monthContainer.Value;
+
+                return this;
+            }
+
+            public bool IsNull() =>
+                _monthContainer.IsValueCreated != true;
+        }
     }
+
 
     public readonly struct MonthRange
     {
