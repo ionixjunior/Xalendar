@@ -81,6 +81,9 @@ namespace Xalendar.View.Controls
 
         private static void RemoveEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> notifiedEvents)
         {
+            if (calendarView._monthContainer is null)
+                return;
+            
             foreach (var calendarViewEvent in notifiedEvents)
                 calendarView._monthContainer.RemoveEvent(calendarViewEvent);
             
@@ -89,6 +92,9 @@ namespace Xalendar.View.Controls
 
         private static void RemoveAllEvents(CalendarView calendarView)
         {
+            if (calendarView._monthContainer is null)
+                return;
+            
             calendarView._monthContainer.RemoveAllEvents();
             calendarView.RecycleDays(calendarView._monthContainer.Days);
         }
@@ -96,6 +102,9 @@ namespace Xalendar.View.Controls
         private static void ReplaceEvents(CalendarView calendarView, IEnumerable<ICalendarViewEvent> oldEventsNotified,
             IEnumerable<ICalendarViewEvent> newEventsNotified)
         {
+            if (calendarView._monthContainer is null)
+                return;
+            
             RemoveEvents(calendarView, oldEventsNotified);
             AddEvents(calendarView, newEventsNotified);
             calendarView.RecycleDays(calendarView._monthContainer.Days);
@@ -118,7 +127,7 @@ namespace Xalendar.View.Controls
         public event Action<MonthRange>? MonthChanged;
         public event Action<DaySelected>? DaySelected;
 
-        private MonthContainer _monthContainer;
+        private MonthContainer? _monthContainer;
         private int _numberOfDaysInContainer;
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -177,6 +186,9 @@ namespace Xalendar.View.Controls
             
             var result = await Task.Run(() =>
             {
+                if (_monthContainer is null)
+                    return default;
+                
                 _monthContainer.Previous();
                 
                 var days = _monthContainer.Days;
@@ -186,6 +198,9 @@ namespace Xalendar.View.Controls
 
                 return (days, monthName, firstDay, lastDay);
             });
+
+            if (result.Equals(default))
+                return;
 
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
@@ -199,6 +214,9 @@ namespace Xalendar.View.Controls
             
             var result = await Task.Run(() =>
             {
+                if (_monthContainer is null)
+                    return default;
+                
                 _monthContainer.Next();
                 
                 var days = _monthContainer.Days;
@@ -208,6 +226,9 @@ namespace Xalendar.View.Controls
 
                 return (days, monthName, firstDay, lastDay);
             });
+            
+            if (result.Equals(default))
+                return;
             
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
