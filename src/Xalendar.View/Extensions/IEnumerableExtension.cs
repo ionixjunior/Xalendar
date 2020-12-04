@@ -5,7 +5,7 @@ namespace Xalendar.View.Extensions
 {
     public static class IEnumerableExtension
     {
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T>? collection)
         {
             if (collection is null)
                 return true;
