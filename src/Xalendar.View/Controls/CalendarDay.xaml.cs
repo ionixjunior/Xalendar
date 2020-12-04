@@ -11,7 +11,7 @@ namespace Xalendar.View.Controls
 {
     public partial class CalendarDay : ContentView
     {
-        public event Action<CalendarDay?> DaySelected;
+        public event Action<CalendarDay?>? DaySelected;
         public Day? Day { get; set; }
         
         public CalendarDay()
