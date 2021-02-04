@@ -14,8 +14,7 @@
         <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
         <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
         <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-        <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-        <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
         <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -47,7 +46,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="4.5.0.356"/>
+      <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MainActivity.cs" />
@@ -67,7 +66,7 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Xalendar.Sample\Xalendar.Sample.csproj">
-            <Project>{3B83098C-423E-486C-8D71-17B08589416A}</Project>
+            <Project>{FFE6B2DB-E99A-4361-8217-83446C86EEBB}</Project>
             <Name>Xalendar.Sample</Name>
         </ProjectReference>
     </ItemGroup>
