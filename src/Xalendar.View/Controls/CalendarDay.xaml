@@ -15,20 +15,6 @@
                 <Label x:Name="DayElement" StyleClass="DayElement" />
                 <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
             </FlexLayout>
-
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="DayContainerGroup">
-                    <VisualState x:Name="IsToday" />
-                    <VisualState x:Name="IsNotToday" />
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
         </Frame>
     </ContentView.Content>
-
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup x:Name="DayContentGroup">
-            <VisualState x:Name="Selected" />
-            <VisualState x:Name="UnSelected" />
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
 </ContentView>
