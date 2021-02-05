@@ -1,15 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    Title="CalendarView Sample"
     x:Class="Xalendar.Sample.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:Xalendar.Sample.Converters"
     xmlns:local="clr-namespace:Xalendar.Sample.Views"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xal="http://xalendar.com/schemas/xaml">
+    xmlns:xal="http://xalendar.com/schemas/xaml"
+    Title="CalendarView Sample">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+
+            <Style
+                ApplyToDerivedTypes="True"
+                Class="DayContent"
+                TargetType="ContentView">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightGray" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="UnSelected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style Class="DayContainer" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="HeightRequest" Value="56" />
+                <Setter Property="Padding" Value="0" />
+
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="IsToday">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Red" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="IsNotToday">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style Class="DayLayout" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Column" />
+                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
+
+            <Style Class="DayElement" TargetType="Label">
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style Class="HasEventsElement" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="HeightRequest" Value="8" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="8" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -34,30 +103,30 @@
             </ListView>
 
             <Button
+                Margin="20,0"
                 BackgroundColor="DodgerBlue"
                 Clicked="OnRandomButtonClick"
-                Margin="20,0"
                 Text="Add random event"
                 TextColor="White" />
 
             <Button
+                Margin="20,0"
                 BackgroundColor="Red"
                 Clicked="OnRemoveButtonClick"
-                Margin="20,0"
                 Text="Remove event"
                 TextColor="White" />
 
             <Button
+                Margin="20,0"
                 BackgroundColor="Indigo"
                 Command="{Binding RemoveAllEventsCommand}"
-                Margin="20,0"
                 Text="Remove all events"
                 TextColor="White" />
 
             <Button
+                Margin="20,0"
                 BackgroundColor="Goldenrod"
                 Command="{Binding ReplaceEventCommand}"
-                Margin="20,0"
                 Text="Replace event"
                 TextColor="White" />
         </StackLayout>
