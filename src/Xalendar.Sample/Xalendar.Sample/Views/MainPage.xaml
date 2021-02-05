@@ -11,6 +11,27 @@
         <ResourceDictionary>
             <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 
+            <Style Class="PreviousButton" TargetType="Button">
+                <Setter Property="Text" Value="◀" />
+            </Style>
+
+            <Style Class="MonthName" TargetType="Label">
+                <Setter Property="FlexLayout.Grow" Value="1" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style Class="NextButton" TargetType="Button">
+                <Setter Property="Text" Value="▶" />
+            </Style>
+
+            <Style Class="DayOfWeek" TargetType="Label">
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="HeightRequest" Value="56" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+
             <Style
                 ApplyToDerivedTypes="True"
                 Class="DayContent"
