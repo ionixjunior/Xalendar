@@ -8,6 +8,7 @@ using Xalendar.View.Controls;
 
 //Custom xaml schema <see href="https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/xaml/custom-namespace-schemas#defining-a-custom-namespace-schema"/>
 [assembly: XmlnsDefinition("http://xalendar.com/schemas/xaml", "Xalendar.View.Controls")]
+[assembly: XmlnsDefinition("http://xalendar.com/schemas/xaml", "Xalendar.View.Themes")]
 
 //Recommended prefix <see href="https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/xaml/custom-prefix"/>
 [assembly: XmlnsPrefix("http://xalendar.com/schemas/xaml", "xal")]
