@@ -69,4 +69,7 @@
     <None Include="build\**\*.cs;build\**\*.targets" Pack="true" PackagePath="build" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
 </Project>

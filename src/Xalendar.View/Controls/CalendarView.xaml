@@ -2,8 +2,8 @@
 <ContentView
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:controls="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View">
     <ContentView.Resources>
         <ResourceDictionary>
             <FlexBasis x:Key="DayWidth">14.28%</FlexBasis>
@@ -12,40 +12,33 @@
 
     <StackLayout Spacing="0">
         <FlexLayout
+            Padding="10,0"
             AlignItems="Center"
-            HeightRequest="56"
-            Padding="10,0">
+            HeightRequest="56">
             <Button
+                x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"
-                Text="◀"
-                x:Name="PreviousButton" />
+                StyleClass="PreviousButton" />
 
-            <Label
-                FlexLayout.Grow="1"
-                FontSize="Title"
-                HorizontalTextAlignment="Center"
-                x:Name="MonthName" />
+            <Label x:Name="MonthName" StyleClass="MonthName" />
 
             <Button
+                x:Name="NextButton"
                 Clicked="OnNextMonthClick"
-                Text="▶"
-                x:Name="NextButton" />
+                StyleClass="NextButton" />
         </FlexLayout>
 
-        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysOfWeekContainer">
+        <FlexLayout x:Name="CalendarDaysOfWeekContainer" Wrap="Wrap">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Label
                         FlexLayout.Basis="{StaticResource DayWidth}"
-                        FontSize="Body"
-                        HeightRequest="56"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding .}"
-                        VerticalTextAlignment="Center" />
+                        StyleClass="DayOfWeek"
+                        Text="{Binding .}" />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </FlexLayout>
 
-        <FlexLayout Wrap="Wrap" x:Name="CalendarDaysContainer" />
+        <FlexLayout x:Name="CalendarDaysContainer" Wrap="Wrap" />
     </StackLayout>
 </ContentView>

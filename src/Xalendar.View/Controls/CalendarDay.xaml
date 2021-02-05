@@ -1,61 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <ContentView
-    FlexLayout.Basis="14.28%"
     x:Class="Xalendar.View.Controls.CalendarDay"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    FlexLayout.Basis="14.28%"
+    StyleClass="DayContent">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnDaySelected" />
     </ContentView.GestureRecognizers>
 
     <ContentView.Content>
-        <Frame
-            BackgroundColor="Transparent"
-            CornerRadius="20"
-            HasShadow="false"
-            HeightRequest="56"
-            Padding="0"
-            x:Name="DayContainer">
-            <Grid RowSpacing="0" VerticalOptions="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="14" />
-                </Grid.RowDefinitions>
-
-                <Label
-                    FontSize="Subtitle"
-                    Grid.Row="0"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center"
-                    x:Name="DayElement" />
-
-                <BoxView
-                    BackgroundColor="Black"
-                    CornerRadius="4"
-                    Grid.Row="1"
-                    HeightRequest="8"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="8"
-                    x:Name="HasEventsElement" />
-            </Grid>
+        <Frame x:Name="DayContainer" StyleClass="DayContainer">
+            <FlexLayout StyleClass="DayLayout">
+                <Label x:Name="DayElement" StyleClass="DayElement" />
+                <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
+            </FlexLayout>
         </Frame>
     </ContentView.Content>
-
-    <VisualStateManager.VisualStateGroups>
-        <VisualStateGroup>
-            <VisualState x:Name="Selected">
-                <VisualState.Setters>
-                    <Setter Property="BackgroundColor" Value="LightGray" />
-                </VisualState.Setters>
-            </VisualState>
-
-            <VisualState x:Name="UnSelected">
-                <VisualState.Setters>
-                    <Setter Property="BackgroundColor" Value="Transparent" />
-                </VisualState.Setters>
-            </VisualState>
-        </VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>
 </ContentView>

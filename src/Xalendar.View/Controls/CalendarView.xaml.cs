@@ -248,8 +248,8 @@ namespace Xalendar.View.Controls
                     if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
                         hasEventsElement.IsVisible = day?.HasEvents ?? false;
 
-                    if (view.FindByName<XView>("DayContainer") is {} dayContainer)
-                        dayContainer.BackgroundColor = day is {} && day.IsToday ? Color.Red : Color.Transparent;
+                    if (view.FindByName<XView>("DayContainer") is { } dayContainer)
+                        VisualStateManager.GoToState(dayContainer, day is { } && day.IsToday ? "IsToday" : "IsNotToday");
 
                     if (view.FindByName<Label>("DayElement") is {} dayElement)
                         dayElement.Text = day?.ToString();
