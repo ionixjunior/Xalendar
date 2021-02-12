@@ -92,4 +92,8 @@
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="WidthRequest" Value="8" />
     </Style>
+
+    <Style Class="CalendarLineSeparator" TargetType="BoxView">
+        <Setter Property="IsVisible" Value="false" />
+    </Style>
 </ResourceDictionary>
