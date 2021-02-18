@@ -161,8 +161,16 @@ namespace Xalendar.View.Controls
                     }
                 }
                 RecycleDays(days);
-                
-                BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
+
+                column = 0;
+
+                foreach (var dayOfWeek in _monthContainer.DaysOfWeek)
+                {
+                    var calendarDayOfWeek = new CalendarDayOfWeek();
+                    calendarDayOfWeek.Text = dayOfWeek;
+                    CalendarDaysOfWeekContainer.Children.Add(calendarDayOfWeek, column++, 0);
+                }
+
                 MonthName.Text = _monthContainer.GetName();
                 MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
             }

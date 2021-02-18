@@ -29,19 +29,7 @@
                 StyleClass="NextButton" />
         </FlexLayout>
 
-        <FlexLayout
-            x:Name="CalendarDaysOfWeekContainer"
-            StyleClass="CalendarMargin"
-            Wrap="Wrap">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        FlexLayout.Basis="{StaticResource DayWidth}"
-                        StyleClass="DayOfWeek"
-                        Text="{Binding .}" />
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+        <Grid x:Name="CalendarDaysOfWeekContainer" StyleClass="CalendarMargin" />
 
         <BoxView StyleClass="CalendarLineSeparator" />
 
