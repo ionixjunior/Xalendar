@@ -3,7 +3,6 @@
     x:Class="Xalendar.View.Controls.CalendarDay"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    FlexLayout.Basis="14.28%"
     StyleClass="DayContent">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnDaySelected" />

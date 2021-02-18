@@ -45,9 +45,6 @@
 
         <BoxView StyleClass="CalendarLineSeparator" />
 
-        <FlexLayout
-            x:Name="CalendarDaysContainer"
-            StyleClass="CalendarMargin"
-            Wrap="Wrap" />
+        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarMargin" />
     </StackLayout>
 </ContentView>

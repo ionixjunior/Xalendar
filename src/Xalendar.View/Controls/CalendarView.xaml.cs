@@ -143,12 +143,22 @@ namespace Xalendar.View.Controls
 
                 var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
+
+                var column = 0;
+                var row = 0;
+
                 foreach (var _ in days)
                 {
                     var calendarDay = new CalendarDay();
                     calendarDay.DaySelected += CalendarDayOnDaySelected;
                     calendarDay.UnSelect();
-                    CalendarDaysContainer.Children.Add(calendarDay);
+                    CalendarDaysContainer.Children.Add(calendarDay, column, row);
+
+                    if (++column > 6)
+                    {
+                        column = 0;
+                        row++;
+                    }
                 }
                 RecycleDays(days);
                 
