@@ -37,6 +37,7 @@
                         Class="DayOfWeek"
                         TargetType="Label">
                         <Setter Property="TextColor" Value="#D9D6E9" />
+                        <Setter Property="TextTransform" Value="Lowercase" />
                         <Setter Property="FontSize" Value="Small" />
                         <Setter Property="FontAttributes" Value="Bold" />
                         <Setter Property="HeightRequest" Value="56" />
