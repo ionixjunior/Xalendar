@@ -26,38 +26,6 @@
                 FirstDayOfWeek="Monday"
                 MonthChanged="OnMonthChanged" />
 
-            <!--
-            <FlexLayout
-                Margin="0,0"
-                AlignItems="Center"
-                Wrap="Wrap">
-                <ContentView
-                    Margin="5,0"
-                    BackgroundColor="Gray"
-                    FlexLayout.Basis="14.28%">
-                    <Frame
-                        Padding="0"
-                        BackgroundColor="#FFB51B"
-                        CornerRadius="10"
-                        HasShadow="False"
-                        HeightRequest="46"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        WidthRequest="36">
-                        <FlexLayout
-                            AlignItems="Center"
-                            Direction="Row"
-                            JustifyContent="Center">
-                            <Label
-                                Margin="4,0"
-                                HorizontalTextAlignment="Center"
-                                Text="10" />
-                        </FlexLayout>
-                    </Frame>
-                </ContentView>
-            </FlexLayout>
-            -->
-
             <ListView
                 Footer=""
                 HeightRequest="140"
