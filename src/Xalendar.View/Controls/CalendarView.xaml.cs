@@ -151,7 +151,6 @@ namespace Xalendar.View.Controls
                 {
                     var calendarDay = new CalendarDay();
                     calendarDay.DaySelected += CalendarDayOnDaySelected;
-                    calendarDay.UnSelect();
                     CalendarDaysContainer.Children.Add(calendarDay, column, row);
 
                     if (++column > 6)
@@ -266,8 +265,8 @@ namespace Xalendar.View.Controls
                     if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
                         hasEventsElement.IsVisible = day?.HasEvents ?? false;
 
-                    if (view.FindByName<XView>("DayContainer") is { } dayContainer)
-                        VisualStateManager.GoToState(dayContainer, day is { } && day.IsToday ? "IsToday" : "IsNotToday");
+                    if (view.FindByName<CalendarDay>("DayContainer") is { } dayContainer)
+                        dayContainer.StartState();
 
                     if (view.FindByName<Label>("DayElement") is {} dayElement)
                         dayElement.Text = day?.ToString();
