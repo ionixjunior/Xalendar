@@ -14,7 +14,8 @@
         <FlexLayout
             Padding="10,0"
             AlignItems="Center"
-            HeightRequest="56">
+            HeightRequest="56"
+            StyleClass="CalendarMargin">
             <Button
                 x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"
@@ -28,17 +29,10 @@
                 StyleClass="NextButton" />
         </FlexLayout>
 
-        <FlexLayout x:Name="CalendarDaysOfWeekContainer" Wrap="Wrap">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        FlexLayout.Basis="{StaticResource DayWidth}"
-                        StyleClass="DayOfWeek"
-                        Text="{Binding .}" />
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
+        <Grid x:Name="CalendarDaysOfWeekContainer" StyleClass="CalendarMargin" />
 
-        <FlexLayout x:Name="CalendarDaysContainer" Wrap="Wrap" />
+        <BoxView StyleClass="CalendarLineSeparator" />
+
+        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarDaysContainer,CalendarMargin" />
     </StackLayout>
 </ContentView>

@@ -13,7 +13,7 @@
                     <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
                 </ResourceDictionary>
 
-                <xal:Classic />
+                <xal:Planning />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>

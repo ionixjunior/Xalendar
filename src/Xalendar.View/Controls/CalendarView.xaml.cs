@@ -143,16 +143,33 @@ namespace Xalendar.View.Controls
 
                 var days = _monthContainer.Days;
                 _numberOfDaysInContainer = days.Count;
+
+                var column = 0;
+                var row = 0;
+
                 foreach (var _ in days)
                 {
                     var calendarDay = new CalendarDay();
                     calendarDay.DaySelected += CalendarDayOnDaySelected;
-                    calendarDay.UnSelect();
-                    CalendarDaysContainer.Children.Add(calendarDay);
+                    CalendarDaysContainer.Children.Add(calendarDay, column, row);
+
+                    if (++column > 6)
+                    {
+                        column = 0;
+                        row++;
+                    }
                 }
                 RecycleDays(days);
-                
-                BindableLayout.SetItemsSource(CalendarDaysOfWeekContainer, _monthContainer.DaysOfWeek);
+
+                column = 0;
+
+                foreach (var dayOfWeek in _monthContainer.DaysOfWeek)
+                {
+                    var calendarDayOfWeek = new CalendarDayOfWeek();
+                    calendarDayOfWeek.Text = dayOfWeek;
+                    CalendarDaysOfWeekContainer.Children.Add(calendarDayOfWeek, column++, 0);
+                }
+
                 MonthName.Text = _monthContainer.GetName();
                 MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
             }
@@ -248,8 +265,8 @@ namespace Xalendar.View.Controls
                     if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
                         hasEventsElement.IsVisible = day?.HasEvents ?? false;
 
-                    if (view.FindByName<XView>("DayContainer") is { } dayContainer)
-                        VisualStateManager.GoToState(dayContainer, day is { } && day.IsToday ? "IsToday" : "IsNotToday");
+                    if (view.FindByName<CalendarDay>("DayContainer") is { } dayContainer)
+                        dayContainer.StartState();
 
                     if (view.FindByName<Label>("DayElement") is {} dayElement)
                         dayElement.Text = day?.ToString();
