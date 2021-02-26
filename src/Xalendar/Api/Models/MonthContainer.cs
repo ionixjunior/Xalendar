@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -9,8 +9,7 @@ namespace Xalendar.Api.Models
 {
     public class MonthContainer
     {
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Month _month;
+        internal Month _month;
 
         private IReadOnlyList<Day?>? _days;
         public IReadOnlyList<Day?> Days => _days ??= GetDaysOfContainer();
