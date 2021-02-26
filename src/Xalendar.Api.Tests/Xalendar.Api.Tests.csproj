@@ -21,7 +21,8 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Xalendar.Api\Xalendar.Api.csproj" />
+    <ProjectReference Include="..\Xalendar\Xalendar.csproj" />
   </ItemGroup>
 </Project>

@@ -2,11 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Api", "Xalendar.Api\Xalendar.Api.csproj", "{A912C113-58E9-4D95-BE9E-A8210C553226}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Api.Tests", "Xalendar.Api.Tests\Xalendar.Api.Tests.csproj", "{3E000528-B755-423B-8C06-E3D73FD520E0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.View", "Xalendar.View\Xalendar.View.csproj", "{27F252E0-B00C-4E2D-8682-F688DEEEC50C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.View.Tests", "Xalendar.View.Tests\Xalendar.View.Tests.csproj", "{222730F5-170D-4102-A1EB-9834706BEA14}"
 EndProject
@@ -16,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.iOS", "Xalendar.Sample\Xalendar.Sample.iOS\Xalendar.Sample.iOS.csproj", "{8384588A-2556-4CBB-9D72-8440FD4A3C17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar", "Xalendar\Xalendar.csproj", "{C067C06B-34B4-44C7-837B-4F33673D387C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar", "Xalendar\Xalendar.csproj", "{C067C06B-34B4-44C7-837B-4F33673D387C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,18 +20,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A912C113-58E9-4D95-BE9E-A8210C553226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A912C113-58E9-4D95-BE9E-A8210C553226}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A912C113-58E9-4D95-BE9E-A8210C553226}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A912C113-58E9-4D95-BE9E-A8210C553226}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27F252E0-B00C-4E2D-8682-F688DEEEC50C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{222730F5-170D-4102-A1EB-9834706BEA14}.Release|Any CPU.ActiveCfg = Release|Any CPU

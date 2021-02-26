@@ -1,6 +1,0 @@
-<Project>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)PreserveXalendarView.cs"
-             Visible="false" />
-  </ItemGroup>
-</Project>
