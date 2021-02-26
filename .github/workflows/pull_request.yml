@@ -15,23 +15,6 @@ jobs:
       env:
         CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
 
-  xalendar_api:
-    name: Build Xalendar.Api project
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.201
-    - name: Install dependencies
-      run: dotnet restore
-      working-directory: 'src/'
-    - name: Build
-      run: dotnet build Xalendar.Api --configuration Release --no-restore
-      working-directory: 'src/'
-
   xalendar_view_tests:
     name: Run tests Xalendar.View.Tests
     runs-on: ubuntu-latest
@@ -45,13 +28,13 @@ jobs:
       env:
         CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
 
-  xalendar_view:
-    name: Build Xalendar.View project
+  xalendar:
+    name: Build Xalendar project
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core for Xalendar.View
+    - name: Setup .NET Core for Xalendar
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
@@ -59,5 +42,5 @@ jobs:
       run: dotnet restore
       working-directory: 'src/'
     - name: Build
-      run: dotnet build Xalendar.View --configuration Release --no-restore
+      run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
