@@ -8,6 +8,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        dotnet-version: '5.0.x'
     - name: Run unit tests for Xalendar.Api.Tests
       run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
@@ -15,29 +17,14 @@ jobs:
       env:
         CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
 
-  xalendar_api:
-    name: Build Xalendar.Api project
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.201
-    - name: Install dependencies
-      run: dotnet restore
-      working-directory: 'src/'
-    - name: Build
-      run: dotnet build Xalendar.Api --configuration Release --no-restore
-      working-directory: 'src/'
-
   xalendar_view_tests:
     name: Run tests Xalendar.View.Tests
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        dotnet-version: '5.0.x'
     - name: Run unit tests for Xalendar.View.Tests
       run: dotnet test src/Xalendar.View.Tests/Xalendar.View.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
@@ -45,19 +32,19 @@ jobs:
       env:
         CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
 
-  xalendar_view:
-    name: Build Xalendar.View project
+  xalendar:
+    name: Build Xalendar project
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core for Xalendar.View
+    - name: Setup .NET Core for Xalendar
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.201
+        dotnet-version: '5.0.x'
     - name: Install dependencies
       run: dotnet restore
       working-directory: 'src/'
     - name: Build
-      run: dotnet build Xalendar.View --configuration Release --no-restore
+      run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
