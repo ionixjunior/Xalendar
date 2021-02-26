@@ -8,6 +8,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        dotnet-version: 5.x.x
     - name: Run unit tests for Xalendar.Api.Tests
       run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
@@ -21,6 +23,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        dotnet-version: 5.x.x
     - name: Run unit tests for Xalendar.View.Tests
       run: dotnet test src/Xalendar.View.Tests/Xalendar.View.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
@@ -37,7 +41,7 @@ jobs:
     - name: Setup .NET Core for Xalendar
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.201
+        dotnet-version: 5.x.x
     - name: Install dependencies
       run: dotnet restore
       working-directory: 'src/'
