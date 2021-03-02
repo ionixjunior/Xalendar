@@ -13,6 +13,7 @@
                     <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
                     <xal:DayOfWeek2CaractersFormat x:Key="DayOfWeek2CaractersFormat" />
                     <xal:DayOfWeek3CaractersFormat x:Key="DayOfWeek3CaractersFormat" />
+
                 </ResourceDictionary>
 
                 <xal:Planning />
@@ -24,10 +25,7 @@
         <StackLayout>
             <xal:CalendarView
                 DaySelected="OnDaySelected"
-                DaysOfWeekFormatter="{StaticResource DayOfWeek2CaractersFormat}"
                 Events="{Binding Events}"
-                FirstDayOfWeek="Sunday"
-                IsPreviewDaysActive="True"
                 MonthChanged="OnMonthChanged" />
 
             <ListView

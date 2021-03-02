@@ -2,7 +2,17 @@
 <ResourceDictionary
     x:Class="Xalendar.View.Themes.Planning"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Xalendar.View.Controls"
+    xmlns:formatters="clr-namespace:Xalendar.Api.Formatters">
+    <formatters:DayOfWeek2CaractersFormat x:Key="DayOfWeekFormatter" />
+
+    <Style TargetType="controls:CalendarView">
+        <Setter Property="DaysOfWeekFormatter" Value="{StaticResource DayOfWeekFormatter}" />
+        <Setter Property="FirstDayOfWeek" Value="Monday" />
+        <Setter Property="IsPreviewDaysActive" Value="True" />
+    </Style>
+
     <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
