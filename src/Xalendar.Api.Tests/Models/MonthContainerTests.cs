@@ -271,5 +271,30 @@ namespace Xalendar.Api.Tests.Models
             new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, 4},
             new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, 3}
         };
+
+        [Test]
+        public void DayOfWeekShouldUseACustomFormat()
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            var dateTime = DateTime.Today;
+            var dayOfWeekFormatter = new CustomDayOfWeekFormatter();
+            var monthContainer = new MonthContainer(dateTime, dayOfWeekFormatter, firstDayOfWeek: DayOfWeek.Sunday);
+
+            var firstDayOfWeek = monthContainer.DaysOfWeek.First();
+
+            Assert.AreEqual("SUNDAY", firstDayOfWeek);
+        }
+
+        public class CustomDayOfWeekFormatter : IDayOfWeekFormatter
+        {
+            public string Format(DayOfWeek dayOfWeek)
+            {
+                return CultureInfo
+                    .CurrentCulture
+                    .DateTimeFormat
+                    .GetDayName(dayOfWeek)
+                    .ToUpper();
+            }
+        }
     }
 }
