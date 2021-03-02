@@ -47,7 +47,7 @@ namespace Xalendar.Api.Tests.Models
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.AddEvents(events);
 
-            Assert.IsTrue(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsTrue(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Next();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
+            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
             // TODO POSSIVELMENTE EXISTIRÁ MUDANÇA
             Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
@@ -98,7 +98,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Previous();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
+            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
 
@@ -155,7 +155,7 @@ namespace Xalendar.Api.Tests.Models
             
             monthContainer.RemoveEvent(calendarViewEvent);
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace Xalendar.Api.Tests.Models
             
             monthContainer.RemoveAllEvents();
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]

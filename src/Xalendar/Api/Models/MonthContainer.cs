@@ -9,7 +9,7 @@ namespace Xalendar.Api.Models
 {
     public class MonthContainer
     {
-        internal Month _month;
+        internal Month _currentMonth;
 
         private IReadOnlyList<Day?>? _days;
         public IReadOnlyList<Day?> Days => _days ??= GetDaysOfContainer();
@@ -23,7 +23,7 @@ namespace Xalendar.Api.Models
         
         public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday)
         {
-            _month = new Month(dateTime);
+            _currentMonth = new Month(dateTime);
             _firstDayOfWeek = firstDayOfWeek;
 
             DaysOfWeek = GenerateDaysOfWeek(firstDayOfWeek)
@@ -54,14 +54,14 @@ namespace Xalendar.Api.Models
         {
             var daysOfContainer = new List<Day?>();
             this.GetDaysToDiscardAtStartOfMonth(daysOfContainer);
-            daysOfContainer.AddRange(_month.Days);
+            daysOfContainer.AddRange(_currentMonth.Days);
             this.GetDaysToDiscardAtEndOfMonth(daysOfContainer);
             return daysOfContainer;
         }
         
         private void GetDaysToDiscardAtStartOfMonth(List<Day?> daysOfContainer)
         {
-            var firstDay = _month.Days.First();
+            var firstDay = _currentMonth.Days.First();
             var differenceOfDays = ((int)_firstDayOfWeek - (int) firstDay!.DateTime.DayOfWeek);
             var numberOfDaysToDiscard = differenceOfDays <= 0 ? Math.Abs(differenceOfDays) : 7 - differenceOfDays;  
             
@@ -78,15 +78,15 @@ namespace Xalendar.Api.Models
         
         public void Next()
         {
-            var nextDateTime = _month.MonthDateTime.AddMonths(1);
-            _month = new Month(nextDateTime);
+            var nextDateTime = _currentMonth.MonthDateTime.AddMonths(1);
+            _currentMonth = new Month(nextDateTime);
             _days = null;
         }
 
         public void Previous()
         {
-            var previousDateTime = _month.MonthDateTime.AddMonths(-1);
-            _month = new Month(previousDateTime);
+            var previousDateTime = _currentMonth.MonthDateTime.AddMonths(-1);
+            _currentMonth = new Month(previousDateTime);
             _days = null;
         }
     }
