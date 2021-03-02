@@ -86,6 +86,7 @@ namespace Xalendar.Api.Tests.Models
 
             var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
+            // TODO POSSIVELMENTE EXISTIRÁ MUDANÇA
             Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
         }
 
@@ -190,7 +191,19 @@ namespace Xalendar.Api.Tests.Models
 
             var firstDay = monthContainer.FirstDay;
 
+            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 1, 0, 0, 0), firstDay);
+        }
+
+        [Test]
+        public void ShouldGetFirstDayOfMonthContainerWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            var firstDay = monthContainer.FirstDay;
+
+            Assert.AreEqual(new DateTime(2020, 9, 27, 0, 0, 0), firstDay);
         }
 
         [Test]
@@ -200,8 +213,20 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             var lastDay = monthContainer.LastDay;
-            
+
+            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
+        }
+
+        [Test]
+        public void ShouldGetLastDayOfMonthContainerWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime);
+
+            var lastDay = monthContainer.LastDay;
+
+            Assert.AreEqual(new DateTime(2020, 11, 7, 23, 59, 59), lastDay);
         }
 
         [Test]
