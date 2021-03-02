@@ -81,12 +81,11 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2020, 11, 9);
             var monthContainer = new MonthContainer(dateTime);
+            var nextMonth = new Month(dateTime.AddMonths(1));
 
             monthContainer.Next();
 
-            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
-            Assert.AreEqual(dateTimeName, monthContainer.GetName());
-            Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
+            Assert.AreEqual(nextMonth, monthContainer._currentMonth);
         }
 
         [Test]
@@ -94,11 +93,35 @@ namespace Xalendar.Api.Tests.Models
         {
             var dateTime = new DateTime(2021, 1, 1);
             var monthContainer = new MonthContainer(dateTime);
+            var previousMonth = new Month(dateTime.AddMonths(-1));
 
             monthContainer.Previous();
 
-            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
-            Assert.AreEqual(dateTimeName, monthContainer.GetName());
+            Assert.AreEqual(previousMonth, monthContainer._currentMonth);
+        }
+
+        [Test]
+        public void MonthContainerShouldNavigateToNextMonthWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2020, 11, 9);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
+            var nextMonth = monthContainer._nextMonth;
+
+            monthContainer.Next();
+
+            Assert.AreEqual(nextMonth, monthContainer._currentMonth);
+        }
+
+        [Test]
+        public void MonthContainerShouldNavigateToPreviousMonthWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2021, 1, 1);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
+            var previousMonth = monthContainer._previousMonth;
+
+            monthContainer.Previous();
+
+            Assert.AreEqual(previousMonth, monthContainer._currentMonth);
         }
 
         [Test]
