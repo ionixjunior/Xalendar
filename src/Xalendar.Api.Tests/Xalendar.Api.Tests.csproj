@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Formatters\" />
   </ItemGroup>
 
   <ItemGroup>
