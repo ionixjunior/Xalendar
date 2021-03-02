@@ -199,7 +199,7 @@ namespace Xalendar.Api.Tests.Models
         public void ShouldGetFirstDayOfMonthContainerWhenPreviewDaysIsActive()
         {
             var dateTime = new DateTime(2020, 10, 1);
-            var monthContainer = new MonthContainer(dateTime);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
 
             var firstDay = monthContainer.FirstDay;
 
@@ -222,7 +222,7 @@ namespace Xalendar.Api.Tests.Models
         public void ShouldGetLastDayOfMonthContainerWhenPreviewDaysIsActive()
         {
             var dateTime = new DateTime(2020, 10, 1);
-            var monthContainer = new MonthContainer(dateTime);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
 
             var lastDay = monthContainer.LastDay;
 
