@@ -22,7 +22,12 @@ namespace Xalendar.View.Controls
         
         private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(this);
 
-        public void Select() => VisualStateManager.GoToState(DayFrame, "Selected");
+        public void Select()
+        {
+            const string state = "Selected";
+            VisualStateManager.GoToState(DayFrame, state);
+            VisualStateManager.GoToState(DayElement, state);
+        }
 
         public void UnSelect() => StartState();
 
