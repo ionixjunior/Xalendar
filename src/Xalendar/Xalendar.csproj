@@ -47,6 +47,9 @@
     <Compile Update="Api\Formatters\DayOfWeek2CaractersFormat.cs">
       <SubType></SubType>
     </Compile>
+    <Compile Update="Api\Formatters\DayOfWeek3CaractersFormat.cs">
+      <SubType></SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\Formatters\" />
