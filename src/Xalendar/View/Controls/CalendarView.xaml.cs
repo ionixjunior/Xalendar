@@ -4,10 +4,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Xalendar.Api.Extensions;
+using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
-using Xalendar.View.Extensions;
 using Xamarin.Forms;
 using XView = Xamarin.Forms.View;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
-namespace Xalendar.Api.Extensions
+namespace Xalendar.Extensions
 {
     public static class MonthExtension
     {

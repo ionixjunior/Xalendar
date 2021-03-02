@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Xalendar.Api.Extensions;
+using Xalendar.Extensions;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Tests.Models

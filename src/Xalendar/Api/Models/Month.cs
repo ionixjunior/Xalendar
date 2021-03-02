@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Xalendar.Api.Extensions.MonthExtension;
+using static Xalendar.Extensions.MonthExtension;
 
 namespace Xalendar.Api.Models
 {
