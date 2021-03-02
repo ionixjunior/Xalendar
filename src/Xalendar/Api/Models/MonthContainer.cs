@@ -30,8 +30,8 @@ namespace Xalendar.Api.Models
 
             if (isPreviewDaysActive)
             {
-                _previousMonth = new Month(dateTime.AddMonths(-1), false);
-                _nextMonth = new Month(dateTime.AddMonths(1), false);
+                _previousMonth = new Month(dateTime.AddMonths(-1), isCurrentMonth: false);
+                _nextMonth = new Month(dateTime.AddMonths(1), isCurrentMonth: false);
             }
 
             _firstDayOfWeek = firstDayOfWeek;
@@ -157,8 +157,8 @@ namespace Xalendar.Api.Models
 
             if (_isPreviewDaysActive)
             {
-                _previousMonth = new Month(nextDateTime.AddMonths(-1), false);
-                _nextMonth = new Month(nextDateTime.AddMonths(1), false);
+                _previousMonth = new Month(nextDateTime.AddMonths(-1), isCurrentMonth: false);
+                _nextMonth = new Month(nextDateTime.AddMonths(1), isCurrentMonth: false);
             }
         }
 
@@ -170,8 +170,8 @@ namespace Xalendar.Api.Models
 
             if (_isPreviewDaysActive)
             {
-                _previousMonth = new Month(previousDateTime.AddMonths(-1), false);
-                _nextMonth = new Month(previousDateTime.AddMonths(1), false);
+                _previousMonth = new Month(previousDateTime.AddMonths(-1), isCurrentMonth: false);
+                _nextMonth = new Month(previousDateTime.AddMonths(1), isCurrentMonth: false);
             }
         }
     }
