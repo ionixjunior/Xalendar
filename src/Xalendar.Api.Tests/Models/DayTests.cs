@@ -210,5 +210,29 @@ namespace Xalendar.Api.Tests.Models
             
             Assert.IsEmpty(day.Events);
         }
+
+        [Test]
+        public void DayShouldNotBePreview()
+        {
+            var dateTime = new DateTime(2021, 3, 1);
+            var currentDateTime = new DateTime(2021, 3, 1);
+            var day = new Day(dateTime, currentDateTime);
+
+            var isPreview = day.IsPreview;
+
+            Assert.IsFalse(isPreview);
+        }
+
+        [Test]
+        public void DayShouldBePreview()
+        {
+            var dateTime = new DateTime(2021, 2, 28);
+            var currentDateTime = new DateTime(2021, 3, 1);
+            var day = new Day(dateTime, currentDateTime);
+
+            var isPreview = day.IsPreview;
+
+            Assert.IsTrue(isPreview);
+        }
     }
 }

@@ -41,7 +41,9 @@ namespace Xalendar.Api.Models
             get => _isSelected;
             set => _isSelected = value;
         }
-        
+
+        public bool IsPreview => _currentDateTime.Date.Month != DateTime.Date.Month;
+
         public override bool Equals(object obj)
         {
             if (obj is Day dayToCompare)
