@@ -50,6 +50,9 @@ namespace Xalendar.View.Controls
                 if (Day.IsToday)
                     return "IsToday";
 
+                if (Day.IsWeekend)
+                    return "IsWeekend";
+
                 if (Day.IsPreview)
                     return "IsPreview";
             }

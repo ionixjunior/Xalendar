@@ -103,6 +103,12 @@
                         </VisualState.Setters>
                     </VisualState>
 
+                    <VisualState x:Name="IsWeekend">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="#D9D6E9" />
+                        </VisualState.Setters>
+                    </VisualState>
+
                     <VisualState x:Name="IsToday">
                         <VisualState.Setters>
                             <Setter Property="TextColor" Value="Black" />
