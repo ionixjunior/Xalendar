@@ -3,11 +3,17 @@
     x:Class="Xalendar.View.Themes.Classic"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
+        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Padding" Value="0,0" />
+    </Style>
+
     <Style Class="PreviousButton" TargetType="Button">
         <Setter Property="Text" Value="◀" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FlexLayout.Basis" Value="60" />
+        <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
@@ -21,7 +27,7 @@
         <Setter Property="Text" Value="▶" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FlexLayout.Basis" Value="60" />
+        <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
     <Style

@@ -11,11 +11,7 @@
     </ContentView.Resources>
 
     <StackLayout Spacing="0">
-        <FlexLayout
-            Padding="10,0"
-            AlignItems="Center"
-            HeightRequest="56"
-            StyleClass="CalendarMargin">
+        <FlexLayout StyleClass="CalendarMargin,CalendarHeaderContainer">
             <Button
                 x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"
