@@ -137,9 +137,9 @@ namespace Xalendar.Api.Tests.Models
         
         private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
         {
-            new object[] { "pt-BR", "DOM" },
-            new object[] { "en-US", "SUN" },
-            new object[] { "fr-FR", "DIM" }
+            new object[] { "pt-BR", "dom" },
+            new object[] { "en-US", "sun" },
+            new object[] { "fr-FR", "dim" }
         };
 
         [Test]
@@ -157,13 +157,13 @@ namespace Xalendar.Api.Tests.Models
 
         private static object[] ValuesForDaysOfWeekShouldStartWithSpecificDay =
         {
-            new object[] { "en-US", DayOfWeek.Sunday, new List<string> { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" } },
-            new object[] { "en-US", DayOfWeek.Monday, new List<string> { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" } },
-            new object[] { "en-US", DayOfWeek.Tuesday, new List<string> { "TUE", "WED", "THU", "FRI", "SAT", "SUN", "MON" } },
-            new object[] { "en-US", DayOfWeek.Wednesday, new List<string> { "WED", "THU", "FRI", "SAT", "SUN", "MON", "TUE" } },
-            new object[] { "en-US", DayOfWeek.Thursday, new List<string> { "THU", "FRI", "SAT", "SUN", "MON", "TUE", "WED" } },
-            new object[] { "en-US", DayOfWeek.Friday, new List<string> { "FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU" } },
-            new object[] { "en-US", DayOfWeek.Saturday, new List<string> { "SAT", "SUN", "MON", "TUE", "WED", "THU", "FRI" } }
+            new object[] { "en-US", DayOfWeek.Sunday, new List<string> { "sun", "mon", "tue", "wed", "thu", "fri", "sat" } },
+            new object[] { "en-US", DayOfWeek.Monday, new List<string> { "mon", "tue", "wed", "thu", "fri", "sat", "sun" } },
+            new object[] { "en-US", DayOfWeek.Tuesday, new List<string> { "tue", "wed", "thu", "fri", "sat", "sun", "mon" } },
+            new object[] { "en-US", DayOfWeek.Wednesday, new List<string> { "wed", "thu", "fri", "sat", "sun", "mon", "tue" } },
+            new object[] { "en-US", DayOfWeek.Thursday, new List<string> { "thu", "fri", "sat", "sun", "mon", "tue", "wed" } },
+            new object[] { "en-US", DayOfWeek.Friday, new List<string> { "fri", "sat", "sun", "mon", "tue", "wed", "thu" } },
+            new object[] { "en-US", DayOfWeek.Saturday, new List<string> { "sat", "sun", "mon", "tue", "wed", "thu", "fri" } }
         };
 
         [Test]

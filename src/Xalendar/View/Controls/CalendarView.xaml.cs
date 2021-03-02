@@ -9,6 +9,7 @@ using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 using XView = Xamarin.Forms.View;
+using Xalendar.Api.Formatters;
 
 namespace Xalendar.View.Controls
 {
@@ -149,7 +150,7 @@ namespace Xalendar.View.Controls
 
             if (propertyName == "Renderer")
             {
-                _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek, IsPreviewDaysActive);
+                _monthContainer = new MonthContainer(DateTime.Today, new DayOfWeek3CaractersFormat(), FirstDayOfWeek, IsPreviewDaysActive);
                 
                 if (!Events.IsNullOrEmpty())
                     _monthContainer.AddEvents(Events);
