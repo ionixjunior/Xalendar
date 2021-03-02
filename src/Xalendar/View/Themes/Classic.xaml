@@ -7,6 +7,7 @@
         <Setter Property="Text" Value="◀" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FlexLayout.Basis" Value="60" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
@@ -20,6 +21,7 @@
         <Setter Property="Text" Value="▶" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FlexLayout.Basis" Value="60" />
     </Style>
 
     <Style
