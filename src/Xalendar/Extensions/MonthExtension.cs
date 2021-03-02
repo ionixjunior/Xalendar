@@ -38,12 +38,12 @@ namespace Xalendar.Extensions
             return month.Days.FirstOrDefault(day => day.IsSelected);
         }
         
-        public static List<Day> GenerateDaysOfMonth(DateTime dateTime)
+        public static List<Day> GenerateDaysOfMonth(DateTime dateTime, bool isCurrentMonth = true)
         {
             return Enumerable
                 .Range(1, DateTime.DaysInMonth(dateTime.Year, dateTime.Month))
                 .Select(dayValue => new DateTime(dateTime.Year, dateTime.Month, dayValue))
-                .Select(dateTime => new Day(dateTime))
+                .Select(dateTime => new Day(dateTime, isCurrentMonth: isCurrentMonth))
                 .ToList();
         }
 

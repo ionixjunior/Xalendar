@@ -215,8 +215,7 @@ namespace Xalendar.Api.Tests.Models
         public void DayShouldNotBePreview()
         {
             var dateTime = new DateTime(2021, 3, 1);
-            var currentDateTime = new DateTime(2021, 3, 1);
-            var day = new Day(dateTime, currentDateTime);
+            var day = new Day(dateTime);
 
             var isPreview = day.IsPreview;
 
@@ -227,8 +226,7 @@ namespace Xalendar.Api.Tests.Models
         public void DayShouldBePreview()
         {
             var dateTime = new DateTime(2021, 2, 28);
-            var currentDateTime = new DateTime(2021, 3, 1);
-            var day = new Day(dateTime, currentDateTime);
+            var day = new Day(dateTime, isCurrentMonth: false);
 
             var isPreview = day.IsPreview;
 
