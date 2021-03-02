@@ -123,6 +123,20 @@ namespace Xalendar.View.Controls
             set => SetValue(FirstDayOfWeekProperty, value);
         }
 
+        public static BindableProperty IsPreviewDaysActiveProperty =
+            BindableProperty.Create(
+                nameof(IsPreviewDaysActive),
+                typeof(bool),
+                typeof(CalendarView),
+                false,
+                BindingMode.OneTime);
+
+        public bool IsPreviewDaysActive
+        {
+            get => (bool)GetValue(IsPreviewDaysActiveProperty);
+            set => SetValue(IsPreviewDaysActiveProperty, value);
+        }
+
         public event Action<MonthRange>? MonthChanged;
         public event Action<DaySelected>? DaySelected;
 
@@ -135,7 +149,7 @@ namespace Xalendar.View.Controls
 
             if (propertyName == "Renderer")
             {
-                _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek);
+                _monthContainer = new MonthContainer(DateTime.Today, FirstDayOfWeek, IsPreviewDaysActive);
                 
                 if (!Events.IsNullOrEmpty())
                     _monthContainer.AddEvents(Events);
