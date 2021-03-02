@@ -86,7 +86,6 @@ namespace Xalendar.Api.Tests.Models
 
             var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
-            // TODO POSSIVELMENTE EXISTIRÁ MUDANÇA
             Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
         }
 
@@ -191,7 +190,6 @@ namespace Xalendar.Api.Tests.Models
 
             var firstDay = monthContainer.FirstDay;
 
-            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 1, 0, 0, 0), firstDay);
         }
 
@@ -214,7 +212,6 @@ namespace Xalendar.Api.Tests.Models
 
             var lastDay = monthContainer.LastDay;
 
-            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
         }
 
