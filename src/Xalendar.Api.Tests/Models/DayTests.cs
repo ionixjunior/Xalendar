@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using Xalendar.Api.Extensions;
+using Xalendar.Extensions;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Api.Tests.Models
@@ -209,6 +209,28 @@ namespace Xalendar.Api.Tests.Models
             day.RemoveAllEvents();
             
             Assert.IsEmpty(day.Events);
+        }
+
+        [Test]
+        public void DayShouldNotBePreview()
+        {
+            var dateTime = new DateTime(2021, 3, 1);
+            var day = new Day(dateTime);
+
+            var isPreview = day.IsPreview;
+
+            Assert.IsFalse(isPreview);
+        }
+
+        [Test]
+        public void DayShouldBePreview()
+        {
+            var dateTime = new DateTime(2021, 2, 28);
+            var day = new Day(dateTime, isCurrentMonth: false);
+
+            var isPreview = day.IsPreview;
+
+            Assert.IsTrue(isPreview);
         }
     }
 }

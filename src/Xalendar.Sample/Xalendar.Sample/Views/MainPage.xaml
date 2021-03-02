@@ -23,7 +23,8 @@
             <xal:CalendarView
                 DaySelected="OnDaySelected"
                 Events="{Binding Events}"
-                FirstDayOfWeek="Monday"
+                FirstDayOfWeek="Sunday"
+                IsPreviewDaysActive="True"
                 MonthChanged="OnMonthChanged" />
 
             <ListView

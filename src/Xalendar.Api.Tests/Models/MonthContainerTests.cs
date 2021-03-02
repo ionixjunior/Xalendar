@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
-using Xalendar.Api.Extensions;
+using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
@@ -47,7 +47,7 @@ namespace Xalendar.Api.Tests.Models
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.AddEvents(events);
 
-            Assert.IsTrue(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsTrue(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -84,8 +84,9 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Next();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
+            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
+            // TODO POSSIVELMENTE EXISTIRÁ MUDANÇA
             Assert.AreEqual(31, monthContainer.Days.Count(day => day is {}));
         }
 
@@ -97,7 +98,7 @@ namespace Xalendar.Api.Tests.Models
 
             monthContainer.Previous();
 
-            var dateTimeName = monthContainer._month.MonthDateTime.ToString("MMMM yyyy");
+            var dateTimeName = monthContainer._currentMonth.MonthDateTime.ToString("MMMM yyyy");
             Assert.AreEqual(dateTimeName, monthContainer.GetName());
         }
 
@@ -154,7 +155,7 @@ namespace Xalendar.Api.Tests.Models
             
             monthContainer.RemoveEvent(calendarViewEvent);
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -168,7 +169,7 @@ namespace Xalendar.Api.Tests.Models
             
             monthContainer.RemoveAllEvents();
 
-            Assert.IsFalse(monthContainer._month.Days.Any(day => day.HasEvents));
+            Assert.IsFalse(monthContainer._currentMonth.Days.Any(day => day.HasEvents));
         }
 
         [Test]
@@ -190,7 +191,19 @@ namespace Xalendar.Api.Tests.Models
 
             var firstDay = monthContainer.FirstDay;
 
+            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 1, 0, 0, 0), firstDay);
+        }
+
+        [Test]
+        public void ShouldGetFirstDayOfMonthContainerWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
+
+            var firstDay = monthContainer.FirstDay;
+
+            Assert.AreEqual(new DateTime(2020, 9, 27, 0, 0, 0), firstDay);
         }
 
         [Test]
@@ -200,54 +213,43 @@ namespace Xalendar.Api.Tests.Models
             var monthContainer = new MonthContainer(dateTime);
 
             var lastDay = monthContainer.LastDay;
-            
+
+            // TODO POSSIVELMENTE VAI MUDAR
             Assert.AreEqual(new DateTime(2020, 10, 31, 23, 59, 59), lastDay);
         }
 
         [Test]
+        public void ShouldGetLastDayOfMonthContainerWhenPreviewDaysIsActive()
+        {
+            var dateTime = new DateTime(2020, 10, 1);
+            var monthContainer = new MonthContainer(dateTime, isPreviewDaysActive: true);
+
+            var lastDay = monthContainer.LastDay;
+
+            Assert.AreEqual(new DateTime(2020, 11, 7, 23, 59, 59), lastDay);
+        }
+
+        [Test]
         [TestCaseSource(nameof(ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek))]
-        public void DaysOfMonthShouldStartBasedOnFirstDayOfWeek(DateTime dateTime, DayOfWeek firstDayOfWeek, List<Day?> expectedDays)
+        public void DaysOfMonthShouldStartBasedOnFirstDayOfWeek(DateTime dateTime, DayOfWeek firstDayOfWeek, int index)
         {
             var monthContainer = new MonthContainer(dateTime, firstDayOfWeek);
 
             var days = monthContainer.Days;
-            
-            CollectionAssert.AreEqual(expectedDays, days);
+
+            var firstDayOfCurrentMonth = days.First(day => day is { } && day.DateTime.Day == 1);
+            Assert.AreEqual(firstDayOfCurrentMonth, days.ElementAt(index));
         }
 
         private static object[] ValuesForDaysOfMonthShouldStartBasedOnFirstDayOfWeek =
         {
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Sunday, GenerateDaysOfSeptember2020(2, 3) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Monday, GenerateDaysOfSeptember2020(1, 4) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Tuesday, GenerateDaysOfSeptember2020(0, 5) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, GenerateDaysOfSeptember2020(6, 6) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, GenerateDaysOfSeptember2020(5, 7) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, GenerateDaysOfSeptember2020(4, 1) },
-            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, GenerateDaysOfSeptember2020(3, 2) }
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Sunday, 2},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Monday, 1},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Tuesday, 0},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Wednesday, 6},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Thursday, 5},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Friday, 4},
+            new object[] { new DateTime(2020, 9, 1), DayOfWeek.Saturday, 3}
         };
-
-        private static List<Day?> GenerateDaysOfSeptember2020(int daysToDiscardAtStart, int daysToDiscardAtEnd)
-        {
-            var days = new List<Day?>();
-            
-            for (var index = 0; index < daysToDiscardAtStart; index++)
-                days.Add(default(Day));
-
-            var dateTime = new DateTime(2020, 9, 1);
-            for (var index = 1; index <= 30; index++)
-            {
-                days.Add(new Day(dateTime));
-                dateTime = dateTime.AddDays(1);
-            }
-            
-            for (var index = 0; index < daysToDiscardAtEnd; index++)
-                days.Add(default(Day));
-            
-            if (days.Count < 42)
-                for (var index = days.Count; index < 42; index++)
-                    days.Add(default(Day));
-            
-            return days;
-        }
     }
 }

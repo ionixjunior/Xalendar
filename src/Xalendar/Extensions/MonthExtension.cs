@@ -4,7 +4,7 @@ using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
-namespace Xalendar.Api.Extensions
+namespace Xalendar.Extensions
 {
     public static class MonthExtension
     {
@@ -38,12 +38,12 @@ namespace Xalendar.Api.Extensions
             return month.Days.FirstOrDefault(day => day.IsSelected);
         }
         
-        public static List<Day> GenerateDaysOfMonth(DateTime dateTime)
+        public static List<Day> GenerateDaysOfMonth(DateTime dateTime, bool isCurrentMonth = true)
         {
             return Enumerable
                 .Range(1, DateTime.DaysInMonth(dateTime.Year, dateTime.Month))
                 .Select(dayValue => new DateTime(dateTime.Year, dateTime.Month, dayValue))
-                .Select(dateTime => new Day(dateTime))
+                .Select(dateTime => new Day(dateTime, isCurrentMonth: isCurrentMonth))
                 .ToList();
         }
 

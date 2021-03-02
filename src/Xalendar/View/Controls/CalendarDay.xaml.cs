@@ -28,8 +28,36 @@ namespace Xalendar.View.Controls
 
         internal void StartState()
         {
-            var state = Day is { } && Day.IsToday ? "IsToday" : "UnSelected";
-            VisualStateManager.GoToState(DayFrame, state);
+            VisualStateManager.GoToState(DayFrame, GetStateOfDayFrame());
+            VisualStateManager.GoToState(DayElement, GetStateOfDayElement());
+        }
+
+        private string GetStateOfDayFrame()
+        {
+            if (Day is { })
+            {
+                if (Day.IsToday)
+                    return "IsToday";
+            }
+
+            return "UnSelected";
+        }
+
+        private string GetStateOfDayElement()
+        {
+            if (Day is { })
+            {
+                if (Day.IsToday)
+                    return "IsToday";
+
+                if (Day.IsWeekend)
+                    return "IsWeekend";
+
+                if (Day.IsPreview)
+                    return "IsPreview";
+            }
+
+            return "IsNotPreview";
         }
     }
 }

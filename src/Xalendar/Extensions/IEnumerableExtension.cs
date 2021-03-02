@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Xalendar.View.Extensions
+namespace Xalendar.Extensions
 {
     public static class IEnumerableExtension
     {

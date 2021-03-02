@@ -8,6 +8,7 @@ namespace Xalendar.Api.Models
     public class Day
     {
         private DateTime _currentDateTime;
+        private bool _isCurrentMonth;
         public DateTime DateTime { get; }
         public IList<ICalendarViewEvent> Events { get; }
 
@@ -20,13 +21,14 @@ namespace Xalendar.Api.Models
         
         public bool HasEvents => Events.Any();
 
-        public Day(DateTime dateTime, bool isSelected = false) : this(dateTime, DateTime.Now, isSelected)
+        public Day(DateTime dateTime, bool isSelected = false, bool isCurrentMonth = true) : this(dateTime, DateTime.Now, isSelected, isCurrentMonth)
         {
         }
 
-        public Day(DateTime dateTime, DateTime currentDateTime, bool isSelected = false)
+        public Day(DateTime dateTime, DateTime currentDateTime, bool isSelected = false, bool isCurrentMonth = true)
         {
             _currentDateTime = currentDateTime;
+            _isCurrentMonth = isCurrentMonth;
             DateTime = dateTime;
             _isSelected = isSelected;
             Events = new List<ICalendarViewEvent>();
@@ -41,7 +43,9 @@ namespace Xalendar.Api.Models
             get => _isSelected;
             set => _isSelected = value;
         }
-        
+
+        public bool IsPreview => !_isCurrentMonth;
+
         public override bool Equals(object obj)
         {
             if (obj is Day dayToCompare)

@@ -90,10 +90,39 @@
 
     <Style Class="DayElement" TargetType="Label">
         <Setter Property="FontSize" Value="Body" />
-        <Setter Property="TextColor" Value="Black" />
         <Setter Property="Margin" Value="4,0,4,0" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup>
+                    <VisualState x:Name="IsPreview">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="#D9D6E9" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="IsWeekend">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="#D9D6E9" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="IsToday">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Black" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="IsNotPreview">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Black" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
     <Style Class="HasEventsElement" TargetType="BoxView">
