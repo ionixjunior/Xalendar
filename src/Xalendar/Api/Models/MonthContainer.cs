@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using Xalendar.Api.Formatters;
+using Xalendar.Api.Interfaces;
 using Xalendar.Extensions;
 
 namespace Xalendar.Api.Models
@@ -15,7 +17,7 @@ namespace Xalendar.Api.Models
 
         private IReadOnlyList<Day?>? _days;
         public IReadOnlyList<Day?> Days => _days ??= GetDaysOfContainer();
-        public IReadOnlyList<string> DaysOfWeek { get; }
+        public IReadOnlyList<DayOfWeekName> DaysOfWeek { get; }
 
         public DateTime FirstDay => Days.First(day => day is {})!.DateTime;
 
@@ -23,8 +25,15 @@ namespace Xalendar.Api.Models
 
         private DayOfWeek _firstDayOfWeek;
         private bool _isPreviewDaysActive;
-        
-        public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday, bool isPreviewDaysActive = false)
+        private IDayOfWeekFormatter _dayOfWeekFormatter;
+
+        public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday,
+            bool isPreviewDaysActive = false) : this(dateTime, new DayOfWeek3CaractersFormat(), firstDayOfWeek, isPreviewDaysActive)
+        {
+        }
+
+        public MonthContainer(DateTime dateTime, IDayOfWeekFormatter dayOfWeekFormatter, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday,
+            bool isPreviewDaysActive = false)
         {
             _currentMonth = new Month(dateTime);
 
@@ -34,6 +43,7 @@ namespace Xalendar.Api.Models
                 _nextMonth = new Month(dateTime.AddMonths(1), isCurrentMonth: false);
             }
 
+            _dayOfWeekFormatter = dayOfWeekFormatter;
             _firstDayOfWeek = firstDayOfWeek;
             _isPreviewDaysActive = isPreviewDaysActive;
 
@@ -55,11 +65,7 @@ namespace Xalendar.Api.Models
             return daysOfWeek;
         }
 
-        private string GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek)
-        {
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedDayName(dayOfWeek)
-                .Substring(0, 3).ToUpper();
-        }
+        private DayOfWeekName GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek) => new DayOfWeekName(dayOfWeek, _dayOfWeekFormatter.Format(dayOfWeek));
 
         private IReadOnlyList<Day?> GetDaysOfContainer()
         {

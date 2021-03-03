@@ -2,8 +2,7 @@
 <ContentView
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:Xalendar.View.Controls;assembly=Xalendar.View">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Resources>
         <ResourceDictionary>
             <FlexBasis x:Key="DayWidth">14.28%</FlexBasis>
@@ -11,11 +10,7 @@
     </ContentView.Resources>
 
     <StackLayout Spacing="0">
-        <FlexLayout
-            Padding="10,0"
-            AlignItems="Center"
-            HeightRequest="56"
-            StyleClass="CalendarMargin">
+        <FlexLayout StyleClass="CalendarMargin,CalendarHeaderContainer">
             <Button
                 x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"

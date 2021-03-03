@@ -2,11 +2,28 @@
 <ResourceDictionary
     x:Class="Xalendar.View.Themes.Planning"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Xalendar.View.Controls"
+    xmlns:formatters="clr-namespace:Xalendar.Api.Formatters">
+    <formatters:DayOfWeek2CaractersFormat x:Key="DayOfWeekFormatter" />
+
+    <Style TargetType="controls:CalendarView">
+        <Setter Property="DaysOfWeekFormatter" Value="{StaticResource DayOfWeekFormatter}" />
+        <Setter Property="FirstDayOfWeek" Value="Monday" />
+        <Setter Property="IsPreviewDaysActive" Value="True" />
+    </Style>
+
+    <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
+        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Padding" Value="0,0" />
+    </Style>
+
     <Style Class="PreviousButton" TargetType="Button">
         <Setter Property="Text" Value="◀" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
@@ -21,6 +38,7 @@
         <Setter Property="Text" Value="▶" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
     <Style
@@ -74,6 +92,12 @@
                             <Setter Property="BackgroundColor" Value="Transparent" />
                         </VisualState.Setters>
                     </VisualState>
+
+                    <VisualState x:Name="HasEvents">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
@@ -116,6 +140,18 @@
                     </VisualState>
 
                     <VisualState x:Name="IsNotPreview">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Black" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Black" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="HasEvents">
                         <VisualState.Setters>
                             <Setter Property="TextColor" Value="Black" />
                         </VisualState.Setters>

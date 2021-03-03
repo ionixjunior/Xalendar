@@ -40,4 +40,21 @@
     <Compile Remove="build\*.cs" />
     <None Include="build\**\*.cs;build\**\*.targets" Pack="true" PackagePath="build" />
   </ItemGroup>  
+  <ItemGroup>
+    <Compile Update="Api\Interfaces\IDayOfWeekFormatter.cs">
+      <SubType></SubType>
+    </Compile>
+    <Compile Update="Api\Formatters\DayOfWeek2CaractersFormat.cs">
+      <SubType></SubType>
+    </Compile>
+    <Compile Update="Api\Formatters\DayOfWeek3CaractersFormat.cs">
+      <SubType></SubType>
+    </Compile>
+    <Compile Update="Api\Models\DayOfWeekName.cs">
+      <SubType></SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\Formatters\" />
+  </ItemGroup>
 </Project>

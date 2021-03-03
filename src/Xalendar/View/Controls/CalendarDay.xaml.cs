@@ -22,7 +22,12 @@ namespace Xalendar.View.Controls
         
         private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(this);
 
-        public void Select() => VisualStateManager.GoToState(DayFrame, "Selected");
+        public void Select()
+        {
+            const string state = "Selected";
+            VisualStateManager.GoToState(DayFrame, state);
+            VisualStateManager.GoToState(DayElement, state);
+        }
 
         public void UnSelect() => StartState();
 
@@ -38,6 +43,9 @@ namespace Xalendar.View.Controls
             {
                 if (Day.IsToday)
                     return "IsToday";
+
+                if (Day.HasEvents)
+                    return "HasEvents";
             }
 
             return "UnSelected";
@@ -52,6 +60,9 @@ namespace Xalendar.View.Controls
 
                 if (Day.IsWeekend)
                     return "IsWeekend";
+
+                if (Day.HasEvents)
+                    return "HasEvents";
 
                 if (Day.IsPreview)
                     return "IsPreview";
