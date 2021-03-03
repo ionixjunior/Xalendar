@@ -58,11 +58,11 @@ namespace Xalendar.View.Controls
                 if (Day.IsToday)
                     return "IsToday";
 
-                if (Day.HasEvents)
-                    return "HasEvents";
-
                 if (Day.IsWeekend)
                     return "IsWeekend";
+
+                if (Day.HasEvents)
+                    return "HasEvents";
 
                 if (Day.IsPreview)
                     return "IsPreview";
