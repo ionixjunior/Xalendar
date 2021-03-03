@@ -303,19 +303,7 @@ namespace Xalendar.View.Controls
                 var day = days[index];
 
                 if (CalendarDaysContainer.Children[index] is CalendarDay view)
-                {
-                    view.Day = day;
-                    
-                    if (view.FindByName<XView>("HasEventsElement") is {} hasEventsElement)
-                        hasEventsElement.IsVisible = day?.HasEvents ?? false;
-
-                    if (view.FindByName<CalendarDay>("DayContainer") is { } dayContainer)
-                        dayContainer.StartState();
-
-                    if (view.FindByName<Label>("DayElement") is {} dayElement)
-                        dayElement.Text = day?.ToString();
-                }
-
+                    view.UpdateData(day);
             }
         }
     }

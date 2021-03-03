@@ -70,6 +70,18 @@ namespace Xalendar.View.Controls
 
             return "IsNotPreview";
         }
+
+        internal void UpdateData(Day? day)
+        {
+            Day = day;
+            HasEventsElement.IsVisible = day?.HasEvents ?? false;
+            DayElement.Text = day?.ToString();
+
+            if (day is { })
+                AutomationProperties.SetName(DayElement, day.DateTime.ToString("D"));
+
+            StartState();
+        }
     }
 }
 
