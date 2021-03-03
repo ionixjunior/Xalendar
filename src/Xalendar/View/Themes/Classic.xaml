@@ -98,7 +98,8 @@
 
     <Style Class="DayLayout" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
-        <Setter Property="JustifyContent" Value="Center" />
+        <Setter Property="JustifyContent" Value="Start" />
+        <Setter Property="Margin" Value="0,9,0,0" />
         <Setter Property="AlignItems" Value="Center" />
     </Style>
 
