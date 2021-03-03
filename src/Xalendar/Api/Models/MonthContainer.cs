@@ -17,7 +17,7 @@ namespace Xalendar.Api.Models
 
         private IReadOnlyList<Day?>? _days;
         public IReadOnlyList<Day?> Days => _days ??= GetDaysOfContainer();
-        public IReadOnlyList<string> DaysOfWeek { get; }
+        public IReadOnlyList<DayOfWeekName> DaysOfWeek { get; }
 
         public DateTime FirstDay => Days.First(day => day is {})!.DateTime;
 
@@ -65,7 +65,7 @@ namespace Xalendar.Api.Models
             return daysOfWeek;
         }
 
-        private string GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek) => _dayOfWeekFormatter.Format(dayOfWeek);
+        private DayOfWeekName GetDayOfWeekAbbreviated(DayOfWeek dayOfWeek) => new DayOfWeekName(dayOfWeek, _dayOfWeekFormatter.Format(dayOfWeek));
 
         private IReadOnlyList<Day?> GetDaysOfContainer()
         {

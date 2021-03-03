@@ -126,7 +126,7 @@ namespace Xalendar.Api.Tests.Models
 
         [Test]
         [TestCaseSource(nameof(ValuesForTheDaysOfWeekInSpecificLanguagesTests))]
-        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, string dayOfWeekName)
+        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, DayOfWeekName dayOfWeekName)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
             var dateTime = DateTime.Today;
@@ -137,14 +137,14 @@ namespace Xalendar.Api.Tests.Models
         
         private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
         {
-            new object[] { "pt-BR", "dom" },
-            new object[] { "en-US", "sun" },
-            new object[] { "fr-FR", "dim" }
+            new object[] { "pt-BR", CreateDayOfWeekName(DayOfWeek.Sunday, "dom") },
+            new object[] { "en-US", CreateDayOfWeekName(DayOfWeek.Sunday, "sun") },
+            new object[] { "fr-FR", CreateDayOfWeekName(DayOfWeek.Sunday, "dim") }
         };
 
         [Test]
         [TestCaseSource(nameof(ValuesForDaysOfWeekShouldStartWithSpecificDay))]
-        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, List<string> expectedDaysOfWeek)
+        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, List<DayOfWeekName> expectedDaysOfWeek)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
             var dateTime = DateTime.Today;
@@ -157,14 +157,103 @@ namespace Xalendar.Api.Tests.Models
 
         private static object[] ValuesForDaysOfWeekShouldStartWithSpecificDay =
         {
-            new object[] { "en-US", DayOfWeek.Sunday, new List<string> { "sun", "mon", "tue", "wed", "thu", "fri", "sat" } },
-            new object[] { "en-US", DayOfWeek.Monday, new List<string> { "mon", "tue", "wed", "thu", "fri", "sat", "sun" } },
-            new object[] { "en-US", DayOfWeek.Tuesday, new List<string> { "tue", "wed", "thu", "fri", "sat", "sun", "mon" } },
-            new object[] { "en-US", DayOfWeek.Wednesday, new List<string> { "wed", "thu", "fri", "sat", "sun", "mon", "tue" } },
-            new object[] { "en-US", DayOfWeek.Thursday, new List<string> { "thu", "fri", "sat", "sun", "mon", "tue", "wed" } },
-            new object[] { "en-US", DayOfWeek.Friday, new List<string> { "fri", "sat", "sun", "mon", "tue", "wed", "thu" } },
-            new object[] { "en-US", DayOfWeek.Saturday, new List<string> { "sat", "sun", "mon", "tue", "wed", "thu", "fri" } }
+            new object[] {
+                "en-US",
+                DayOfWeek.Sunday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Monday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Tuesday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Wednesday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Thursday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Friday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri"),
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu")
+                }
+            },
+            new object[] {
+                "en-US",
+                DayOfWeek.Saturday,
+                new List<DayOfWeekName> {
+                    CreateDayOfWeekName(DayOfWeek.Saturday, "sat"),
+                    CreateDayOfWeekName(DayOfWeek.Sunday, "sun"),
+                    CreateDayOfWeekName(DayOfWeek.Monday, "mon"),
+                    CreateDayOfWeekName(DayOfWeek.Tuesday, "tue"),
+                    CreateDayOfWeekName(DayOfWeek.Wednesday, "wed"),
+                    CreateDayOfWeekName(DayOfWeek.Thursday, "thu"),
+                    CreateDayOfWeekName(DayOfWeek.Friday, "fri")
+                }
+            }
         };
+
+        private static DayOfWeekName CreateDayOfWeekName(DayOfWeek dayOfWeek, string name)
+        {
+            return new DayOfWeekName(dayOfWeek, name);
+        }
 
         [Test]
         public void EventsShouldBeRemovedFromMonthContainer()
@@ -280,7 +369,7 @@ namespace Xalendar.Api.Tests.Models
             var dayOfWeekFormatter = new CustomDayOfWeekFormatter();
             var monthContainer = new MonthContainer(dateTime, dayOfWeekFormatter, firstDayOfWeek: DayOfWeek.Sunday);
 
-            var firstDayOfWeek = monthContainer.DaysOfWeek.First();
+            var firstDayOfWeek = monthContainer.DaysOfWeek.First().Name;
 
             Assert.AreEqual("SUNDAY", firstDayOfWeek);
         }
