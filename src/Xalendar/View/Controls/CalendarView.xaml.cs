@@ -194,8 +194,8 @@ namespace Xalendar.View.Controls
                 foreach (var dayOfWeek in _monthContainer.DaysOfWeek)
                 {
                     var calendarDayOfWeek = new CalendarDayOfWeek();
-                    calendarDayOfWeek.Text = dayOfWeek.Name;
                     CalendarDaysOfWeekContainer.Children.Add(calendarDayOfWeek, column++, 0);
+                    calendarDayOfWeek.UpdateData(dayOfWeek);
                 }
 
                 MonthName.Text = _monthContainer.GetName();
