@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 
@@ -14,6 +15,7 @@ namespace Xalendar.View.Controls
         internal void UpdateData(DayOfWeekName dayOfWeekName)
         {
             Text = dayOfWeekName.Name;
+            AutomationProperties.SetName(this, CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dayOfWeekName.DayOfWeek));
             VisualStateManager.GoToState(this, GetState(dayOfWeekName.DayOfWeek));
         }
 
