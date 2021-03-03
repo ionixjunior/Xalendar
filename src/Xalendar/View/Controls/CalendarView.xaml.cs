@@ -164,8 +164,11 @@ namespace Xalendar.View.Controls
 
             if (propertyName == "Renderer")
             {
-                _monthContainer = new MonthContainer(DateTime.Today, DaysOfWeekFormatter, FirstDayOfWeek, IsPreviewDaysActive);
-                
+                var today = DateTime.Today;
+                UpdateAccessibilityText(today);
+
+                _monthContainer = new MonthContainer(today, DaysOfWeekFormatter, FirstDayOfWeek, IsPreviewDaysActive);
+
                 if (!Events.IsNullOrEmpty())
                     _monthContainer.AddEvents(Events);
 
@@ -201,6 +204,17 @@ namespace Xalendar.View.Controls
                 MonthName.Text = _monthContainer.GetName();
                 MonthChanged?.Invoke(new MonthRange(_monthContainer.FirstDay, _monthContainer.LastDay));
             }
+        }
+
+
+        private const string AccessibilityNavigateToMonth = "Navigate to {0}";
+
+        private void UpdateAccessibilityText(DateTime dateTime)
+        {
+            var nameOfPreviousMonth = dateTime.AddMonths(-1).ToString("Y");
+            var nameOfNextMonth = dateTime.AddMonths(1).ToString("Y");
+            AutomationProperties.SetName(PreviousButton, string.Format(AccessibilityNavigateToMonth, nameOfPreviousMonth));
+            AutomationProperties.SetName(NextButton, string.Format(AccessibilityNavigateToMonth, nameOfNextMonth));
         }
 
         private CalendarDay? _selectedDay;
@@ -250,6 +264,7 @@ namespace Xalendar.View.Controls
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
             MonthChanged?.Invoke(new MonthRange(result.firstDay, result.lastDay));
+            UpdateAccessibilityText(result.firstDay);
         }
 
         private async void OnNextMonthClick(object sender, EventArgs e)
@@ -278,6 +293,7 @@ namespace Xalendar.View.Controls
             MonthName.Text = result.monthName;
             RecycleDays(result.days);
             MonthChanged?.Invoke(new MonthRange(result.firstDay, result.lastDay));
+            UpdateAccessibilityText(result.firstDay);
         }
 
         private void RecycleDays(IReadOnlyList<Day?> days)
