@@ -92,6 +92,12 @@
                             <Setter Property="BackgroundColor" Value="Transparent" />
                         </VisualState.Setters>
                     </VisualState>
+
+                    <VisualState x:Name="HasEvents">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
@@ -140,6 +146,12 @@
                     </VisualState>
 
                     <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="Black" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="HasEvents">
                         <VisualState.Setters>
                             <Setter Property="TextColor" Value="Black" />
                         </VisualState.Setters>
