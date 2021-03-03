@@ -49,6 +49,7 @@
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextTransform" Value="Uppercase" />
     </Style>
 
     <Style
