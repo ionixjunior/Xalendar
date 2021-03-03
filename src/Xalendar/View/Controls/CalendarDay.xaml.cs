@@ -43,6 +43,9 @@ namespace Xalendar.View.Controls
             {
                 if (Day.IsToday)
                     return "IsToday";
+
+                if (Day.HasEvents)
+                    return "HasEvents";
             }
 
             return "UnSelected";
@@ -54,6 +57,9 @@ namespace Xalendar.View.Controls
             {
                 if (Day.IsToday)
                     return "IsToday";
+
+                if (Day.HasEvents)
+                    return "HasEvents";
 
                 if (Day.IsWeekend)
                     return "IsWeekend";
