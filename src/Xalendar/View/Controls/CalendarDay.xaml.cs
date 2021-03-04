@@ -78,7 +78,7 @@ namespace Xalendar.View.Controls
             DayElement.Text = day?.ToString();
 
             if (day is { })
-                AutomationProperties.SetName(DayElement, day.DateTime.ToString("D"));
+                AutomationProperties.SetName(DayFrame, day.DateTime.ToString("D"));
 
             StartState();
         }
