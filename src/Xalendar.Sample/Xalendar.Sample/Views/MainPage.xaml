@@ -8,16 +8,11 @@
     Title="CalendarView Sample">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 
-
-                <ResourceDictionary>
-                    <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
-                    <xal:DayOfWeek1CaractersFormat x:Key="DayOfWeek1CaractersFormat" />
-                    <xal:DayOfWeek2CaractersFormat x:Key="DayOfWeek2CaractersFormat" />
-                    <xal:DayOfWeek3CaractersFormat x:Key="DayOfWeek3CaractersFormat" />
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
+            <xal:Planning x:Key="Planning" />
+            <xal:TaskManagement x:Key="TaskManagement" />
+            <xal:Amazonas x:Key="Amazonas" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,7 +21,8 @@
             <xal:CalendarView
                 DaySelected="OnDaySelected"
                 Events="{Binding Events}"
-                MonthChanged="OnMonthChanged" />
+                MonthChanged="OnMonthChanged"
+                Theme="{StaticResource Amazonas}" />
 
             <ListView
                 Footer=""
