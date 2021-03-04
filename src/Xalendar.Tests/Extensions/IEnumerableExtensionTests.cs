@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Xalendar.Extensions;
 
-namespace Xalendar.Tests.View.Extensions
+namespace Xalendar.Tests.Extensions
 {
     [TestFixture]
     public class IEnumerableExtensionTests
