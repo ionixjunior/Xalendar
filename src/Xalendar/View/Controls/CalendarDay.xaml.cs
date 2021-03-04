@@ -78,9 +78,19 @@ namespace Xalendar.View.Controls
             DayElement.Text = day?.ToString();
 
             if (day is { })
-                AutomationProperties.SetName(DayFrame, day.DateTime.ToString("D"));
+                AutomationProperties.SetName(DayFrame, GetTextForAccessibility(day));
 
             StartState();
+        }
+
+        private string GetTextForAccessibility(Day day)
+        {
+            var text = new StringBuilder(day.DateTime.ToString("D"));
+
+            if (day.HasEvents)
+                text.Append(", there are events in this day");
+
+            return text.ToString();
         }
     }
 }
