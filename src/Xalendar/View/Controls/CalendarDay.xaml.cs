@@ -27,6 +27,7 @@ namespace Xalendar.View.Controls
             const string state = "Selected";
             VisualStateManager.GoToState(DayFrame, state);
             VisualStateManager.GoToState(DayElement, state);
+            UpdateTextAccessibility(Day);
         }
 
         public void UnSelect() => StartState();
@@ -35,6 +36,7 @@ namespace Xalendar.View.Controls
         {
             VisualStateManager.GoToState(DayFrame, GetStateOfDayFrame());
             VisualStateManager.GoToState(DayElement, GetStateOfDayElement());
+            UpdateTextAccessibility(Day);
         }
 
         private string GetStateOfDayFrame()
@@ -76,11 +78,14 @@ namespace Xalendar.View.Controls
             Day = day;
             HasEventsElement.IsVisible = day?.HasEvents ?? false;
             DayElement.Text = day?.ToString();
+            UpdateTextAccessibility(day);
+            StartState();
+        }
 
+        private void UpdateTextAccessibility(Day? day)
+        {
             if (day is { })
                 AutomationProperties.SetName(DayFrame, GetTextForAccessibility(day));
-
-            StartState();
         }
 
         private string GetTextForAccessibility(Day day)
@@ -89,6 +94,9 @@ namespace Xalendar.View.Controls
 
             if (day.HasEvents)
                 text.Append(", there are events in this day");
+
+            if (day.IsSelected)
+                text.Append(", this day is selected");
 
             return text.ToString();
         }
