@@ -9,10 +9,11 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <xal:TaskManagement />
+                <xal:Amazonas />
 
                 <ResourceDictionary>
                     <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+                    <xal:DayOfWeek1CaractersFormat x:Key="DayOfWeek1CaractersFormat" />
                     <xal:DayOfWeek2CaractersFormat x:Key="DayOfWeek2CaractersFormat" />
                     <xal:DayOfWeek3CaractersFormat x:Key="DayOfWeek3CaractersFormat" />
                 </ResourceDictionary>

@@ -53,6 +53,9 @@
     <Compile Update="Api\Models\DayOfWeekName.cs">
       <SubType></SubType>
     </Compile>
+    <Compile Update="Api\Formatters\DayOfWeek1CaractersFormat.cs">
+      <SubType></SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\Formatters\" />
