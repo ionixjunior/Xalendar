@@ -3,17 +3,17 @@ using System.Globalization;
 using NUnit.Framework;
 using Xalendar.Api.Formatters;
 
-namespace Xalendar.Api.Tests.Formatters
+namespace Xalendar.Tests.Api.Formatters
 {
     [TestFixture]
-    public class DayOfWeek2CaractersFormatTests
+    public class DayOfWeek3CaractersFormatTests
     {
         [Test]
         [TestCaseSource(nameof(ValuesForTheDaysOfWeekInSpecificLanguagesTests))]
         public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, DayOfWeek dayOfWeek, string dayOfWeekName)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
-            var formatter = new DayOfWeek2CaractersFormat();
+            var formatter = new DayOfWeek3CaractersFormat();
 
             var result = formatter.Format(dayOfWeek);
 
@@ -22,9 +22,9 @@ namespace Xalendar.Api.Tests.Formatters
 
         private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
         {
-            new object[] { "pt-BR", DayOfWeek.Sunday, "do" },
-            new object[] { "en-US", DayOfWeek.Sunday, "su" },
-            new object[] { "fr-FR", DayOfWeek.Sunday, "di" }
+            new object[] { "pt-BR", DayOfWeek.Sunday, "dom" },
+            new object[] { "en-US", DayOfWeek.Sunday, "sun" },
+            new object[] { "fr-FR", DayOfWeek.Sunday, "dim" }
         };
     }
 }

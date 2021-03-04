@@ -7,7 +7,7 @@ using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
-namespace Xalendar.Api.Tests.Models
+namespace Xalendar.Tests.Api.Models
 {
     [TestFixture]
     public class MonthContainerTests

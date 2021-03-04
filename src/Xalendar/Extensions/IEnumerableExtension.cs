@@ -7,10 +7,10 @@ namespace Xalendar.Extensions
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T>? collection)
         {
-            if (collection is null)
-                return true;
+            if (collection is { })
+                return !collection.Any();
 
-            return !collection.Any();
+            return true;
         }
     }
 }

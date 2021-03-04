@@ -11,7 +11,8 @@ namespace Xalendar.Api.Formatters
             return CultureInfo
                 .CurrentCulture
                 .DateTimeFormat
-                .GetShortestDayName(dayOfWeek)
+                .GetDayName(dayOfWeek)
+                .Substring(0, 1)
                 .ToLower();
         }
     }

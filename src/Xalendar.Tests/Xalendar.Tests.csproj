@@ -2,14 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
     <IsPackable>false</IsPackable>
-    <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="nunit" Version="3.13.1" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
     <PackageReference Include="coverlet.msbuild" Version="3.0.3">
@@ -19,10 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Formatters\" />
+    <Folder Include="Api\" />
+    <Folder Include="Api\Formatters\" />
+    <Folder Include="Api\Models\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Xalendar\Xalendar.csproj" />
   </ItemGroup>

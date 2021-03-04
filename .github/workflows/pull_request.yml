@@ -2,31 +2,16 @@ name: Pull Request Validation
 on: [pull_request]
 
 jobs:
-  xalendar_api_tests:
-    name: Run tests Xalendar.Api.Tests
+  xalendar_tests:
+    name: Run tests Xalendar.Tests
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
       with:
         dotnet-version: '5.0.x'
-    - name: Run unit tests for Xalendar.Api.Tests
-      run: dotnet test src/Xalendar.Api.Tests/Xalendar.Api.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-    - name: Send report to codecov.io
-      run: bash <(curl -s https://codecov.io/bash)
-      env:
-        CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
-
-  xalendar_view_tests:
-    name: Run tests Xalendar.View.Tests
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        dotnet-version: '5.0.x'
-    - name: Run unit tests for Xalendar.View.Tests
-      run: dotnet test src/Xalendar.View.Tests/Xalendar.View.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+    - name: Run unit tests for Xalendar.Tests
+      run: dotnet test src/Xalendar.Tests/Xalendar.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
     - name: Send report to codecov.io
       run: bash <(curl -s https://codecov.io/bash)
       env:
