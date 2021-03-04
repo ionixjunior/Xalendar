@@ -2,10 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Api.Tests", "Xalendar.Api.Tests\Xalendar.Api.Tests.csproj", "{3E000528-B755-423B-8C06-E3D73FD520E0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.View.Tests", "Xalendar.View.Tests\Xalendar.View.Tests.csproj", "{222730F5-170D-4102-A1EB-9834706BEA14}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Sample", "Xalendar.Sample\Xalendar.Sample\Xalendar.Sample.csproj", "{FFE6B2DB-E99A-4361-8217-83446C86EEBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.Android", "Xalendar.Sample\Xalendar.Sample.Android\Xalendar.Sample.Android.csproj", "{8C862181-60B4-4B66-8731-85F3A41A2FE2}"
@@ -22,14 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3E000528-B755-423B-8C06-E3D73FD520E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E000528-B755-423B-8C06-E3D73FD520E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E000528-B755-423B-8C06-E3D73FD520E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{222730F5-170D-4102-A1EB-9834706BEA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{222730F5-170D-4102-A1EB-9834706BEA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{222730F5-170D-4102-A1EB-9834706BEA14}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
