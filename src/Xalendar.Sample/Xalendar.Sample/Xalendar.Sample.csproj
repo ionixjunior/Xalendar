@@ -17,4 +17,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Xalendar\Xalendar.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Themes\" />
+    </ItemGroup>
 </Project>

@@ -6,6 +6,33 @@
     xmlns:converters="clr-namespace:Xalendar.Sample.Converters"
     xmlns:xal="http://xalendar.com/schemas/xaml"
     Title="CalendarView Sample">
+
+    <ContentPage.Content>
+        <ListView
+            HasUnevenRows="true"
+            ItemSelected="OnItemSelected"
+            ItemsSource="{Binding Pages}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Frame
+                                Margin="10"
+                                Padding="15,0"
+                                BorderColor="#dddddd"
+                                HasShadow="false"
+                                HeightRequest="50">
+                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+
+    <!--
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
@@ -65,4 +92,5 @@
                 TextColor="White" />
         </StackLayout>
     </ScrollView>
+    -->
 </ContentPage>

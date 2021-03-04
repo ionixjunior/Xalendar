@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Xalendar.Sample.Views.ChoosingTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <ListView
+            HasUnevenRows="true"
+            ItemSelected="OnItemSelected"
+            ItemsSource="{Binding Pages}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Frame
+                                Margin="10"
+                                Padding="15,0"
+                                BorderColor="#dddddd"
+                                HasShadow="false"
+                                HeightRequest="50">
+                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
