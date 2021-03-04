@@ -1,41 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary
-    x:Class="Xalendar.View.Themes.Classic"
+    x:Class="Xalendar.View.Themes.Amazonas"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Xalendar.View.Controls"
     xmlns:formatters="clr-namespace:Xalendar.Api.Formatters">
-    <formatters:DayOfWeek3CaractersFormat x:Key="DayOfWeekFormatter" />
+    <formatters:DayOfWeek1CaractersFormat x:Key="DayOfWeekFormatter" />
 
     <Style TargetType="controls:CalendarView">
         <Setter Property="DaysOfWeekFormatter" Value="{StaticResource DayOfWeekFormatter}" />
-        <Setter Property="FirstDayOfWeek" Value="Sunday" />
-        <Setter Property="IsPreviewDaysActive" Value="False" />
+        <Setter Property="FirstDayOfWeek" Value="Monday" />
+        <Setter Property="IsPreviewDaysActive" Value="True" />
     </Style>
 
     <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="BackgroundColor" Value="#669817" />
         <Setter Property="AlignItems" Value="Center" />
         <Setter Property="Padding" Value="0,0" />
     </Style>
 
     <Style Class="PreviousButton" TargetType="Button">
-        <Setter Property="Text" Value="◀" />
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Text" Value="&lt;" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
-        <Setter Property="FontSize" Value="Title" />
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
     <Style Class="NextButton" TargetType="Button">
-        <Setter Property="Text" Value="▶" />
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Text" Value="&gt;" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
@@ -44,7 +48,8 @@
         ApplyToDerivedTypes="True"
         Class="DayOfWeek"
         TargetType="Label">
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="TextColor" Value="#7B7B7B" />
+        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="Body" />
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -61,9 +66,12 @@
         ApplyToDerivedTypes="True"
         Class="DayFrame"
         TargetType="Frame">
-        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="CornerRadius" Value="23" />
         <Setter Property="HasShadow" Value="False" />
-        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="WidthRequest" Value="46" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="46" />
         <Setter Property="Padding" Value="0" />
 
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -71,7 +79,7 @@
                 <VisualStateGroup>
                     <VisualState x:Name="IsToday">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="Red" />
+                            <Setter Property="BackgroundColor" Value="Transparent" />
                         </VisualState.Setters>
                     </VisualState>
 
@@ -89,7 +97,7 @@
 
                     <VisualState x:Name="HasEvents">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="Transparent" />
+                            <Setter Property="BackgroundColor" Value="#669817" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -99,13 +107,13 @@
 
     <Style Class="DayLayout" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
-        <Setter Property="JustifyContent" Value="Start" />
-        <Setter Property="Margin" Value="0,9,0,0" />
+        <Setter Property="JustifyContent" Value="Center" />
         <Setter Property="AlignItems" Value="Center" />
     </Style>
 
     <Style Class="DayElement" TargetType="Label">
-        <Setter Property="FontSize" Value="Subtitle" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
 
@@ -114,25 +122,19 @@
                 <VisualStateGroup>
                     <VisualState x:Name="IsPreview">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="Gray" />
-                        </VisualState.Setters>
-                    </VisualState>
-
-                    <VisualState x:Name="IsWeekend">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="Gray" />
+                            <Setter Property="TextColor" Value="#E0E0E1" />
                         </VisualState.Setters>
                     </VisualState>
 
                     <VisualState x:Name="IsToday">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="Black" />
+                            <Setter Property="TextColor" Value="#669817" />
                         </VisualState.Setters>
                     </VisualState>
 
                     <VisualState x:Name="IsNotPreview">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="Black" />
+                            <Setter Property="TextColor" Value="#343434" />
                         </VisualState.Setters>
                     </VisualState>
 
@@ -144,7 +146,7 @@
 
                     <VisualState x:Name="HasEvents">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="Black" />
+                            <Setter Property="TextColor" Value="White" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -153,12 +155,9 @@
     </Style>
 
     <Style Class="HasEventsElement" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="Black" />
-        <Setter Property="CornerRadius" Value="4" />
-        <Setter Property="HeightRequest" Value="8" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="WidthRequest" Value="8" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HeightRequest" Value="0" />
+        <Setter Property="WidthRequest" Value="0" />
     </Style>
 
     <Style Class="CalendarLineSeparator" TargetType="BoxView">
