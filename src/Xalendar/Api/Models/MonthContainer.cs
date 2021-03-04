@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using Xalendar.Api.Formatters;
 using Xalendar.Api.Interfaces;
-using Xalendar.Extensions;
 
 namespace Xalendar.Api.Models
 {
