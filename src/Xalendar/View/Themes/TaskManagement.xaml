@@ -30,6 +30,7 @@
         <Setter Property="BackgroundColor" Value="#ED6582" />
         <Setter Property="HeightRequest" Value="30" />
         <Setter Property="WidthRequest" Value="30" />
+        <Setter Property="Padding" Value="0" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
@@ -48,7 +49,7 @@
         <Setter Property="WidthRequest" Value="30" />
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="#ED6582" />
-
+        <Setter Property="Padding" Value="0" />
     </Style>
 
     <Style
