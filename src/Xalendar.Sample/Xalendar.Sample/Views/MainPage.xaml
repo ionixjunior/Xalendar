@@ -6,18 +6,40 @@
     xmlns:converters="clr-namespace:Xalendar.Sample.Converters"
     xmlns:xal="http://xalendar.com/schemas/xaml"
     Title="CalendarView Sample">
+
+    <ContentPage.Content>
+        <ListView
+            HasUnevenRows="true"
+            ItemSelected="OnItemSelected"
+            ItemsSource="{Binding Pages}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Frame
+                                Margin="10"
+                                Padding="15,0"
+                                BorderColor="#dddddd"
+                                HasShadow="false"
+                                HeightRequest="50">
+                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+
+    <!--
     <ContentPage.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <xal:Amazonas />
+            <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 
-                <ResourceDictionary>
-                    <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
-                    <xal:DayOfWeek1CaractersFormat x:Key="DayOfWeek1CaractersFormat" />
-                    <xal:DayOfWeek2CaractersFormat x:Key="DayOfWeek2CaractersFormat" />
-                    <xal:DayOfWeek3CaractersFormat x:Key="DayOfWeek3CaractersFormat" />
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
+            <xal:Planning x:Key="Planning" />
+            <xal:TaskManagement x:Key="TaskManagement" />
+            <xal:Amazonas x:Key="Amazonas" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,7 +48,8 @@
             <xal:CalendarView
                 DaySelected="OnDaySelected"
                 Events="{Binding Events}"
-                MonthChanged="OnMonthChanged" />
+                MonthChanged="OnMonthChanged"
+                Theme="{StaticResource Amazonas}" />
 
             <ListView
                 Footer=""
@@ -69,4 +92,5 @@
                 TextColor="White" />
         </StackLayout>
     </ScrollView>
+    -->
 </ContentPage>

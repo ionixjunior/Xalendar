@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xalendar.Sample.Models;
 using Xalendar.Sample.ViewModels;
 using Xamarin.Forms;
 
 namespace Xalendar.Sample.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class ChoosingTheme : ContentPage
     {
-        public MainPage()
+        public ChoosingTheme()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = new ChoosingThemeViewModel();
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
