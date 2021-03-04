@@ -12,4 +12,14 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="Api\Formatters\" />
+    <Folder Include="Api\Models\" />
+    <Folder Include="View\" />
+    <Folder Include="View\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xalendar\Xalendar.csproj" />
+  </ItemGroup>
 </Project>

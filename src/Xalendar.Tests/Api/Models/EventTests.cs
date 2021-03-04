@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using Xalendar.Api.Models;
 
-namespace Xalendar.Api.Tests.Models
+namespace Xalendar.Tests.Api.Models
 {
     [TestFixture]
     public class EventTests

@@ -3,7 +3,7 @@ using System.Globalization;
 using NUnit.Framework;
 using Xalendar.Api.Formatters;
 
-namespace Xalendar.Api.Tests.Formatters
+namespace Xalendar.Tests.Api.Formatters
 {
     [TestFixture]
     public class DayOfWeek3CaractersFormatTests
