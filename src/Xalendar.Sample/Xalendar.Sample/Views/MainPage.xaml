@@ -9,7 +9,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <xal:Amazonas />
+
 
                 <ResourceDictionary>
                     <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />

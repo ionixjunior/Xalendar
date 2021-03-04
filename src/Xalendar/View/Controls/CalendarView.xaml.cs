@@ -10,6 +10,7 @@ using Xalendar.Api.Models;
 using Xamarin.Forms;
 using XView = Xamarin.Forms.View;
 using Xalendar.Api.Formatters;
+using Xalendar.View.Themes;
 
 namespace Xalendar.View.Controls
 {
@@ -152,6 +153,20 @@ namespace Xalendar.View.Controls
             set => SetValue(DaysOfWeekFormatterProperty, value);
         }
 
+        public static BindableProperty ThemeProperty =
+            BindableProperty.Create(
+                nameof(Theme),
+                typeof(ResourceDictionary),
+                typeof(CalendarView),
+                new Classic(),
+                BindingMode.OneTime);
+
+        public ResourceDictionary Theme
+        {
+            get => (ResourceDictionary)GetValue(ThemeProperty);
+            set => SetValue(ThemeProperty, value);
+        }
+
         public event Action<MonthRange>? MonthChanged;
         public event Action<DaySelected>? DaySelected;
 
@@ -164,6 +179,7 @@ namespace Xalendar.View.Controls
 
             if (propertyName == "Renderer")
             {
+                Resources.MergedDictionaries.Add(Theme);
                 _monthContainer = new MonthContainer(DateTime.Today, DaysOfWeekFormatter, FirstDayOfWeek, IsPreviewDaysActive);
                 
                 if (!Events.IsNullOrEmpty())
