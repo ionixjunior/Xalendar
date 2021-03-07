@@ -8,14 +8,14 @@
             <Button
                 x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"
-                StyleClass="PreviousButton" />
+                StyleClass="CalendarHeaderPreviousButton" />
 
-            <Label x:Name="MonthName" StyleClass="MonthName" />
+            <Label x:Name="MonthName" StyleClass="CalendarHeaderMonthName" />
 
             <Button
                 x:Name="NextButton"
                 Clicked="OnNextMonthClick"
-                StyleClass="NextButton" />
+                StyleClass="CalendarHeaderNextButton" />
         </FlexLayout>
 
         <Grid x:Name="CalendarDaysOfWeekContainer" StyleClass="CalendarDaysOfWeek" />

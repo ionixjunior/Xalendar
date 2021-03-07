@@ -24,14 +24,14 @@
 
     <ImageSource x:Key="ArrowLeft">arrow_left.png</ImageSource>
 
-    <Style Class="PreviousButton" TargetType="Button">
+    <Style Class="CalendarHeaderPreviousButton" TargetType="Button">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="100" />
         <Setter Property="ImageSource" Value="{StaticResource ArrowLeft}" />
     </Style>
 
-    <Style Class="MonthName" TargetType="Label">
+    <Style Class="CalendarHeaderMonthName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="FontSize" Value="Medium" />
         <Setter Property="TextColor" Value="White" />
@@ -40,7 +40,7 @@
 
     <ImageSource x:Key="ArrowRight">arrow_right.png</ImageSource>
 
-    <Style Class="NextButton" TargetType="Button">
+    <Style Class="CalendarHeaderNextButton" TargetType="Button">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="100" />

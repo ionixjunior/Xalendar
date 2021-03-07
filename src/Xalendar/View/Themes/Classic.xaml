@@ -22,21 +22,21 @@
         <Setter Property="Margin" Value="20,0" />
     </Style>
 
-    <Style Class="PreviousButton" TargetType="Button">
+    <Style Class="CalendarHeaderPreviousButton" TargetType="Button">
         <Setter Property="Text" Value="◀" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
-    <Style Class="MonthName" TargetType="Label">
+    <Style Class="CalendarHeaderMonthName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="FontSize" Value="Title" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style Class="NextButton" TargetType="Button">
+    <Style Class="CalendarHeaderNextButton" TargetType="Button">
         <Setter Property="Text" Value="▶" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />

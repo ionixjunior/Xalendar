@@ -25,7 +25,7 @@
         <Setter Property="Margin" Value="20,0" />
     </Style>
 
-    <Style Class="PreviousButton" TargetType="Button">
+    <Style Class="CalendarHeaderPreviousButton" TargetType="Button">
         <Setter Property="Text" Value="&lt;" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -36,7 +36,7 @@
         <Setter Property="Padding" Value="0" />
     </Style>
 
-    <Style Class="MonthName" TargetType="Label">
+    <Style Class="CalendarHeaderMonthName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="FontSize" Value="Body" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -44,7 +44,7 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style Class="NextButton" TargetType="Button">
+    <Style Class="CalendarHeaderNextButton" TargetType="Button">
         <Setter Property="Text" Value="&gt;" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="FontAttributes" Value="Bold" />
