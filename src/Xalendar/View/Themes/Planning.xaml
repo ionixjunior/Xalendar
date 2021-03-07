@@ -50,7 +50,7 @@
 
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayOfWeek"
+        Class="CalendarDayOfWeek"
         TargetType="Label">
         <Setter Property="TextColor" Value="#D9D6E9" />
         <Setter Property="TextTransform" Value="Lowercase" />

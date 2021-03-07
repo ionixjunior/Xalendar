@@ -61,7 +61,7 @@
 
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayOfWeek"
+        Class="CalendarDayOfWeek"
         TargetType="Label">
         <Setter Property="FontSize" Value="Body" />
         <Setter Property="FontAttributes" Value="Bold" />
