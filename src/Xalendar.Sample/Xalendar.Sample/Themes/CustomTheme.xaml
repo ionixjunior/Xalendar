@@ -173,7 +173,7 @@
         <Setter Property="HeightRequest" Value="1" />
     </Style>
 
-    <Style Class="CalendarMargin" TargetType="Grid">
+    <Style Class="CalendarDaysOfWeekContainer" TargetType="Grid">
         <Setter Property="Margin" Value="20,0" />
     </Style>
 
