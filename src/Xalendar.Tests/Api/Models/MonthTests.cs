@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Xalendar.Extensions;
-using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Tests.Api.Models
@@ -199,7 +198,7 @@ namespace Xalendar.Tests.Api.Models
         {
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
-            var events = new List<ICalendarViewEvent>
+            var events = new List<Event>
             {
                 new Event(1, "Name", dateTime, dateTime, false)
             };
@@ -216,7 +215,7 @@ namespace Xalendar.Tests.Api.Models
         {
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
-            var events = new List<ICalendarViewEvent>
+            var events = new List<Event>
             {
                 new Event(1, "Name", dateTime, dateTime, false),
                 new Event(2, "Name", dateTime.AddMonths(1), dateTime.AddMonths(1), false)
@@ -235,7 +234,7 @@ namespace Xalendar.Tests.Api.Models
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
             var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
-            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            var events = new List<Event> {calendarViewEvent};
             month.AddEvents(events);
             
             month.RemoveEvent(calendarViewEvent);
@@ -250,7 +249,7 @@ namespace Xalendar.Tests.Api.Models
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
             var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
-            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            var events = new List<Event> {calendarViewEvent};
             month.AddEvents(events);
             var eventFromPreviousMonth = new Event(1, "Name", dateTime.AddMonths(-1), dateTime.AddMonths(-1), false);
             
@@ -279,7 +278,7 @@ namespace Xalendar.Tests.Api.Models
             var dateTime = new DateTime(2020, 1, 1);
             var month = new Month(dateTime);
             var calendarViewEvent = new Event(1, "Name", dateTime, dateTime, false);
-            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            var events = new List<Event> {calendarViewEvent};
             month.AddEvents(events);
             
             month.RemoveAllEvents();

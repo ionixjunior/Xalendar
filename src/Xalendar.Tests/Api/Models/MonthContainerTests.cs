@@ -55,7 +55,7 @@ namespace Xalendar.Tests.Api.Models
         {
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
-            var events = new List<ICalendarViewEvent>
+            var events = new List<Event>
             {
                 new Event(1, "Name event", dateTime, dateTime, false)
             };
@@ -261,7 +261,7 @@ namespace Xalendar.Tests.Api.Models
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
             var calendarViewEvent = new Event(1, "Name event", dateTime, dateTime, false);
-            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            var events = new List<Event> {calendarViewEvent};
             monthContainer.AddEvents(events);
             
             monthContainer.RemoveEvent(calendarViewEvent);
@@ -275,7 +275,7 @@ namespace Xalendar.Tests.Api.Models
             var dateTime = new DateTime(2020, 7, 9);
             var monthContainer = new MonthContainer(dateTime);
             var calendarViewEvent = new Event(1, "Name event", dateTime, dateTime, false);
-            var events = new List<ICalendarViewEvent> {calendarViewEvent};
+            var events = new List<Event> {calendarViewEvent};
             monthContainer.AddEvents(events);
             
             monthContainer.RemoveAllEvents();
