@@ -3,8 +3,8 @@
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <StackLayout Spacing="0" StyleClass="CalendarViewContainer">
-        <FlexLayout StyleClass="CalendarHeaderContainer">
+    <StackLayout Spacing="0" StyleClass="CalendarView">
+        <FlexLayout StyleClass="CalendarHeader">
             <Button
                 x:Name="PreviousButton"
                 Clicked="OnPreviousMonthClick"
@@ -18,10 +18,10 @@
                 StyleClass="NextButton" />
         </FlexLayout>
 
-        <Grid x:Name="CalendarDaysOfWeekContainer" StyleClass="CalendarDaysOfWeekContainer" />
+        <Grid x:Name="CalendarDaysOfWeekContainer" StyleClass="CalendarDaysOfWeek" />
 
         <BoxView StyleClass="CalendarLineSeparator" />
 
-        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarDaysContainer" />
+        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarDays" />
     </StackLayout>
 </ContentView>

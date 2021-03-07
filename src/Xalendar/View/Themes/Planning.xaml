@@ -13,9 +13,9 @@
         <Setter Property="IsPreviewDaysActive" Value="True" />
     </Style>
 
-    <Style Class="CalendarViewContainer" TargetType="StackLayout" />
+    <Style Class="CalendarView" TargetType="StackLayout" />
 
-    <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
+    <Style Class="CalendarHeader" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
         <Setter Property="Padding" Value="0,0" />
@@ -175,11 +175,11 @@
         <Setter Property="HeightRequest" Value="1" />
     </Style>
 
-    <Style Class="CalendarDaysOfWeekContainer" TargetType="Grid">
+    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
         <Setter Property="Margin" Value="20,0" />
     </Style>
 
-    <Style Class="CalendarDaysContainer" TargetType="Grid">
+    <Style Class="CalendarDays" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="0" />
         <Setter Property="RowSpacing" Value="0" />
         <Setter Property="Margin" Value="20,0" />
