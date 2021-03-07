@@ -152,7 +152,7 @@
         </Setter>
     </Style>
 
-    <Style Class="HasEventsElement" TargetType="BoxView">
+    <Style Class="CalendarDayEvent" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HeightRequest" Value="0" />
         <Setter Property="WidthRequest" Value="0" />

@@ -159,7 +159,7 @@
         </Setter>
     </Style>
 
-    <Style Class="HasEventsElement" TargetType="BoxView">
+    <Style Class="CalendarDayEvent" TargetType="BoxView">
         <Setter Property="FlexLayout.AlignSelf" Value="Center" />
         <Setter Property="Margin" Value="0,0,0,8" />
         <Setter Property="BackgroundColor" Value="#549387" />

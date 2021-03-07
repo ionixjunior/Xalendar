@@ -12,7 +12,7 @@
     <Frame x:Name="DayFrame" StyleClass="CalendarDay">
         <FlexLayout StyleClass="CalendarDayLayout">
             <Label x:Name="DayElement" StyleClass="CalendarDayNumber" />
-            <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
+            <BoxView x:Name="HasEventsElement" StyleClass="CalendarDayEvent" />
         </FlexLayout>
     </Frame>
 </ContentView>

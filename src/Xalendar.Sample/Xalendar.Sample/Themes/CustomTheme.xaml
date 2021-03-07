@@ -154,7 +154,7 @@
         </Setter>
     </Style>
 
-    <Style Class="HasEventsElement" TargetType="BoxView">
+    <Style Class="CalendarDayEvent" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="Black" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="HeightRequest" Value="8" />
