@@ -57,11 +57,6 @@
 
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayContainer"
-        TargetType="ContentView" />
-
-    <Style
-        ApplyToDerivedTypes="True"
         Class="DayFrame"
         TargetType="Frame">
         <Setter Property="CornerRadius" Value="20" />
