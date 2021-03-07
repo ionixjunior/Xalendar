@@ -55,6 +55,10 @@
         <Setter Property="Padding" Value="0" />
     </Style>
 
+    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
+        <Setter Property="Margin" Value="20,0" />
+    </Style>
+
     <Style
         ApplyToDerivedTypes="True"
         Class="DayOfWeek"
@@ -83,6 +87,16 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+
+    <Style Class="CalendarLineSeparator" TargetType="BoxView">
+        <Setter Property="IsVisible" Value="false" />
+    </Style>
+
+    <Style Class="CalendarDays" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="0" />
+        <Setter Property="RowSpacing" Value="0" />
+        <Setter Property="Margin" Value="20,0" />
     </Style>
 
     <Style
@@ -187,19 +201,5 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HeightRequest" Value="0" />
         <Setter Property="WidthRequest" Value="0" />
-    </Style>
-
-    <Style Class="CalendarLineSeparator" TargetType="BoxView">
-        <Setter Property="IsVisible" Value="false" />
-    </Style>
-
-    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
-        <Setter Property="Margin" Value="20,0" />
-    </Style>
-
-    <Style Class="CalendarDays" TargetType="Grid">
-        <Setter Property="ColumnSpacing" Value="0" />
-        <Setter Property="RowSpacing" Value="0" />
-        <Setter Property="Margin" Value="20,0" />
     </Style>
 </ResourceDictionary>

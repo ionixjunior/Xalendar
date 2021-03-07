@@ -47,6 +47,10 @@
         <Setter Property="ImageSource" Value="{StaticResource ArrowRight}" />
     </Style>
 
+    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
+        <Setter Property="Margin" Value="20,0" />
+    </Style>
+
     <Style
         ApplyToDerivedTypes="True"
         Class="DayOfWeek"
@@ -57,6 +61,17 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextTransform" Value="Uppercase" />
+    </Style>
+
+    <Style Class="CalendarLineSeparator" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="Purple" />
+        <Setter Property="HeightRequest" Value="1" />
+    </Style>
+
+    <Style Class="CalendarDays" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="0" />
+        <Setter Property="RowSpacing" Value="0" />
+        <Setter Property="Margin" Value="20,0" />
     </Style>
 
     <Style
@@ -161,20 +176,5 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="WidthRequest" Value="8" />
-    </Style>
-
-    <Style Class="CalendarLineSeparator" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="Purple" />
-        <Setter Property="HeightRequest" Value="1" />
-    </Style>
-
-    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
-        <Setter Property="Margin" Value="20,0" />
-    </Style>
-
-    <Style Class="CalendarDays" TargetType="Grid">
-        <Setter Property="ColumnSpacing" Value="0" />
-        <Setter Property="RowSpacing" Value="0" />
-        <Setter Property="Margin" Value="20,0" />
     </Style>
 </ResourceDictionary>
