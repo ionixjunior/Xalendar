@@ -19,8 +19,8 @@
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="BackgroundColor" Value="#669817" />
         <Setter Property="AlignItems" Value="Center" />
-        <Setter Property="Padding" Value="0,0" />
-        <Setter Property="Margin" Value="20,0" />
+        <Setter Property="Padding" Value="20,0" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style Class="CalendarHeaderPreviousButton" TargetType="Button">
