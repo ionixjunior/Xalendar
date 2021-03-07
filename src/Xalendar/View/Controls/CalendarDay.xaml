@@ -10,7 +10,7 @@
     </ContentView.GestureRecognizers>
 
     <Frame x:Name="DayFrame" StyleClass="CalendarDay">
-        <FlexLayout StyleClass="DayLayout">
+        <FlexLayout StyleClass="CalendarDayLayout">
             <Label x:Name="DayElement" StyleClass="DayElement" />
             <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
         </FlexLayout>

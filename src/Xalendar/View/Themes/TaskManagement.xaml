@@ -128,7 +128,7 @@
         </Setter>
     </Style>
 
-    <Style Class="DayLayout" TargetType="FlexLayout">
+    <Style Class="CalendarDayLayout" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Center" />
         <Setter Property="AlignItems" Value="Center" />

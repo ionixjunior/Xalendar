@@ -95,7 +95,7 @@
         </Setter>
     </Style>
 
-    <Style Class="DayLayout" TargetType="FlexLayout">
+    <Style Class="CalendarDayLayout" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Start" />
         <Setter Property="Margin" Value="0,9,0,0" />
