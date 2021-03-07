@@ -110,7 +110,7 @@
         <Setter Property="AlignItems" Value="Center" />
     </Style>
 
-    <Style Class="DayElement" TargetType="Label">
+    <Style Class="CalendarDayNumber" TargetType="Label">
         <Setter Property="FontSize" Value="Body" />
         <Setter Property="Margin" Value="4,0,4,0" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
