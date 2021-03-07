@@ -180,5 +180,6 @@
     <Style Class="CalendarDaysContainer" TargetType="Grid">
         <Setter Property="ColumnSpacing" Value="0" />
         <Setter Property="RowSpacing" Value="0" />
+        <Setter Property="Margin" Value="20,0" />
     </Style>
 </ResourceDictionary>

@@ -22,6 +22,6 @@
 
         <BoxView StyleClass="CalendarLineSeparator" />
 
-        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarDaysContainer,CalendarMargin" />
+        <Grid x:Name="CalendarDaysContainer" StyleClass="CalendarDaysContainer" />
     </StackLayout>
 </ContentView>
