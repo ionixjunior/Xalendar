@@ -19,11 +19,13 @@
         <Setter Property="BackgroundColor" Value="Red" />
     </Style>
 
+    <ImageSource x:Key="ArrowLeft">arrow_left.png</ImageSource>
+
     <Style Class="PreviousButton" TargetType="Button">
-        <Setter Property="Text" Value="Previous" />
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="100" />
+        <Setter Property="ImageSource" Value="{StaticResource ArrowLeft}" />
     </Style>
 
     <Style Class="MonthName" TargetType="Label">
@@ -33,11 +35,13 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
+    <ImageSource x:Key="ArrowRight">arrow_right.png</ImageSource>
+
     <Style Class="NextButton" TargetType="Button">
-        <Setter Property="Text" Value="Next" />
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="100" />
+        <Setter Property="ImageSource" Value="{StaticResource ArrowRight}" />
     </Style>
 
     <Style
