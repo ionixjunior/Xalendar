@@ -19,6 +19,7 @@
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
         <Setter Property="Padding" Value="0,0" />
+        <Setter Property="Margin" Value="20,0" />
     </Style>
 
     <Style Class="PreviousButton" TargetType="Button">
@@ -177,10 +178,6 @@
     <Style Class="CalendarLineSeparator" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="#F5F4F9" />
         <Setter Property="HeightRequest" Value="1" />
-    </Style>
-
-    <Style Class="CalendarMargin" TargetType="FlexLayout">
-        <Setter Property="Margin" Value="20,0" />
     </Style>
 
     <Style Class="CalendarMargin" TargetType="Grid">

@@ -17,8 +17,9 @@
     <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
-        <Setter Property="Padding" Value="0,0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="BackgroundColor" Value="Red" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <ImageSource x:Key="ArrowLeft">arrow_left.png</ImageSource>
@@ -170,10 +171,6 @@
     <Style Class="CalendarLineSeparator" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="Purple" />
         <Setter Property="HeightRequest" Value="1" />
-    </Style>
-
-    <Style Class="CalendarMargin" TargetType="FlexLayout">
-        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style Class="CalendarMargin" TargetType="Grid">
