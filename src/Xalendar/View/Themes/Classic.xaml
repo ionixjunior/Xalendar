@@ -13,6 +13,8 @@
         <Setter Property="IsPreviewDaysActive" Value="False" />
     </Style>
 
+    <Style Class="CalendarViewContainer" TargetType="StackLayout" />
+
     <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
