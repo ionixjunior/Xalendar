@@ -59,7 +59,7 @@
 
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayFrame"
+        Class="CalendarDay"
         TargetType="Frame">
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="HasShadow" Value="False" />

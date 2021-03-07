@@ -9,7 +9,7 @@
         <TapGestureRecognizer Tapped="OnDaySelected" />
     </ContentView.GestureRecognizers>
 
-    <Frame x:Name="DayFrame" StyleClass="DayFrame">
+    <Frame x:Name="DayFrame" StyleClass="CalendarDay">
         <FlexLayout StyleClass="DayLayout">
             <Label x:Name="DayElement" StyleClass="DayElement" />
             <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
