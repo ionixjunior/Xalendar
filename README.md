@@ -1,4 +1,5 @@
-# Xalendar [![codecov](https://codecov.io/gh/ionixjunior/Xalendar/branch/master/graph/badge.svg)](https://codecov.io/gh/ionixjunior/Xalendar)
+# Xalendar 
+[![codecov](https://codecov.io/gh/ionixjunior/Xalendar/branch/main/graph/badge.svg)](https://codecov.io/gh/ionixjunior/Xalendar)
 
 ![Xalendar logo](./assets/logo.png)
 
