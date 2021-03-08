@@ -4,9 +4,9 @@
 
 Xalendar is a calendar view for Xamarin.Forms applications. This plugin is under development.
 
-<img src="./assets/logo.png" width="200" />
+<img alt="Xalendar logo" src="./assets/logo.png" width="200" />
 
-![Xalendar samples](./assets/samples.png)
+![Xalendar samples image](./assets/samples.png)
 
 ## Getting Started
 
