@@ -15,7 +15,7 @@ jobs:
     - name: Send report to codecov.io
       run: bash <(curl -s https://codecov.io/bash)
       env:
-        CODECOV_TOKEN: 108d5d20-bca6-4e85-9bb6-fae56e78a84f
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   xalendar:
     name: Build Xalendar project
