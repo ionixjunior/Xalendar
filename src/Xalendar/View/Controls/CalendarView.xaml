@@ -3,7 +3,7 @@
     x:Class="Xalendar.View.Controls.CalendarView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <StackLayout Spacing="0" StyleClass="CalendarView">
+    <StackLayout StyleClass="CalendarView">
         <FlexLayout StyleClass="CalendarHeader">
             <Button
                 x:Name="PreviousButton"

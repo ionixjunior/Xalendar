@@ -13,7 +13,9 @@
         <Setter Property="IsPreviewDaysActive" Value="True" />
     </Style>
 
-    <Style Class="CalendarView" TargetType="StackLayout" />
+    <Style Class="CalendarView" TargetType="StackLayout">
+        <Setter Property="Spacing" Value="0" />
+    </Style>
 
     <Style Class="CalendarHeader" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
