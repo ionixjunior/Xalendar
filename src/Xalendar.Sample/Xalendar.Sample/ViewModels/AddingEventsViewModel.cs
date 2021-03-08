@@ -7,11 +7,11 @@ namespace Xalendar.Sample.ViewModels
 {
     public class AddingEventsViewModel
     {
-        public ObservableCollection<ICalendarViewEvent> Events { get; }
+        public ObservableCollection<CustomEvent> Events { get; }
 
         public AddingEventsViewModel()
         {
-            Events = new ObservableCollection<ICalendarViewEvent>();
+            Events = new ObservableCollection<CustomEvent>();
 
             var today = DateTime.Today;
             var tomorrow = DateTime.Today.AddDays(1);

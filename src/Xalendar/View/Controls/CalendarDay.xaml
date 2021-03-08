@@ -3,17 +3,16 @@
     x:Class="Xalendar.View.Controls.CalendarDay"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="DayContainer"
-    StyleClass="DayContainer">
+    x:Name="DayContainer">
 
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnDaySelected" />
     </ContentView.GestureRecognizers>
 
-    <Frame x:Name="DayFrame" StyleClass="DayFrame">
-        <FlexLayout StyleClass="DayLayout">
-            <Label x:Name="DayElement" StyleClass="DayElement" />
-            <BoxView x:Name="HasEventsElement" StyleClass="HasEventsElement" />
+    <Frame x:Name="DayFrame" StyleClass="CalendarDay">
+        <FlexLayout StyleClass="CalendarDayLayout">
+            <Label x:Name="DayElement" StyleClass="CalendarDayNumber" />
+            <BoxView x:Name="HasEventsElement" StyleClass="CalendarDayEvent" />
         </FlexLayout>
     </Frame>
 </ContentView>

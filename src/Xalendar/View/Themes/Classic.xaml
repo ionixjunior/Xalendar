@@ -13,36 +13,45 @@
         <Setter Property="IsPreviewDaysActive" Value="False" />
     </Style>
 
-    <Style Class="CalendarHeaderContainer" TargetType="FlexLayout">
+    <Style Class="CalendarView" TargetType="StackLayout">
+        <Setter Property="Spacing" Value="0" />
+    </Style>
+
+    <Style Class="CalendarHeader" TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="AlignItems" Value="Center" />
         <Setter Property="Padding" Value="0,0" />
+        <Setter Property="Margin" Value="20,0" />
     </Style>
 
-    <Style Class="PreviousButton" TargetType="Button">
+    <Style Class="CalendarHeaderPreviousButton" TargetType="Button">
         <Setter Property="Text" Value="◀" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
-    <Style Class="MonthName" TargetType="Label">
+    <Style Class="CalendarHeaderMonthName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="FontSize" Value="Title" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style Class="NextButton" TargetType="Button">
+    <Style Class="CalendarHeaderNextButton" TargetType="Button">
         <Setter Property="Text" Value="▶" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FlexLayout.Basis" Value="50" />
     </Style>
 
+    <Style Class="CalendarDaysOfWeek" TargetType="Grid">
+        <Setter Property="Margin" Value="20,0" />
+    </Style>
+
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayOfWeek"
+        Class="CalendarDayOfWeek"
         TargetType="Label">
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="FontSize" Value="Body" />
@@ -52,14 +61,19 @@
         <Setter Property="TextTransform" Value="Uppercase" />
     </Style>
 
-    <Style
-        ApplyToDerivedTypes="True"
-        Class="DayContainer"
-        TargetType="ContentView" />
+    <Style Class="CalendarLineSeparator" TargetType="BoxView">
+        <Setter Property="IsVisible" Value="false" />
+    </Style>
+
+    <Style Class="CalendarDays" TargetType="Grid">
+        <Setter Property="ColumnSpacing" Value="0" />
+        <Setter Property="RowSpacing" Value="0" />
+        <Setter Property="Margin" Value="20,0" />
+    </Style>
 
     <Style
         ApplyToDerivedTypes="True"
-        Class="DayFrame"
+        Class="CalendarDay"
         TargetType="Frame">
         <Setter Property="CornerRadius" Value="20" />
         <Setter Property="HasShadow" Value="False" />
@@ -97,14 +111,14 @@
         </Setter>
     </Style>
 
-    <Style Class="DayLayout" TargetType="FlexLayout">
+    <Style Class="CalendarDayLayout" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Start" />
         <Setter Property="Margin" Value="0,9,0,0" />
         <Setter Property="AlignItems" Value="Center" />
     </Style>
 
-    <Style Class="DayElement" TargetType="Label">
+    <Style Class="CalendarDayNumber" TargetType="Label">
         <Setter Property="FontSize" Value="Subtitle" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -152,29 +166,12 @@
         </Setter>
     </Style>
 
-    <Style Class="HasEventsElement" TargetType="BoxView">
+    <Style Class="CalendarDayEvent" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="Black" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="HeightRequest" Value="8" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="WidthRequest" Value="8" />
-    </Style>
-
-    <Style Class="CalendarLineSeparator" TargetType="BoxView">
-        <Setter Property="IsVisible" Value="false" />
-    </Style>
-
-    <Style Class="CalendarMargin" TargetType="FlexLayout">
-        <Setter Property="Margin" Value="20,0" />
-    </Style>
-
-    <Style Class="CalendarMargin" TargetType="Grid">
-        <Setter Property="Margin" Value="20,0" />
-    </Style>
-
-    <Style Class="CalendarDaysContainer" TargetType="Grid">
-        <Setter Property="ColumnSpacing" Value="0" />
-        <Setter Property="RowSpacing" Value="0" />
     </Style>
 </ResourceDictionary>

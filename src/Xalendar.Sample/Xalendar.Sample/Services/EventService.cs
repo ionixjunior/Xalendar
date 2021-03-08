@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xalendar.Api.Interfaces;
 using Xalendar.Sample.Models;
 
 namespace Xalendar.Sample.Services
@@ -11,11 +10,11 @@ namespace Xalendar.Sample.Services
         private static EventService _instance;
         public static EventService Instance => _instance ??= new EventService();
 
-        private IList<ICalendarViewEvent> _events;
+        private IList<CustomEvent> _events;
 
         private EventService()
         {
-            _events = new List<ICalendarViewEvent>();
+            _events = new List<CustomEvent>();
             
             for (var index = 1; index <= 10; index++)
             {
@@ -60,9 +59,9 @@ namespace Xalendar.Sample.Services
             }
         }
 
-        public IList<ICalendarViewEvent> GetEvents() => _events;
+        public IList<CustomEvent> GetEvents() => _events;
 
-        public IList<ICalendarViewEvent> GetEventsByRange(DateTime start, DateTime end) =>
+        public IList<CustomEvent> GetEventsByRange(DateTime start, DateTime end) =>
             _events.Where(x => x.StartDateTime >= start)
                 .Where(x => x.EndDateTime <= end)
                 .ToList();
