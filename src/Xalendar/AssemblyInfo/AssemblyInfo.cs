@@ -1,7 +1,5 @@
 ﻿using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-using Xalendar.View.Controls;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Xalendar.Tests")]
