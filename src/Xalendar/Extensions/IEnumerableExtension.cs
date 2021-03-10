@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Xalendar.Extensions
 {
-    public static class IEnumerableExtension
+    internal static class IEnumerableExtension
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T>? collection)
         {

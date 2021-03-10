@@ -126,13 +126,13 @@ namespace Xalendar.Tests.Api.Models
 
         [Test]
         [TestCaseSource(nameof(ValuesForTheDaysOfWeekInSpecificLanguagesTests))]
-        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, DayOfWeekName dayOfWeekName)
+        public void MonthContainerShouldContainsTheDaysOfWeekInSpecificLanguages(string language, object dayOfWeekName)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
             var dateTime = DateTime.Today;
             var monthContainer = new MonthContainer(dateTime);
             
-            Assert.AreEqual(dayOfWeekName, monthContainer.DaysOfWeek.First());
+            Assert.AreEqual((DayOfWeekName)dayOfWeekName, monthContainer.DaysOfWeek.First());
         }
         
         private static object[] ValuesForTheDaysOfWeekInSpecificLanguagesTests =
@@ -144,7 +144,7 @@ namespace Xalendar.Tests.Api.Models
 
         [Test]
         [TestCaseSource(nameof(ValuesForDaysOfWeekShouldStartWithSpecificDay))]
-        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, List<DayOfWeekName> expectedDaysOfWeek)
+        public void DaysOfWeekShouldStartWithSpecificDay(string language, DayOfWeek firstDayOfWeek, object expectedDaysOfWeek)
         {
             CultureInfo.CurrentCulture = new CultureInfo(language);
             var dateTime = DateTime.Today;
@@ -152,7 +152,7 @@ namespace Xalendar.Tests.Api.Models
 
             var daysOfWeek = monthContainer.DaysOfWeek;
 
-            CollectionAssert.AreEqual(expectedDaysOfWeek, daysOfWeek.ToList());
+            CollectionAssert.AreEqual((List<DayOfWeekName>)expectedDaysOfWeek, daysOfWeek.ToList());
         }
 
         private static object[] ValuesForDaysOfWeekShouldStartWithSpecificDay =

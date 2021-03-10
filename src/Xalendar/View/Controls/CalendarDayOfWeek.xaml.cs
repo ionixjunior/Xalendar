@@ -6,7 +6,7 @@ namespace Xalendar.View.Controls
 {
     public partial class CalendarDayOfWeek : Label
     {
-        public CalendarDayOfWeek()
+        internal CalendarDayOfWeek()
         {
             InitializeComponent();
         }

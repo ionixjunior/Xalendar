@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
 namespace Xalendar.Extensions
 {
-    public static class MonthContainerExtension
+    internal static class MonthContainerExtension
     {
         public static void SelectDay(this MonthContainer monthContainer, Day selectedDay) => monthContainer._currentMonth.SelectDay(selectedDay);
         public static Day GetSelectedDay(this MonthContainer monthContainer) => monthContainer._currentMonth.GetSelectedDay();
