@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 

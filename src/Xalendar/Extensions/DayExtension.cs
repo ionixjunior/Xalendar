@@ -1,4 +1,3 @@
-using System;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 
