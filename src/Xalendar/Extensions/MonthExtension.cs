@@ -6,7 +6,7 @@ using Xalendar.Api.Models;
 
 namespace Xalendar.Extensions
 {
-    public static class MonthExtension
+    internal static class MonthExtension
     {
         public static void SelectDay(this Month month, Day selectedDay)
         {

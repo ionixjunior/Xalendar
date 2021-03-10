@@ -5,7 +5,7 @@ using Xalendar.Api.Interfaces;
 
 namespace Xalendar.Api.Models
 {
-    public class Day
+    internal class Day
     {
         private DateTime _currentDateTime;
         private bool _isCurrentMonth;

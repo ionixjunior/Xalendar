@@ -5,7 +5,7 @@ using static Xalendar.Extensions.MonthExtension;
 
 namespace Xalendar.Api.Models
 {
-    public readonly struct Month : IEquatable<Month>
+    internal readonly struct Month : IEquatable<Month>
     {
         public DateTime MonthDateTime { get; }
         public IReadOnlyList<Day> Days { get; }

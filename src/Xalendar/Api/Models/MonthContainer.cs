@@ -6,7 +6,7 @@ using Xalendar.Api.Interfaces;
 
 namespace Xalendar.Api.Models
 {
-    public class MonthContainer
+    internal class MonthContainer
     {
         internal Month? _previousMonth;
         internal Month _currentMonth;

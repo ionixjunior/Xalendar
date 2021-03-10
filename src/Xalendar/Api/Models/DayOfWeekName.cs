@@ -2,7 +2,7 @@
 
 namespace Xalendar.Api.Models
 {
-    public struct DayOfWeekName
+    internal struct DayOfWeekName
     {
         public DayOfWeek DayOfWeek { get; }
         public string Name { get; }

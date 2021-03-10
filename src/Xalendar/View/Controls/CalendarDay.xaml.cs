@@ -8,9 +8,9 @@ namespace Xalendar.View.Controls
     {
 
         public event Action<CalendarDay?>? DaySelected;
-        public Day? Day { get; set; }
+        internal Day? Day { get; set; }
         
-        public CalendarDay()
+        internal CalendarDay()
         {
             InitializeComponent();
         }

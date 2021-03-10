@@ -4,7 +4,7 @@ using Xalendar.Api.Models;
 
 namespace Xalendar.Extensions
 {
-    public static class DayExtension
+    internal static class DayExtension
     {
         public static void AddEvent(this Day day, ICalendarViewEvent @event)
         {
