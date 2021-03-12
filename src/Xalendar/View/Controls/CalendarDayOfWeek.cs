@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
 
 namespace Xalendar.View.Controls
 {
-    public partial class CalendarDayOfWeek : Label
+    internal class CalendarDayOfWeek : Label
     {
         internal CalendarDayOfWeek()
         {
-            InitializeComponent();
+            StyleClass = new List<string> { "CalendarDayOfWeek" };
         }
 
         internal void UpdateData(DayOfWeekName dayOfWeekName)

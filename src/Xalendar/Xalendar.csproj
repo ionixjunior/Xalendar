@@ -59,6 +59,9 @@
     <Compile Update="View\Controls\CalendarDay.cs">
       <SubType></SubType>
     </Compile>
+    <Compile Update="View\Controls\CalendarDayOfWeek.cs">
+      <SubType></SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\Formatters\" />
