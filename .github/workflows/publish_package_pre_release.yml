@@ -63,13 +63,16 @@ jobs:
       run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
       
-    - name: Run ID
-      run: echo "$GITHUB_RUN_ID"
+    - name: Pack
+      run: dotnet pack -v normal --configuration Release --no-restore --include-symbols --include-source -p:PackageVersion=$GITHUB_RUN_ID src/*/Xalendar.csproj
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: nupkg
+        path: ./src/Xalendar/bin/Release/*.nupkg
       
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
-        TAG_FORMAT: '*'
