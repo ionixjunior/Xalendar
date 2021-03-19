@@ -9,7 +9,7 @@
     <Nullable>enable</Nullable>
     <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
 
-    <PackageVersion>0.0.2-pre</PackageVersion>
+    <PackageVersion>0.1.1-pre</PackageVersion>
     <PackageId>Xalendar</PackageId>
     <Title>Xalendar - A CalendarView for Xamarin.Forms</Title>
     <Authors>Ione Souza Junior</Authors>
