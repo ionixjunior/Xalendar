@@ -14,9 +14,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
       working-directory: 'src/'
+      
     - name: Build
       run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
@@ -31,10 +33,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: 'src/'
+      
     - name: Run unit tests for Xalendar.Tests
       run: dotnet test src/Xalendar.Tests/Xalendar.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      
     - name: Send report to codecov.io
       run: bash <(curl -s https://codecov.io/bash)
       env:
@@ -50,10 +56,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: 'src/'
+      
     - name: Build
       run: dotnet build Xalendar --configuration Release --no-restore
+      working-directory: 'src/'
+      
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
