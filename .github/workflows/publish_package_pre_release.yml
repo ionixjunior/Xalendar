@@ -71,4 +71,5 @@ jobs:
       with:
         PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        PACKAGE_NAME: 'Xalendar.0.1.$GITHUB_RUN_ID-pre'
+        VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
+        TAG_FORMAT: '*'
