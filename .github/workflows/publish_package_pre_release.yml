@@ -63,9 +63,12 @@ jobs:
       run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
       
+    - name: Run ID
+      run: echo "$GITHUB_RUN_ID"
+      
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_STATIC: '0.1.1-pre'
+        PACKAGE_NAME: 'Xalendar.0.1.$GITHUB_RUN_ID-pre'
