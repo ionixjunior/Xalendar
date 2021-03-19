@@ -2,7 +2,7 @@ name: Publish package on NuGet
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   job_1: 
@@ -45,7 +45,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         
   job_3: 
-    name: Xalendar pre-release publish
+    name: Xalendar release publish
     needs: job_2
     runs-on: ubuntu-latest
     steps:
@@ -68,4 +68,4 @@ jobs:
       with:
         PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_STATIC: '0.1.2-pre'
+        VERSION_STATIC: '1.0.0'
