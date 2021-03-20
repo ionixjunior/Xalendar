@@ -54,7 +54,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
-        fetch-depth: 0
     
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.7
@@ -65,6 +64,7 @@ jobs:
       uses: gittools/actions/gitversion/execute@v0.9.7
       with:
         useConfigFile: true
+      run: git fetch --unshallow
         
     - name: Restore dependencies
       run: dotnet restore
