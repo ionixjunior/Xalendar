@@ -67,6 +67,9 @@ jobs:
       uses: gittools/actions/gitversion/execute@v0.9.7
       with:
         useConfigFile: true
+    
+    - name: Change version on csproj file
+      run: sed -i '' 's/PackageVersion>[0-9a-z.-]*</PackageVersion>'$GITVERSION_MAJORMINORPATCH-pre'</' src/Xalendar/Xalendar.csproj
         
     - name: Restore dependencies
       run: dotnet restore
@@ -81,4 +84,4 @@ jobs:
       with:
         PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_STATIC: ${GITVERSION_MAJORMINORPATCH}-pre
+        VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
