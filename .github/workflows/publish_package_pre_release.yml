@@ -79,5 +79,6 @@ jobs:
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+        PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_STATIC: '${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}-pre'
+        VERSION_STATIC: '${{ steps.gitversion.outputs.MajorMinorPatch }}-pre'
