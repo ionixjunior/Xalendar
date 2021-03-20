@@ -69,7 +69,7 @@ jobs:
         useConfigFile: true
     
     - name: Change version on csproj file
-      run: sed -i '' 's/PackageVersion>[0-9a-z.-]*</PackageVersion>'$GITVERSION_MAJORMINORPATCH-pre'</' src/Xalendar/Xalendar.csproj
+      run: sed -i -e 's/PackageVersion>[0-9a-z.-]*</PackageVersion>'$GITVERSION_MAJORMINORPATCH-pre'</' src/Xalendar/Xalendar.csproj
         
     - name: Restore dependencies
       run: dotnet restore
