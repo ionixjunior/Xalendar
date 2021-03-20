@@ -1,4 +1,4 @@
-name: Publish package on NuGet
+name: Publish pre-release package on NuGet
 
 on:
   push:
@@ -54,6 +54,16 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
+    
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: '5.x'
+    
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        useConfigFile: true
         
     - name: Restore dependencies
       run: dotnet restore
@@ -62,10 +72,9 @@ jobs:
     - name: Build
       run: dotnet build Xalendar --configuration Release --no-restore
       working-directory: 'src/'
-      
+    
     - name: Publish NuGet
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
         NUGET_KEY: ${{secrets.NUGET_TOKEN}}
-        VERSION_STATIC: '0.1.2-pre'
+        VERSION_STATIC: '${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}-pre'
