@@ -1,0 +1,4 @@
+next-version: 0.2.0
+branches:
+  develop:
+    tag: 'pre'

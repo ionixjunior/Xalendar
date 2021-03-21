@@ -1,0 +1,87 @@
+name: Publish package on NuGet
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  job_1: 
+    name: Xalendar build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: 'src/'
+      
+    - name: Build
+      run: dotnet build Xalendar --configuration Release --no-restore
+      working-directory: 'src/'
+      
+  job_2: 
+    name: Xalendar test
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: 'src/'
+      
+    - name: Run unit tests for Xalendar.Tests
+      run: dotnet test src/Xalendar.Tests/Xalendar.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      
+    - name: Send report to codecov.io
+      run: bash <(curl -s https://codecov.io/bash)
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        
+  job_3: 
+    name: Xalendar release publish
+    needs: job_2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: '5.x'
+    
+    - name: Fetch all repository
+      run: git fetch --unshallow
+
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        useConfigFile: true
+
+    - name: Change version on csproj file
+      run: sed -i -e 's/PackageVersion>[0-9a-z.-]*</PackageVersion>'$GITVERSION_NUGETVERSION'</' src/Xalendar/Xalendar.csproj
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: 'src/'
+      
+    - name: Build
+      run: dotnet build Xalendar --configuration Release --no-restore
+      working-directory: 'src/'
+      
+    - name: Publish NuGet
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/Xalendar/Xalendar.csproj
+        NUGET_KEY: ${{secrets.NUGET_TOKEN}}
+        VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
