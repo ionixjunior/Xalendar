@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Xalendar.Api.Models;
 using Xalendar.View.Controls;
+using Xamarin.Forms;
 
 namespace Xalendar.Tests.View.Controls
 {
@@ -109,6 +113,46 @@ namespace Xalendar.Tests.View.Controls
             var range = await taskCompletionSource.Task;
             
             Assert.AreEqual(endDate, range.End);
+        }
+
+        [Test]
+        public async Task ShouldGetSelectedDayWhenSelectADay()
+        {
+            var firstDayOfCurrentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            var taskCompletionSource = new TaskCompletionSource<DaySelected>();
+            _calendarView.DaySelected += taskCompletionSource.SetResult;
+
+            var firstValidCalendarDay = _calendarView
+                .FindByName<Grid>("CalendarDaysContainer")
+                .Children
+                .Cast<CalendarDay>()
+                .First(x => x.Day is {});
+            var tap = (TapGestureRecognizer)firstValidCalendarDay.GestureRecognizers.First();
+            tap.SendTapped(firstValidCalendarDay);
+            var daySelected = await taskCompletionSource.Task;
+            
+            Assert.AreEqual(firstDayOfCurrentMonth, daySelected.DateTime);
+        }
+        
+        [Test]
+        public async Task ShouldGetEventsWhenSelectADay()
+        {
+            var firstDayOfCurrentMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            var calendarEvent = new Event(1, "Event name", firstDayOfCurrentMonth, firstDayOfCurrentMonth, false);
+            _calendarView.Events = new List<Event> {calendarEvent};
+            var taskCompletionSource = new TaskCompletionSource<DaySelected>();
+            _calendarView.DaySelected += taskCompletionSource.SetResult;
+
+            var firstValidCalendarDay = _calendarView
+                .FindByName<Grid>("CalendarDaysContainer")
+                .Children
+                .Cast<CalendarDay>()
+                .First(x => x.Day is {});
+            var tap = (TapGestureRecognizer)firstValidCalendarDay.GestureRecognizers.First();
+            tap.SendTapped(firstValidCalendarDay);
+            var daySelected = await taskCompletionSource.Task;
+            
+            Assert.AreEqual(calendarEvent, daySelected.Events.First());
         }
     }
 }
