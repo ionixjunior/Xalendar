@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -37,9 +38,8 @@ namespace Xalendar.Tests.View.Controls
         private void InvokeCalendarViewMethod(string name, object[] parameters)
         {
             var calendarViewType = typeof(CalendarView);
-            var onPreviousMonthClick =
-                calendarViewType.GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic);
-            _ = onPreviousMonthClick.Invoke(_calendarView, parameters);
+            var method = calendarViewType.GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic);
+            _ = method.Invoke(_calendarView, parameters);
         }
 
         private DateTime GetStartDateOfMonth(DateTime dateTime)
@@ -153,6 +153,72 @@ namespace Xalendar.Tests.View.Controls
             var daySelected = await taskCompletionSource.Task;
             
             Assert.AreEqual(calendarEvent, daySelected.Events.First());
+        }
+
+        [Test]
+        public void ShouldGetAddedEvents()
+        {
+            var events = new ObservableCollection<Event>();
+            _calendarView.Events = events;
+            var calendarEvent = new Event(1, "Event name", DateTime.Now, DateTime.Now, false);
+
+            events.Add(calendarEvent);
+            
+            Assert.AreEqual(calendarEvent, _calendarView.Events.First());
+        }
+
+        [Test]
+        public void ShouldDiscardRemovedEvents()
+        {
+            var events = new ObservableCollection<Event>();
+            _calendarView.Events = events;
+            var calendarEvent = new Event(1, "Event name", DateTime.Now, DateTime.Now, false);
+            events.Add(calendarEvent);
+
+            events.Remove(calendarEvent);
+            
+            Assert.IsEmpty(_calendarView.Events);
+        }
+
+        [Test]
+        public void ShouldDiscardAllEvents()
+        {
+            var events = new ObservableCollection<Event>();
+            _calendarView.Events = events;
+            var calendarEvent = new Event(1, "Event name", DateTime.Now, DateTime.Now, false);
+            events.Add(calendarEvent);
+            
+            events.Clear();
+            
+            Assert.IsEmpty(_calendarView.Events);
+        }
+
+        [Test]
+        public void ShouldReplaceEvent()
+        {
+            var events = new ObservableCollection<Event>();
+            _calendarView.Events = events;
+            var oldEvent = new Event(1, "Old event", DateTime.Now, DateTime.Now, false);
+            var updatedEvent = new Event(1, "New event", DateTime.Now, DateTime.Now, false);
+            events.Add(oldEvent);
+            
+            events[0] = updatedEvent;
+            var replacedEvent = _calendarView.Events.First();
+            
+            Assert.AreEqual(updatedEvent, replacedEvent);
+        }
+
+        [Test]
+        public void ShouldReplaceEventsCollection()
+        {
+            var oldEvents = new ObservableCollection<Event>();
+            _calendarView.Events = oldEvents;
+            
+            _calendarView.Events = new ObservableCollection<Event>();
+            var discartedEvent = new Event(1, "Event name", DateTime.Now, DateTime.Now, false);
+            oldEvents.Add(discartedEvent);
+            
+            Assert.IsEmpty(_calendarView.Events);
         }
     }
 }
