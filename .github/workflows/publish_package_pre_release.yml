@@ -37,12 +37,7 @@ jobs:
       working-directory: 'src/'
       
     - name: Run unit tests for Xalendar.Tests
-      run: dotnet test src/Xalendar.Tests/Xalendar.Tests.csproj -v n /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-      
-    - name: Send report to codecov.io
-      run: bash <(curl -s https://codecov.io/bash)
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      run: dotnet test src/Xalendar.Tests/Xalendar.Tests.csproj -v n
         
   job_3: 
     name: Xalendar pre-release publish
