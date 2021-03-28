@@ -10,9 +10,10 @@ Xalendar is a calendar view for Xamarin.Forms applications.
 
 ## Getting Started
 
-Install Xalendar using NuGet with the following command line to your shared library project.
+[Install Xalendar using NuGet](https://www.nuget.org/packages/Xalendar/) in your shared library project.
 
 ![Nuget](https://img.shields.io/nuget/v/Xalendar)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Xalendar)
 
 ## Documentation
 
