@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Xalendar.Api.Enums;
 using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
@@ -165,6 +166,20 @@ namespace Xalendar.View.Controls
         {
             get => (ResourceDictionary)GetValue(ThemeProperty);
             set => SetValue(ThemeProperty, value);
+        }
+
+        public static BindableProperty SelectModeProperty =
+            BindableProperty.Create(
+                nameof(SelectMode),
+                typeof(SelectMode),
+                typeof(CalendarView),
+                SelectMode.Single,
+                BindingMode.OneTime);
+
+        public SelectMode SelectMode
+        {
+            get => (SelectMode)GetValue(SelectModeProperty);
+            set => SetValue(SelectModeProperty, value);
         }
 
         public event Action<MonthRange>? MonthChanged;
