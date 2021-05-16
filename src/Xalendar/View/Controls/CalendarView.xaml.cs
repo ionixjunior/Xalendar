@@ -236,11 +236,11 @@ namespace Xalendar.View.Controls
             }
         }
 
-        private CalendarDay? _selectedDay;
+        private CalendarDay? _lastSelectedDay;
 
         private void CalendarDayOnDaySelected(CalendarDay? calendarDay)
         {
-            if (_selectedDay == calendarDay)
+            if (_lastSelectedDay == calendarDay)
                 return;
 
             if (calendarDay?.Day is null)
@@ -248,14 +248,14 @@ namespace Xalendar.View.Controls
             
             UnSelectLastSelectedDay();
             calendarDay.Select();
-            _selectedDay = calendarDay;
+            _lastSelectedDay = calendarDay;
             DaySelected?.Invoke(new DaySelected(calendarDay.Day.DateTime, calendarDay.Day.Events));
         }
 
         private void UnSelectLastSelectedDay()
         {
             if (SelectMode == SelectMode.Single)
-                _selectedDay?.UnSelect();
+                _lastSelectedDay?.UnSelect();
         }
 
         public CalendarView()
@@ -265,8 +265,8 @@ namespace Xalendar.View.Controls
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
-            _selectedDay?.UnSelect();
-            _selectedDay = null;
+            _lastSelectedDay?.UnSelect();
+            _lastSelectedDay = null;
             
             var result = await Task.Run(() =>
             {
@@ -293,8 +293,8 @@ namespace Xalendar.View.Controls
 
         private async void OnNextMonthClick(object sender, EventArgs e)
         {
-            _selectedDay?.UnSelect();
-            _selectedDay = null;
+            _lastSelectedDay?.UnSelect();
+            _lastSelectedDay = null;
             
             var result = await Task.Run(() =>
             {
