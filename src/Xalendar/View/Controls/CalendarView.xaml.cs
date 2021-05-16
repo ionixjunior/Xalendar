@@ -246,10 +246,16 @@ namespace Xalendar.View.Controls
             if (calendarDay?.Day is null)
                 return;
             
-            _selectedDay?.UnSelect();
+            UnSelectLastSelectedDay();
             calendarDay.Select();
             _selectedDay = calendarDay;
             DaySelected?.Invoke(new DaySelected(calendarDay.Day.DateTime, calendarDay.Day.Events));
+        }
+
+        private void UnSelectLastSelectedDay()
+        {
+            if (SelectMode == SelectMode.Single)
+                _selectedDay?.UnSelect();
         }
 
         public CalendarView()
