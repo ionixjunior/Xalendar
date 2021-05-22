@@ -8,6 +8,7 @@ namespace Xalendar.View.Controls
     internal class CalendarDay : ContentView
     {
         public event Action<CalendarDay?>? DaySelected;
+        public event Action<CalendarDay?>? DayTapped;
         internal Day? Day { get; set; }
 
         private Label _dayElement;
@@ -44,10 +45,12 @@ namespace Xalendar.View.Controls
 
             var tap = new TapGestureRecognizer();
             tap.Tapped += OnDaySelected;
+            tap.Tapped += OnDayTapped;
             GestureRecognizers.Add(tap);
         }
         
         private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(this);
+        private void OnDayTapped(object _, EventArgs __) => DayTapped?.Invoke(this);
 
         public void Select()
         {
