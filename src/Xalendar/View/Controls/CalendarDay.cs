@@ -7,6 +7,7 @@ namespace Xalendar.View.Controls
 {
     internal class CalendarDay : ContentView
     {
+        [Obsolete("Use DayTapped instead of this one")]
         public event Action<CalendarDay?>? DaySelected;
         public event Action<CalendarDay?>? DayTapped;
         internal Day? Day { get; set; }
