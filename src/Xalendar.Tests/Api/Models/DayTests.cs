@@ -232,5 +232,25 @@ namespace Xalendar.Tests.Api.Models
 
             Assert.IsTrue(isPreview);
         }
+
+        [Test]
+        public void ShouldChangeSelectedStateToFalse()
+        {
+            var day = new Day(DateTime.Now, true);
+            
+            day.SwitchSelectedState();
+            
+            Assert.IsFalse(day.IsSelected);
+        }
+
+        [Test]
+        public void ShouldChangeSelectedStateToTrue()
+        {
+            var day = new Day(DateTime.Now, false);
+            
+            day.SwitchSelectedState();
+            
+            Assert.IsTrue(day.IsSelected);
+        }
     }
 }
