@@ -168,6 +168,7 @@ namespace Xalendar.View.Controls
         }
 
         public event Action<MonthRange>? MonthChanged;
+        [Obsolete("Use DayTapped instead of this one")]
         public event Action<DaySelected>? DaySelected;
         public event Action<DayTapped>? DayTapped;
 
