@@ -169,6 +169,7 @@ namespace Xalendar.View.Controls
 
         public event Action<MonthRange>? MonthChanged;
         public event Action<DaySelected>? DaySelected;
+        public event Action<DayTapped>? DayTapped;
 
         private MonthContainer? _monthContainer;
         private int _numberOfDaysInContainer;
