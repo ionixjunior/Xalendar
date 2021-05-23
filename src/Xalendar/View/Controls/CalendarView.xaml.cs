@@ -211,7 +211,6 @@ namespace Xalendar.View.Controls
                 foreach (var _ in days)
                 {
                     var calendarDay = new CalendarDay();
-                    // calendarDay.DaySelected += CalendarDayOnDaySelected;
                     calendarDay.DayTapped += CalendarDayOnDayTapped;
                     CalendarDaysContainer.Children.Add(calendarDay, column, row);
 
