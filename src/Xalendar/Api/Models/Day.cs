@@ -62,5 +62,15 @@ namespace Xalendar.Api.Models
         {
             IsSelected = !IsSelected;
         }
+
+        public void UnSelect()
+        {
+            IsSelected = false;
+        }
+
+        public void Select()
+        {
+            IsSelected = true;
+        }
     }
 }

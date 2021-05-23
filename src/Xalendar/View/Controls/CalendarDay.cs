@@ -55,6 +55,7 @@ namespace Xalendar.View.Controls
 
         public void Select()
         {
+            Day?.Select();
             const string state = "Selected";
             VisualStateManager.GoToState(_dayFrame, state);
             VisualStateManager.GoToState(_dayElement, state);
@@ -64,6 +65,7 @@ namespace Xalendar.View.Controls
 
         internal void StartState()
         {
+            Day?.UnSelect();
             VisualStateManager.GoToState(_dayFrame, GetStateOfDayFrame());
             VisualStateManager.GoToState(_dayElement, GetStateOfDayElement());
         }
@@ -108,6 +110,14 @@ namespace Xalendar.View.Controls
             _hasEventsElement.IsVisible = day?.HasEvents ?? false;
             _dayElement.Text = day?.ToString();
             StartState();
+        }
+
+        public void SwitchSelectedState()
+        {
+            if (Day?.IsSelected ?? false)
+                UnSelect();
+            else
+                Select();
         }
     }
 }
