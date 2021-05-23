@@ -17,6 +17,7 @@ namespace Xalendar.Sample.ViewModels
                 new SamplePage { Name = "Changing month", Type = typeof(ChangingMonth) },
                 new SamplePage { Name = "Selecting day (legacy)", Type = typeof(SelectingDayLegacy) },
                 new SamplePage { Name = "Selecting day - single mode", Type = typeof(SelectingDaySingle) },
+                new SamplePage { Name = "Selecting day - multi mode", Type = typeof(SelectingDayMulti) },
                 new SamplePage { Name = "Choosing theme", Type = typeof(ChoosingTheme) }
             };
         }
