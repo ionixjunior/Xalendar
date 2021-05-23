@@ -258,10 +258,23 @@ namespace Xalendar.View.Controls
             if (calendarDay?.Day is null)
                 return;
 
-            ChangeDayState(calendarDay);
-            var state = calendarDay.Day.IsSelected ? DayState.Selected : DayState.UnSelected;
-            DayTapped?.Invoke(new DayTapped(calendarDay.Day.DateTime, calendarDay.Day.Events, state));
+            if (IsUsedNewEvent())
+            {
+                ChangeDayState(calendarDay);
+                var state = calendarDay.Day.IsSelected ? DayState.Selected : DayState.UnSelected;
+                DayTapped?.Invoke(new DayTapped(calendarDay.Day.DateTime, calendarDay.Day.Events, state));
+                return;
+            }
+
+            if (IsUsedLegacyEvent())
+            {
+                CalendarDayOnDaySelected(calendarDay);
+                return;
+            }
         }
+
+        private bool IsUsedNewEvent() => DayTapped != null;
+        private bool IsUsedLegacyEvent() => DaySelected != null;
 
         private void ChangeDayState(CalendarDay calendarDay)
         {
