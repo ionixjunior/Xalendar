@@ -395,7 +395,13 @@ namespace Xalendar.View.Controls
                 var day = days[index];
 
                 if (CalendarDaysContainer.Children[index] is CalendarDay view)
-                    view.UpdateData(day);
+                {
+                    var shouldSelect = day is { }
+                                       && SelectMode == SelectMode.Multi
+                                       && _selectedDates.Contains(day.DateTime);
+                    
+                    view.UpdateData(day, shouldSelect);
+                }
             }
         }
     }

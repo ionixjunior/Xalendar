@@ -100,12 +100,16 @@ namespace Xalendar.View.Controls
             return "IsNotPreview";
         }
 
-        internal void UpdateData(Day? day)
+        internal void UpdateData(Day? day, bool shouldSelect)
         {
             Day = day;
             _hasEventsElement.IsVisible = day?.HasEvents ?? false;
             _dayElement.Text = day?.ToString();
-            StartState();
+            
+            if (shouldSelect)
+                Select();
+            else
+                StartState();
         }
 
         public void SwitchSelectedState()

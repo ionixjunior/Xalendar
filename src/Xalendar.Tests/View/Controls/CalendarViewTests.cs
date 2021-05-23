@@ -308,5 +308,30 @@ namespace Xalendar.Tests.View.Controls
             
             Assert.IsEmpty(_calendarView.SelectedDates);
         }
+
+        [Test]
+        public async Task ShouldKeepSelectedStateWhenSelectModeIsMultiAndNavigateBetweenMonths()
+        {
+            _calendarView.SelectMode = SelectMode.Multi;
+            
+            var selectTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += selectTaskCompletionSource.SetResult;
+            var firstValidCalendarDay = GetFirstValidCalendarDay();
+            SendTapped(firstValidCalendarDay);
+            await selectTaskCompletionSource.Task;
+
+            var previousTaskCompletionSource = new TaskCompletionSource<MonthRange>();
+            _calendarView.MonthChanged += previousTaskCompletionSource.SetResult;
+            InvokeCalendarViewMethod("OnPreviousMonthClick", new object[] {null, EventArgs.Empty});
+            await previousTaskCompletionSource.Task;
+            _calendarView.MonthChanged -= previousTaskCompletionSource.SetResult;
+
+            var nextTaskCompletionSource = new TaskCompletionSource<MonthRange>();
+            _calendarView.MonthChanged += nextTaskCompletionSource.SetResult;
+            InvokeCalendarViewMethod("OnNextMonthClick", new object[] {null, EventArgs.Empty});
+            await nextTaskCompletionSource.Task;
+
+            Assert.IsTrue(firstValidCalendarDay.Day!.IsSelected);
+        }
     }
 }
