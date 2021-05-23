@@ -268,22 +268,22 @@ namespace Xalendar.Tests.View.Controls
         }
 
         [Test]
-        public async Task SelectedDaysShouldBeFirstAndLastDay()
+        public async Task SelectedDaysShouldBeListedInDateOrder()
         {
             _calendarView.SelectMode = SelectMode.Multi;
-            
-            var firstTaskCompletionSource = new TaskCompletionSource<DayTapped>();
-            _calendarView.DayTapped += firstTaskCompletionSource.SetResult;
-            var firstValidCalendarDay = GetFirstValidCalendarDay();
-            SendTapped(firstValidCalendarDay);
-            await firstTaskCompletionSource.Task;
-            _calendarView.DayTapped -= firstTaskCompletionSource.SetResult;
 
             var lastTaskCompletionSource = new TaskCompletionSource<DayTapped>();
             _calendarView.DayTapped += lastTaskCompletionSource.SetResult;
             var lastValidCalendarDay = GetLastValidCalendarDay();
             SendTapped(lastValidCalendarDay);
             await lastTaskCompletionSource.Task;
+            _calendarView.DayTapped -= lastTaskCompletionSource.SetResult;
+
+            var firstTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += firstTaskCompletionSource.SetResult;
+            var firstValidCalendarDay = GetFirstValidCalendarDay();
+            SendTapped(firstValidCalendarDay);
+            await firstTaskCompletionSource.Task;
 
             Assert.AreEqual(firstValidCalendarDay.Day!.DateTime, _calendarView.SelectedDates.First());
             Assert.AreEqual(lastValidCalendarDay.Day!.DateTime, _calendarView.SelectedDates.Last());

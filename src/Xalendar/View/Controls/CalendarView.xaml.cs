@@ -194,7 +194,7 @@ namespace Xalendar.View.Controls
 
         public IReadOnlyList<DateTime> SelectedDates
         {
-            get => _selectedDates;
+            get => _selectedDates.OrderBy(x => x.Date).ToList();
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
