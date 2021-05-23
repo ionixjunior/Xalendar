@@ -211,7 +211,8 @@ namespace Xalendar.View.Controls
                 foreach (var _ in days)
                 {
                     var calendarDay = new CalendarDay();
-                    calendarDay.DaySelected += CalendarDayOnDaySelected;
+                    // calendarDay.DaySelected += CalendarDayOnDaySelected;
+                    calendarDay.DayTapped += CalendarDayOnDayTapped;
                     CalendarDaysContainer.Children.Add(calendarDay, column, row);
 
                     if (++column > 6)
@@ -250,6 +251,39 @@ namespace Xalendar.View.Controls
             calendarDay.Select();
             _lastSelectedDay = calendarDay;
             DaySelected?.Invoke(new DaySelected(calendarDay.Day.DateTime, calendarDay.Day.Events));
+        }
+        
+        private void CalendarDayOnDayTapped(CalendarDay? calendarDay)
+        {
+            if (calendarDay?.Day is null)
+                return;
+
+            ChangeDayState(calendarDay);
+            var state = calendarDay.Day.IsSelected ? DayState.Selected : DayState.UnSelected;
+            DayTapped?.Invoke(new DayTapped(calendarDay.Day.DateTime, calendarDay.Day.Events, state));
+        }
+
+        private void ChangeDayState(CalendarDay calendarDay)
+        {
+            if (SelectMode == SelectMode.Single)
+                ChangeDayStateForSingleMode(calendarDay);
+
+            if (SelectMode == SelectMode.Multi)
+                ChangeDayStateForMultiMode(calendarDay);
+        }
+
+        private void ChangeDayStateForSingleMode(CalendarDay calendarDay)
+        {
+            if (_lastSelectedDay != calendarDay)
+                _lastSelectedDay?.UnSelect();
+                
+            calendarDay.SwitchSelectedState();
+            _lastSelectedDay = calendarDay;
+        }
+
+        private void ChangeDayStateForMultiMode(CalendarDay calendarDay)
+        {
+            calendarDay.SwitchSelectedState();
         }
 
         private void UnSelectLastSelectedDay()
