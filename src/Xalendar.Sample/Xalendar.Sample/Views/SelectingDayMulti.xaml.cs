@@ -17,6 +17,10 @@ namespace Xalendar.Sample.Views
             TappedDay.Text = dayTapped.DateTime.ToString("G");
             State.Text = dayTapped.State.ToString();
             AmountEvents.Text = dayTapped.Events.Count().ToString();
+            
+            SelectedDays.Children.Clear();
+            foreach (var dateTime in Calendar.SelectedDates)
+                SelectedDays.Children.Add(new Label { Text = dateTime.ToString("G") });
         }
     }
 }

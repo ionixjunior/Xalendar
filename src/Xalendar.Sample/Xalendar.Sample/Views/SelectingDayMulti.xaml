@@ -5,19 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xal="http://xalendar.com/schemas/xaml">
     <ContentPage.Content>
-        <StackLayout>
-            <xal:CalendarView DayTapped="OnDayTapped" SelectMode="Multi" />
+        <ScrollView>
+            <StackLayout>
+                <xal:CalendarView
+                    x:Name="Calendar"
+                    DayTapped="OnDayTapped"
+                    SelectMode="Multi" />
 
-            <StackLayout Margin="15,0">
-                <Label Text="Tapped day:" />
-                <Label x:Name="TappedDay" />
+                <StackLayout Margin="15,0">
+                    <Label Text="Tapped day:" />
+                    <Label x:Name="TappedDay" />
 
-                <Label Margin="0,20,0,0" Text="State:" />
-                <Label x:Name="State" />
+                    <Label Margin="0,20,0,0" Text="State of tapped day:" />
+                    <Label x:Name="State" />
 
-                <Label Margin="0,20,0,0" Text="Amount of events:" />
-                <Label x:Name="AmountEvents" />
+                    <Label Margin="0,20,0,0" Text="Amount of events of tapped day:" />
+                    <Label x:Name="AmountEvents" />
+
+                    <Label Margin="0,20,0,0" Text="Selected days:" />
+                    <StackLayout x:Name="SelectedDays" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
