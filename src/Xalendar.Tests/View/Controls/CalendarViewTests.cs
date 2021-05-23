@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Xalendar.Api.Enums;
 using Xalendar.Api.Models;
 using Xalendar.View.Controls;
 using Xamarin.Forms;
@@ -219,6 +220,93 @@ namespace Xalendar.Tests.View.Controls
             oldEvents.Add(discartedEvent);
             
             Assert.IsEmpty(_calendarView.Events);
+        }
+        
+        private CalendarDay GetFirstValidCalendarDay()
+        {
+            return _calendarView
+                .FindByName<Grid>("CalendarDaysContainer")
+                .Children
+                .Cast<CalendarDay>()
+                .First(x => x.Day is {});
+        }
+        
+        private CalendarDay GetLastValidCalendarDay()
+        {
+            return _calendarView
+                .FindByName<Grid>("CalendarDaysContainer")
+                .Children
+                .Cast<CalendarDay>()
+                .Last(x => x.Day is {});
+        }
+
+        private void SendTapped(CalendarDay calendarDay)
+        {
+            var tap = (TapGestureRecognizer)calendarDay.GestureRecognizers.First();
+            tap.SendTapped(calendarDay);
+        }
+
+        [Test]
+        public void SelectedDaysShouldBeEmpty()
+        {
+            _calendarView.SelectMode = SelectMode.Multi;
+
+            Assert.IsEmpty(_calendarView.SelectedDates);
+        }
+
+        [Test]
+        public async Task SelectedDaysShouldBeFirstDay()
+        {
+            _calendarView.SelectMode = SelectMode.Multi;
+            var taskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += taskCompletionSource.SetResult;
+            var firstValidCalendarDay = GetFirstValidCalendarDay();
+            SendTapped(firstValidCalendarDay);
+            await taskCompletionSource.Task;
+
+            Assert.AreEqual(firstValidCalendarDay.Day!.DateTime, _calendarView.SelectedDates.First());
+        }
+
+        [Test]
+        public async Task SelectedDaysShouldBeFirstAndLastDay()
+        {
+            _calendarView.SelectMode = SelectMode.Multi;
+            
+            var firstTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += firstTaskCompletionSource.SetResult;
+            var firstValidCalendarDay = GetFirstValidCalendarDay();
+            SendTapped(firstValidCalendarDay);
+            await firstTaskCompletionSource.Task;
+            _calendarView.DayTapped -= firstTaskCompletionSource.SetResult;
+
+            var lastTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += lastTaskCompletionSource.SetResult;
+            var lastValidCalendarDay = GetLastValidCalendarDay();
+            SendTapped(lastValidCalendarDay);
+            await lastTaskCompletionSource.Task;
+
+            Assert.AreEqual(firstValidCalendarDay.Day!.DateTime, _calendarView.SelectedDates.First());
+            Assert.AreEqual(lastValidCalendarDay.Day!.DateTime, _calendarView.SelectedDates.Last());
+        }
+
+        [Test]
+        public async Task SelectedDaysShouldBeDiscardUnSelectedDay()
+        {
+            _calendarView.SelectMode = SelectMode.Multi;
+
+            var selectTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += selectTaskCompletionSource.SetResult;
+            var firstValidCalendarDay = GetFirstValidCalendarDay();
+            SendTapped(firstValidCalendarDay);
+            await selectTaskCompletionSource.Task;
+            _calendarView.DayTapped -= selectTaskCompletionSource.SetResult;
+
+            var unSelectTaskCompletionSource = new TaskCompletionSource<DayTapped>();
+            _calendarView.DayTapped += unSelectTaskCompletionSource.SetResult;
+            SendTapped(firstValidCalendarDay);
+            await unSelectTaskCompletionSource.Task;
+            
+            Assert.IsEmpty(_calendarView.SelectedDates);
         }
     }
 }

@@ -190,6 +190,13 @@ namespace Xalendar.View.Controls
         private MonthContainer? _monthContainer;
         private int _numberOfDaysInContainer;
 
+        private List<DateTime> _selectedDates = new List<DateTime>();
+
+        public IReadOnlyList<DateTime> SelectedDates
+        {
+            get => _selectedDates;
+        }
+
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -261,6 +268,7 @@ namespace Xalendar.View.Controls
             {
                 ChangeDayState(calendarDay);
                 var state = calendarDay.Day.IsSelected ? DayState.Selected : DayState.UnSelected;
+                UpdateSelectedDates(calendarDay.Day.DateTime, state);
                 DayTapped?.Invoke(new DayTapped(calendarDay.Day.DateTime, calendarDay.Day.Events, state));
                 return;
             }
@@ -302,6 +310,21 @@ namespace Xalendar.View.Controls
         {
             if (SelectMode == SelectMode.Single)
                 _lastSelectedDay?.UnSelect();
+        }
+
+        private void UpdateSelectedDates(DateTime dateTime, DayState state)
+        {
+            if (state == DayState.UnSelected)
+            {
+                _selectedDates.Remove(dateTime);
+                return;
+            }
+
+            if (state == DayState.Selected)
+            {
+                _selectedDates.Add(dateTime);
+                return;
+            }
         }
 
         public CalendarView()
