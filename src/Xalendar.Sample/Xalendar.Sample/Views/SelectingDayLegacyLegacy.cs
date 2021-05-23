@@ -6,9 +6,9 @@ using Xamarin.Forms;
 
 namespace Xalendar.Sample.Views
 {
-    public partial class SelectingDay : ContentPage
+    public partial class SelectingDayLegacy : ContentPage
     {
-        public SelectingDay()
+        public SelectingDayLegacy()
         {
             InitializeComponent();
         }
