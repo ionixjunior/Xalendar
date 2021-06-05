@@ -7,7 +7,7 @@ namespace Xalendar.Extensions
     internal static class MonthContainerExtension
     {
         public static void SelectDay(this MonthContainer monthContainer, Day selectedDay) => monthContainer._currentMonth.SelectDay(selectedDay);
-        public static Day GetSelectedDay(this MonthContainer monthContainer) => monthContainer._currentMonth.GetSelectedDay();
+        public static Day? GetSelectedDay(this MonthContainer monthContainer) => monthContainer._currentMonth.GetSelectedDay();
         public static void AddEvents(this MonthContainer monthContainer, IEnumerable<ICalendarViewEvent> events) => monthContainer._currentMonth.AddEvents(events);
 
         public static void RemoveEvent(this MonthContainer monthContainer, ICalendarViewEvent calendarViewEvent) =>
