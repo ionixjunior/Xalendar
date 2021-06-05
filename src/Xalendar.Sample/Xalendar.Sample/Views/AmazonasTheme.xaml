@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Xalendar.Sample.Views.AmazonasTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xal="http://xalendar.com/schemas/xaml">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xal:Amazonas x:Key="AmazonasTheme" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <xal:CalendarView Theme="{StaticResource AmazonasTheme}" />
+    </ContentPage.Content>
+</ContentPage>
