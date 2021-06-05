@@ -33,7 +33,7 @@ namespace Xalendar.Extensions
             selectedDay.IsSelected = false;
         }
         
-        public static Day GetSelectedDay(this Month month)
+        public static Day? GetSelectedDay(this Month month)
         {
             return month.Days.FirstOrDefault(day => day.IsSelected);
         }
