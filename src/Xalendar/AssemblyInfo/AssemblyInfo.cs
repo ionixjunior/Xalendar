@@ -1,5 +1,6 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Xalendar.Tests")]
@@ -10,7 +11,7 @@ using System.Runtime.CompilerServices;
 [assembly: XmlnsDefinition("http://xalendar.com/schemas/xaml", "Xalendar.Api.Formatters")]
 
 //Recommended prefix <see href="https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/xaml/custom-prefix"/>
-[assembly: XmlnsPrefix("http://xalendar.com/schemas/xaml", "xal")]
+[assembly: Microsoft.Maui.XmlnsPrefix("http://xalendar.com/schemas/xaml", "xal")]
 
 //Xaml compilation <see href="https://docs.microsoft.com/pt-br/xamarin/xamarin-forms/xaml/xamlc"/>
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]

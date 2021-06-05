@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
-using Xamarin.Forms;
-using XView = Xamarin.Forms.View;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using XView = Microsoft.Maui.Controls.View;
 using Xalendar.Api.Formatters;
 using Xalendar.View.Themes;
 
