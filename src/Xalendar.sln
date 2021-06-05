@@ -2,15 +2,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Sample", "Xalendar.SampleLegacy\Xalendar.Sample\Xalendar.Sample.csproj", "{FFE6B2DB-E99A-4361-8217-83446C86EEBB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.Android", "Xalendar.SampleLegacy\Xalendar.Sample.Android\Xalendar.Sample.Android.csproj", "{8C862181-60B4-4B66-8731-85F3A41A2FE2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.iOS", "Xalendar.SampleLegacy\Xalendar.Sample.iOS\Xalendar.Sample.iOS.csproj", "{8384588A-2556-4CBB-9D72-8440FD4A3C17}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar", "Xalendar\Xalendar.csproj", "{C067C06B-34B4-44C7-837B-4F33673D387C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Tests", "Xalendar.Tests\Xalendar.Tests.csproj", "{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample", "Xalendar.Sample\Xalendar.Sample\Xalendar.Sample.csproj", "{C6435FE1-F358-45B3-BCF7-9F3913E80D36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.WinUI3", "Xalendar.Sample\Xalendar.Sample.WinUI3\Xalendar.Sample.WinUI3.csproj", "{594FAB62-A74D-41F6-AE3F-49C843AC8876}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.WinUI3 (Package)", "Xalendar.Sample\Xalendar.Sample.WinUI3 (Package)\Xalendar.Sample.WinUI3 (Package).wapproj", "{62FA7738-6CF7-416B-9DC5-C317536EDE3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,19 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFE6B2DB-E99A-4361-8217-83446C86EEBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C862181-60B4-4B66-8731-85F3A41A2FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C862181-60B4-4B66-8731-85F3A41A2FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C862181-60B4-4B66-8731-85F3A41A2FE2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8C862181-60B4-4B66-8731-85F3A41A2FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C862181-60B4-4B66-8731-85F3A41A2FE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8384588A-2556-4CBB-9D72-8440FD4A3C17}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{8384588A-2556-4CBB-9D72-8440FD4A3C17}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
-		{8384588A-2556-4CBB-9D72-8440FD4A3C17}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{8384588A-2556-4CBB-9D72-8440FD4A3C17}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
 		{C067C06B-34B4-44C7-837B-4F33673D387C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C067C06B-34B4-44C7-837B-4F33673D387C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C067C06B-34B4-44C7-837B-4F33673D387C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +26,14 @@ Global
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6435FE1-F358-45B3-BCF7-9F3913E80D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6435FE1-F358-45B3-BCF7-9F3913E80D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6435FE1-F358-45B3-BCF7-9F3913E80D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6435FE1-F358-45B3-BCF7-9F3913E80D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{594FAB62-A74D-41F6-AE3F-49C843AC8876}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{594FAB62-A74D-41F6-AE3F-49C843AC8876}.Debug|Any CPU.Build.0 = Debug|x86
+		{594FAB62-A74D-41F6-AE3F-49C843AC8876}.Release|Any CPU.ActiveCfg = Release|x86
+		{594FAB62-A74D-41F6-AE3F-49C843AC8876}.Release|Any CPU.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
