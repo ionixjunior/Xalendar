@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Xalendar.Api.Enums;
 using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
@@ -167,11 +168,34 @@ namespace Xalendar.View.Controls
             set => SetValue(ThemeProperty, value);
         }
 
+        public static BindableProperty SelectModeProperty =
+            BindableProperty.Create(
+                nameof(SelectMode),
+                typeof(SelectMode),
+                typeof(CalendarView),
+                SelectMode.Single,
+                BindingMode.OneTime);
+
+        public SelectMode SelectMode
+        {
+            get => (SelectMode)GetValue(SelectModeProperty);
+            set => SetValue(SelectModeProperty, value);
+        }
+
         public event Action<MonthRange>? MonthChanged;
+        [Obsolete("Use DayTapped instead of this one")]
         public event Action<DaySelected>? DaySelected;
+        public event Action<DayTapped>? DayTapped;
 
         private MonthContainer? _monthContainer;
         private int _numberOfDaysInContainer;
+
+        private List<DateTime> _selectedDates = new List<DateTime>();
+
+        public IReadOnlyList<DateTime> SelectedDates
+        {
+            get => _selectedDates.OrderBy(x => x.Date).ToList();
+        }
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
@@ -194,7 +218,7 @@ namespace Xalendar.View.Controls
                 foreach (var _ in days)
                 {
                     var calendarDay = new CalendarDay();
-                    calendarDay.DaySelected += CalendarDayOnDaySelected;
+                    calendarDay.DayTapped += CalendarDayOnDayTapped;
                     CalendarDaysContainer.Children.Add(calendarDay, column, row);
 
                     if (++column > 6)
@@ -219,20 +243,88 @@ namespace Xalendar.View.Controls
             }
         }
 
-        private CalendarDay? _selectedDay;
+        private CalendarDay? _lastSelectedDay;
 
         private void CalendarDayOnDaySelected(CalendarDay? calendarDay)
         {
-            if (_selectedDay == calendarDay)
+            if (_lastSelectedDay == calendarDay)
                 return;
 
             if (calendarDay?.Day is null)
                 return;
             
-            _selectedDay?.UnSelect();
+            UnSelectLastSelectedDay();
             calendarDay.Select();
-            _selectedDay = calendarDay;
+            _lastSelectedDay = calendarDay;
             DaySelected?.Invoke(new DaySelected(calendarDay.Day.DateTime, calendarDay.Day.Events));
+        }
+        
+        private void CalendarDayOnDayTapped(CalendarDay? calendarDay)
+        {
+            if (calendarDay?.Day is null)
+                return;
+
+            if (IsUsedNewEvent())
+            {
+                ChangeDayState(calendarDay);
+                var state = calendarDay.Day.IsSelected ? DayState.Selected : DayState.UnSelected;
+                UpdateSelectedDates(calendarDay.Day.DateTime, state);
+                DayTapped?.Invoke(new DayTapped(calendarDay.Day.DateTime, calendarDay.Day.Events, state));
+                return;
+            }
+
+            if (IsUsedLegacyEvent())
+            {
+                CalendarDayOnDaySelected(calendarDay);
+                return;
+            }
+        }
+
+        private bool IsUsedNewEvent() => DayTapped != null;
+        private bool IsUsedLegacyEvent() => DaySelected != null;
+
+        private void ChangeDayState(CalendarDay calendarDay)
+        {
+            if (SelectMode == SelectMode.Single)
+                ChangeDayStateForSingleMode(calendarDay);
+
+            if (SelectMode == SelectMode.Multi)
+                ChangeDayStateForMultiMode(calendarDay);
+        }
+
+        private void ChangeDayStateForSingleMode(CalendarDay calendarDay)
+        {
+            if (_lastSelectedDay != calendarDay)
+                _lastSelectedDay?.UnSelect();
+                
+            calendarDay.SwitchSelectedState();
+            _lastSelectedDay = calendarDay;
+        }
+
+        private void ChangeDayStateForMultiMode(CalendarDay calendarDay)
+        {
+            calendarDay.SwitchSelectedState();
+        }
+
+        private void UnSelectLastSelectedDay()
+        {
+            if (SelectMode == SelectMode.Single)
+                _lastSelectedDay?.UnSelect();
+        }
+
+        private void UpdateSelectedDates(DateTime dateTime, DayState state)
+        {
+            if (state == DayState.UnSelected)
+            {
+                _selectedDates.Remove(dateTime);
+                return;
+            }
+
+            if (state == DayState.Selected)
+            {
+                _selectedDates.Add(dateTime);
+                return;
+            }
         }
 
         public CalendarView()
@@ -242,8 +334,8 @@ namespace Xalendar.View.Controls
 
         private async void OnPreviousMonthClick(object sender, EventArgs e)
         {
-            _selectedDay?.UnSelect();
-            _selectedDay = null;
+            _lastSelectedDay?.UnSelect();
+            _lastSelectedDay = null;
             
             var result = await Task.Run(() =>
             {
@@ -270,8 +362,8 @@ namespace Xalendar.View.Controls
 
         private async void OnNextMonthClick(object sender, EventArgs e)
         {
-            _selectedDay?.UnSelect();
-            _selectedDay = null;
+            _lastSelectedDay?.UnSelect();
+            _lastSelectedDay = null;
             
             var result = await Task.Run(() =>
             {
@@ -303,7 +395,13 @@ namespace Xalendar.View.Controls
                 var day = days[index];
 
                 if (CalendarDaysContainer.Children[index] is CalendarDay view)
-                    view.UpdateData(day);
+                {
+                    var shouldSelect = day is { }
+                                       && SelectMode == SelectMode.Multi
+                                       && _selectedDates.Contains(day.DateTime);
+                    
+                    view.UpdateData(day, shouldSelect);
+                }
             }
         }
     }

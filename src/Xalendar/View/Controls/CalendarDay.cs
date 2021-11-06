@@ -7,7 +7,7 @@ namespace Xalendar.View.Controls
 {
     internal class CalendarDay : ContentView
     {
-        public event Action<CalendarDay?>? DaySelected;
+        public event Action<CalendarDay?>? DayTapped;
         internal Day? Day { get; set; }
 
         private Label _dayElement;
@@ -43,14 +43,15 @@ namespace Xalendar.View.Controls
             Content = _dayFrame;
 
             var tap = new TapGestureRecognizer();
-            tap.Tapped += OnDaySelected;
+            tap.Tapped += OnDayTapped;
             GestureRecognizers.Add(tap);
         }
         
-        private void OnDaySelected(object _, EventArgs __) => DaySelected?.Invoke(this);
+        private void OnDayTapped(object _, EventArgs __) => DayTapped?.Invoke(this);
 
         public void Select()
         {
+            Day?.Select();
             const string state = "Selected";
             VisualStateManager.GoToState(_dayFrame, state);
             VisualStateManager.GoToState(_dayElement, state);
@@ -60,6 +61,7 @@ namespace Xalendar.View.Controls
 
         internal void StartState()
         {
+            Day?.UnSelect();
             VisualStateManager.GoToState(_dayFrame, GetStateOfDayFrame());
             VisualStateManager.GoToState(_dayElement, GetStateOfDayElement());
         }
@@ -98,12 +100,24 @@ namespace Xalendar.View.Controls
             return "IsNotPreview";
         }
 
-        internal void UpdateData(Day? day)
+        internal void UpdateData(Day? day, bool shouldSelect)
         {
             Day = day;
             _hasEventsElement.IsVisible = day?.HasEvents ?? false;
             _dayElement.Text = day?.ToString();
-            StartState();
+            
+            if (shouldSelect)
+                Select();
+            else
+                StartState();
+        }
+
+        public void SwitchSelectedState()
+        {
+            if (Day?.IsSelected ?? false)
+                UnSelect();
+            else
+                Select();
         }
     }
 }

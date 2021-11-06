@@ -57,5 +57,20 @@ namespace Xalendar.Api.Models
         public override int GetHashCode() => DateTime.Date.Ticks.GetHashCode();
 
         public override string ToString() => DateTime.Day.ToString();
+
+        public void SwitchSelectedState()
+        {
+            IsSelected = !IsSelected;
+        }
+
+        public void UnSelect()
+        {
+            IsSelected = false;
+        }
+
+        public void Select()
+        {
+            IsSelected = true;
+        }
     }
 }
