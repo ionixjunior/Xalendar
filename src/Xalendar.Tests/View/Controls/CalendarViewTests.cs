@@ -8,7 +8,7 @@ using NUnit.Framework;
 using Xalendar.Api.Enums;
 using Xalendar.Api.Models;
 using Xalendar.View.Controls;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls;
 
 namespace Xalendar.Tests.View.Controls
 {
