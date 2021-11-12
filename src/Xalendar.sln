@@ -2,11 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Sample", "Xalendar.Sample\Xalendar.Sample\Xalendar.Sample.csproj", "{FFE6B2DB-E99A-4361-8217-83446C86EEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar.Sample.OLD", "Xalendar.Sample.OLD\Xalendar.Sample\Xalendar.Sample.OLD.csproj", "{FFE6B2DB-E99A-4361-8217-83446C86EEBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.Android", "Xalendar.Sample\Xalendar.Sample.Android\Xalendar.Sample.Android.csproj", "{8C862181-60B4-4B66-8731-85F3A41A2FE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.Android", "Xalendar.Sample.OLD\Xalendar.Sample.Android\Xalendar.Sample.Android.csproj", "{8C862181-60B4-4B66-8731-85F3A41A2FE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.iOS", "Xalendar.Sample\Xalendar.Sample.iOS\Xalendar.Sample.iOS.csproj", "{8384588A-2556-4CBB-9D72-8440FD4A3C17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample.iOS", "Xalendar.Sample.OLD\Xalendar.Sample.iOS\Xalendar.Sample.iOS.csproj", "{8384588A-2556-4CBB-9D72-8440FD4A3C17}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar", "Xalendar\Xalendar.csproj", "{C067C06B-34B4-44C7-837B-4F33673D387C}"
 EndProject

@@ -119,7 +119,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Xalendar.Sample\Xalendar.Sample.csproj">
       <Project>{FFE6B2DB-E99A-4361-8217-83446C86EEBB}</Project>
-      <Name>Xalendar.Sample</Name>
+      <Name>Xalendar.Sample.OLD</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
