@@ -286,5 +286,33 @@ namespace Xalendar.Tests.Api.Models
             var eventsOfMonth = month.Days.Where(day => day.Events.Any());
             Assert.IsEmpty(eventsOfMonth);
         }
+
+        [Test]
+        public void DayShouldBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 10);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var month = new Month(dateTime, startDate: startDate, endDate: endDate);
+
+            var targetDay = month.Days.Where(x => x.DateTime.Date == targetDateTime.Date).First();
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayShouldNotBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 10);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var month = new Month(dateTime, startDate: startDate, endDate: endDate);
+
+            var targetDay = month.Days.Where(x => x.DateTime.Date == targetDateTime.Date).First();
+            Assert.IsFalse(targetDay.IsInRange);
+        }
     }
 }
