@@ -204,7 +204,7 @@ namespace Xalendar.View.Controls
             if (propertyName == "Renderer")
             {
                 Resources.MergedDictionaries.Add(Theme);
-                _monthContainer = new MonthContainer(DateTime.Today, DaysOfWeekFormatter, FirstDayOfWeek, IsPreviewDaysActive);
+                _monthContainer = new MonthContainer(DateTime.Today, dayOfWeekFormatter: DaysOfWeekFormatter, firstDayOfWeek: FirstDayOfWeek, isPreviewDaysActive: IsPreviewDaysActive);
                 
                 if (!Events.IsNullOrEmpty())
                     _monthContainer.AddEvents(Events);
