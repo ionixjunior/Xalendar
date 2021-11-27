@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Xalendar.Sample.Views.ChoosingRange"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xal="http://xalendar.com/schemas/xaml">
+    <ContentPage.Content>
+        <xal:CalendarView
+            DayTapped="OnDayTapped"
+            EndDate="{Binding EndDate}"
+            StartDate="{Binding StartDate}" />
+    </ContentPage.Content>
+</ContentPage>
