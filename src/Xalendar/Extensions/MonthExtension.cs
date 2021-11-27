@@ -45,14 +45,18 @@ namespace Xalendar.Extensions
                 .Select(dayValue => new DateTime(dateTime.Year, dateTime.Month, dayValue))
                 .Select(dateTime =>
                 {
-                    bool isInRange = true;
-
-                    if (startDate.HasValue && endDate.HasValue)
-                        isInRange = dateTime.Date >= startDate.Value.Date && dateTime.Date <= endDate.Value.Date ? true : false;
-
+                    var isInRange = CheckIfDateTimeIsInRange(dateTime, startDate, endDate);
                     return new Day(dateTime, isCurrentMonth: isCurrentMonth, isInRange: isInRange);
                 })
                 .ToList();
+        }
+
+        private static bool CheckIfDateTimeIsInRange(DateTime dateTime, DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate.HasValue && endDate.HasValue)
+                return dateTime.Date >= startDate.Value.Date && dateTime.Date <= endDate.Value.Date ? true : false;
+
+            return true;
         }
 
         public static void AddEvents(this Month month, IEnumerable<ICalendarViewEvent> events)
