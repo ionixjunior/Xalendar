@@ -94,6 +94,9 @@ namespace Xalendar.View.Controls
                 if (Day.IsPreview)
                     return "IsPreview";
 
+                if (Day.IsInRange == false)
+                    return "IsNotInRange";
+
                 if (Day.IsWeekend)
                     return "IsWeekend";
 
