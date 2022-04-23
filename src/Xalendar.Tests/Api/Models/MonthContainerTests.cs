@@ -385,5 +385,269 @@ namespace Xalendar.Tests.Api.Models
                     .ToUpper();
             }
         }
+
+        [Test]
+        public void DayOfCurrentMonthShouldBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 10);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayOfCurrentMonthShouldNotBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 10);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 10, 31);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldNotBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 10, 31);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 12, 1);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldNotBeInRange()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 12, 1);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayOfCurrentMonthShouldBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 10, 10);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayOfCurrentMonthShouldNotBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 10, 10);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 9, 30);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldNotBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 9, 30);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 1);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldNotBeInRangeWhenNavigateToPreviousMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 1);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Previous();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayOfCurrentMonthShouldBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 12, 10);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void DayOfCurrentMonthShouldNotBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 12, 10);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 30);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void PreviousMonthDayShouldNotBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2021, 11, 30);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2022, 1, 1);
+            var startDate = targetDateTime.AddDays(-5);
+            var endDate = targetDateTime.AddDays(5);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsTrue(targetDay.IsInRange);
+        }
+
+        [Test]
+        public void NextMonthDayShouldNotBeInRangeWhenNavigateToNextMonth()
+        {
+            var dateTime = new DateTime(2021, 11, 1);
+            var targetDateTime = new DateTime(2022, 1, 1);
+            var startDate = targetDateTime.AddDays(5);
+            var endDate = targetDateTime.AddDays(10);
+
+            var monthContaier = new MonthContainer(dateTime, firstDayOfWeek: DayOfWeek.Sunday, startDate: startDate, endDate: endDate, isPreviewDaysActive: true);
+            monthContaier.Next();
+
+            var targetDay = monthContaier.Days.First(x => x.DateTime.Date == targetDateTime.Date);
+            Assert.IsFalse(targetDay.IsInRange);
+        }
     }
 }

@@ -171,6 +171,12 @@
                             <Setter Property="TextColor" Value="Black" />
                         </VisualState.Setters>
                     </VisualState>
+
+                    <VisualState x:Name="IsNotInRange">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="#cccccc" />
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>

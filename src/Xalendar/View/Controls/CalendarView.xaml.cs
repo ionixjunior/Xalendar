@@ -9,7 +9,6 @@ using Xalendar.Extensions;
 using Xalendar.Api.Interfaces;
 using Xalendar.Api.Models;
 using Xamarin.Forms;
-using XView = Xamarin.Forms.View;
 using Xalendar.Api.Formatters;
 using Xalendar.View.Themes;
 
@@ -182,6 +181,34 @@ namespace Xalendar.View.Controls
             set => SetValue(SelectModeProperty, value);
         }
 
+        public static BindableProperty StartDateProperty =
+            BindableProperty.Create(
+                nameof(StartDate),
+                typeof(DateTime?),
+                typeof(CalendarView),
+                null,
+                BindingMode.OneTime);
+
+        public DateTime? StartDate
+        {
+            get => (DateTime?)GetValue(StartDateProperty);
+            set => SetValue(StartDateProperty, value);
+        }
+
+        public static BindableProperty EndDateProperty =
+            BindableProperty.Create(
+                nameof(EndDate),
+                typeof(DateTime?),
+                typeof(CalendarView),
+                null,
+                BindingMode.OneTime);
+
+        public DateTime? EndDate
+        {
+            get => (DateTime?)GetValue(EndDateProperty);
+            set => SetValue(EndDateProperty, value);
+        }
+
         public event Action<MonthRange>? MonthChanged;
         [Obsolete("Use DayTapped instead of this one")]
         public event Action<DaySelected>? DaySelected;
@@ -204,7 +231,13 @@ namespace Xalendar.View.Controls
             if (propertyName == "Renderer")
             {
                 Resources.MergedDictionaries.Add(Theme);
-                _monthContainer = new MonthContainer(DateTime.Today, DaysOfWeekFormatter, FirstDayOfWeek, IsPreviewDaysActive);
+                _monthContainer = new MonthContainer(
+                    DateTime.Today,
+                    dayOfWeekFormatter: DaysOfWeekFormatter,
+                    startDate: StartDate,
+                    endDate: EndDate,
+                    firstDayOfWeek: FirstDayOfWeek,
+                    isPreviewDaysActive: IsPreviewDaysActive);
                 
                 if (!Events.IsNullOrEmpty())
                     _monthContainer.AddEvents(Events);

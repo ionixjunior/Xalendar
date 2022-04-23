@@ -23,21 +23,25 @@ namespace Xalendar.Api.Models
         private DayOfWeek _firstDayOfWeek;
         private bool _isPreviewDaysActive;
         private IDayOfWeekFormatter _dayOfWeekFormatter;
+        private DateTime? _startDate;
+        private DateTime? _endDate;
 
-        public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday,
-            bool isPreviewDaysActive = false) : this(dateTime, new DayOfWeek3CaractersFormat(), firstDayOfWeek, isPreviewDaysActive)
+        public MonthContainer(DateTime dateTime, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday, DateTime? startDate = null, DateTime? endDate = null, 
+            bool isPreviewDaysActive = false) : this(dateTime, new DayOfWeek3CaractersFormat(), startDate, endDate, firstDayOfWeek, isPreviewDaysActive)
         {
         }
 
-        public MonthContainer(DateTime dateTime, IDayOfWeekFormatter dayOfWeekFormatter, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday,
+        public MonthContainer(DateTime dateTime, IDayOfWeekFormatter dayOfWeekFormatter, DateTime? startDate = null, DateTime? endDate = null, DayOfWeek firstDayOfWeek = DayOfWeek.Sunday,
             bool isPreviewDaysActive = false)
         {
-            _currentMonth = new Month(dateTime);
+            _startDate = startDate;
+            _endDate = endDate;
+            _currentMonth = new Month(dateTime, startDate: _startDate, endDate: _endDate);
 
             if (isPreviewDaysActive)
             {
-                _previousMonth = new Month(dateTime.AddMonths(-1), isCurrentMonth: false);
-                _nextMonth = new Month(dateTime.AddMonths(1), isCurrentMonth: false);
+                _previousMonth = new Month(dateTime.AddMonths(-1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
+                _nextMonth = new Month(dateTime.AddMonths(1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
             }
 
             _dayOfWeekFormatter = dayOfWeekFormatter;
@@ -155,26 +159,26 @@ namespace Xalendar.Api.Models
         public void Next()
         {
             var nextDateTime = _currentMonth.MonthDateTime.AddMonths(1);
-            _currentMonth = new Month(nextDateTime);
+            _currentMonth = new Month(nextDateTime, startDate: _startDate, endDate: _endDate);
             _days = null;
 
             if (_isPreviewDaysActive)
             {
-                _previousMonth = new Month(nextDateTime.AddMonths(-1), isCurrentMonth: false);
-                _nextMonth = new Month(nextDateTime.AddMonths(1), isCurrentMonth: false);
+                _previousMonth = new Month(nextDateTime.AddMonths(-1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
+                _nextMonth = new Month(nextDateTime.AddMonths(1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
             }
         }
 
         public void Previous()
         {
             var previousDateTime = _currentMonth.MonthDateTime.AddMonths(-1);
-            _currentMonth = new Month(previousDateTime);
+            _currentMonth = new Month(previousDateTime, startDate: _startDate, endDate: _endDate);
             _days = null;
 
             if (_isPreviewDaysActive)
             {
-                _previousMonth = new Month(previousDateTime.AddMonths(-1), isCurrentMonth: false);
-                _nextMonth = new Month(previousDateTime.AddMonths(1), isCurrentMonth: false);
+                _previousMonth = new Month(previousDateTime.AddMonths(-1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
+                _nextMonth = new Month(previousDateTime.AddMonths(1), startDate: _startDate, endDate: _endDate, isCurrentMonth: false);
             }
         }
     }

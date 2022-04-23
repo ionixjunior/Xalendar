@@ -10,10 +10,10 @@ namespace Xalendar.Api.Models
         public DateTime MonthDateTime { get; }
         public IReadOnlyList<Day> Days { get; }
 
-        public Month(DateTime dateTime, bool isCurrentMonth = true)
+        public Month(DateTime dateTime, DateTime? startDate = null, DateTime? endDate = null, bool isCurrentMonth = true)
         {
             MonthDateTime = dateTime;
-            Days = GenerateDaysOfMonth(dateTime, isCurrentMonth);
+            Days = GenerateDaysOfMonth(dateTime, startDate, endDate, isCurrentMonth);
         }
 
         public bool Equals(Month other)

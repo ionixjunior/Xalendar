@@ -252,5 +252,25 @@ namespace Xalendar.Tests.Api.Models
             
             Assert.IsTrue(day.IsSelected);
         }
+
+        [Test]
+        public void DayShouldBeInRange()
+        {
+            var isInRange = true;
+
+            var day = new Day(DateTime.Now, isInRange: isInRange);
+
+            Assert.IsTrue(day.IsInRange);
+        }
+
+        [Test]
+        public void DayShouldNotBeInRange()
+        {
+            var isInRange = false;
+
+            var day = new Day(DateTime.Now, isInRange: isInRange);
+
+            Assert.IsFalse(day.IsInRange);
+        }
     }
 }

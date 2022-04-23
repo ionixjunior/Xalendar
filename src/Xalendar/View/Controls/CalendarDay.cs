@@ -46,8 +46,12 @@ namespace Xalendar.View.Controls
             tap.Tapped += OnDayTapped;
             GestureRecognizers.Add(tap);
         }
-        
-        private void OnDayTapped(object _, EventArgs __) => DayTapped?.Invoke(this);
+
+        private void OnDayTapped(object _, EventArgs __)
+        {
+            if (Day is { IsInRange: true })
+                DayTapped?.Invoke(this);
+        }
 
         public void Select()
         {
@@ -89,6 +93,9 @@ namespace Xalendar.View.Controls
 
                 if (Day.IsPreview)
                     return "IsPreview";
+
+                if (Day.IsInRange == false)
+                    return "IsNotInRange";
 
                 if (Day.IsWeekend)
                     return "IsWeekend";
