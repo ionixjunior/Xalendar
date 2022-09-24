@@ -49,14 +49,16 @@ namespace Xalendar.View.Controls
                 {
                     if (args.Action == NotifyCollectionChangedAction.Add)
                     {
-                        var notifiedEvents = args.NewItems.Cast<ICalendarViewEvent>();
-                        AddEvents(calendarView, notifiedEvents);
+                        var notifiedEvents = args.NewItems?.Cast<ICalendarViewEvent>();
+                        if (notifiedEvents != null)
+                            AddEvents(calendarView, notifiedEvents);
                     }
 
                     if (args.Action == NotifyCollectionChangedAction.Remove)
                     {
-                        var notifiedEvents = args.OldItems.Cast<ICalendarViewEvent>();
-                        RemoveEvents(calendarView, notifiedEvents);
+                        var notifiedEvents = args.OldItems?.Cast<ICalendarViewEvent>();
+                        if (notifiedEvents != null)
+                            RemoveEvents(calendarView, notifiedEvents);
                     }
 
                     if (args.Action == NotifyCollectionChangedAction.Reset)
@@ -64,9 +66,10 @@ namespace Xalendar.View.Controls
 
                     if (args.Action == NotifyCollectionChangedAction.Replace)
                     {
-                        var oldEventsNotified = args.OldItems.Cast<ICalendarViewEvent>();
-                        var newEventsNotified = args.NewItems.Cast<ICalendarViewEvent>();
-                        ReplaceEvents(calendarView, oldEventsNotified, newEventsNotified);
+                        var oldEventsNotified = args.OldItems?.Cast<ICalendarViewEvent>();
+                        var newEventsNotified = args.NewItems?.Cast<ICalendarViewEvent>();
+                        if (oldEventsNotified != null && newEventsNotified != null)
+                            ReplaceEvents(calendarView, oldEventsNotified, newEventsNotified);
                     }
                 }
             }
