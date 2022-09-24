@@ -45,7 +45,7 @@ namespace Xalendar.View.Controls
                 if (newvalue is IEnumerable<ICalendarViewEvent> events)
                     AddEvents(calendarView, events);
                 
-                void OnEventsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+                void OnEventsCollectionChanged(object? _, NotifyCollectionChangedEventArgs args)
                 {
                     if (args.Action == NotifyCollectionChangedAction.Add)
                     {
