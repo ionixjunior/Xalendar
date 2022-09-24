@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
 using System.Runtime.CompilerServices;
+using XmlnsPrefix = Microsoft.Maui.Controls.XmlnsPrefixAttribute;
 
 [assembly: InternalsVisibleTo("Xalendar.Tests")]
 
