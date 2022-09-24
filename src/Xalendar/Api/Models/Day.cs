@@ -49,7 +49,7 @@ namespace Xalendar.Api.Models
 
         public bool IsInRange { get; private set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Day dayToCompare)
                 return dayToCompare.DateTime.Date.Ticks == DateTime.Date.Ticks;
