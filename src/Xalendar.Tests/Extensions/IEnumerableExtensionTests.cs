@@ -8,7 +8,7 @@ namespace Xalendar.Tests.Extensions
     [TestFixture]
     public class IEnumerableExtensionTests
     {
-        private IEnumerable<int>? _list;
+        private IEnumerable<int> _list;
         
         [Test]
         public void ShouldBeTrueWhenListIsNull()
