@@ -253,7 +253,7 @@ namespace Xalendar.View.Controls
                 {
                     var calendarDay = new CalendarDay();
                     calendarDay.DayTapped += CalendarDayOnDayTapped;
-                    CalendarDaysContainer.Children.Add(calendarDay, column, row);
+                    CalendarDaysContainer.Add(calendarDay, column, row);
 
                     if (++column > 6)
                     {
@@ -268,7 +268,7 @@ namespace Xalendar.View.Controls
                 foreach (var dayOfWeek in _monthContainer.DaysOfWeek)
                 {
                     var calendarDayOfWeek = new CalendarDayOfWeek();
-                    CalendarDaysOfWeekContainer.Children.Add(calendarDayOfWeek, column++, 0);
+                    CalendarDaysOfWeekContainer.Add(calendarDayOfWeek, column++, 0);
                     calendarDayOfWeek.UpdateData(dayOfWeek);
                 }
 
