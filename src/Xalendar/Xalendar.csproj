@@ -24,10 +24,6 @@
     <PackageIcon>standalone-logo.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
-  </ItemGroup>
   
   <ItemGroup>
     <None Include="..\..\assets\standalone-logo.png">
