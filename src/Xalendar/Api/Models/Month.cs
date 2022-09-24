@@ -30,7 +30,7 @@ namespace Xalendar.Api.Models
         public static bool operator !=(Month left, Month right) =>
             !left.Equals(right);
 
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             (obj is Month month) && (this.Equals(month));
 
         public override int GetHashCode()
