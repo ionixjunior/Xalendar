@@ -4,7 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="CalendarView Sample">
-
     <ContentPage.Content>
         <ListView
             HasUnevenRows="true"
@@ -14,81 +13,19 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <ViewCell.View>
-                            <Frame
-                                Margin="10"
-                                Padding="15,0"
-                                BorderColor="#dddddd"
-                                HasShadow="false"
-                                HeightRequest="50">
-                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
-                            </Frame>
-                        </ViewCell.View>
+                        <Border
+                            Margin="10"
+                            HeightRequest="50"
+                            Stroke="#dddddd"
+                            StrokeThickness="4"
+                            StrokeShape="RoundRectangle 5,5,5,5"
+                            Padding="15,0"
+                            HorizontalOptions="Fill">
+                            <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage.Content>
-
-    <!--
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
-
-            <xal:Planning x:Key="Planning" />
-            <xal:TaskManagement x:Key="TaskManagement" />
-            <xal:Amazonas x:Key="Amazonas" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <ScrollView>
-        <StackLayout Margin="0,20,0,0">
-            <xal:CalendarView
-                DaySelected="OnDaySelected"
-                Events="{Binding Events}"
-                MonthChanged="OnMonthChanged"
-                Theme="{StaticResource Amazonas}" />
-
-            <ListView
-                Footer=""
-                HeightRequest="140"
-                IsVisible="{Binding EventsOfDay.Count, Converter={StaticResource IntToBooleanConverter}}"
-                ItemsSource="{Binding EventsOfDay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button
-                Margin="20,0"
-                BackgroundColor="DodgerBlue"
-                Clicked="OnRandomButtonClick"
-                Text="Add random event"
-                TextColor="White" />
-
-            <Button
-                Margin="20,0"
-                BackgroundColor="Red"
-                Clicked="OnRemoveButtonClick"
-                Text="Remove event"
-                TextColor="White" />
-
-            <Button
-                Margin="20,0"
-                BackgroundColor="Indigo"
-                Command="{Binding RemoveAllEventsCommand}"
-                Text="Remove all events"
-                TextColor="White" />
-
-            <Button
-                Margin="20,0"
-                BackgroundColor="Goldenrod"
-                Command="{Binding ReplaceEventCommand}"
-                Text="Replace event"
-                TextColor="White" />
-        </StackLayout>
-    </ScrollView>
-    -->
 </ContentPage>
