@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="Xalendar.Sample.Views.CustomTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="clr-namespace:Xalendar.Sample.Themes"
+    xmlns:xal="http://xalendar.com/schemas/xaml">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <themes:CustomTheme x:Key="CustomTheme" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <xal:CalendarView Theme="{StaticResource CustomTheme}" />
+    </ContentPage.Content>
+</ContentPage>

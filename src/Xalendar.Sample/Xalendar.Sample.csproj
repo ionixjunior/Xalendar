@@ -45,4 +45,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Xalendar\Xalendar.csproj" />
+	</ItemGroup>
 </Project>
