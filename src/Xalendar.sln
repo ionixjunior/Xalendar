@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xalendar", "Xalendar\Xalend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Tests", "Xalendar.Tests\Xalendar.Tests.csproj", "{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xalendar.Sample", "Xalendar.Sample\Xalendar.Sample.csproj", "{7C90546B-4E04-4B45-BD55-EFB3BB905443}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12D1D300-6EC8-4E82-ACCC-0C22F1D456C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C90546B-4E04-4B45-BD55-EFB3BB905443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C90546B-4E04-4B45-BD55-EFB3BB905443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C90546B-4E04-4B45-BD55-EFB3BB905443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C90546B-4E04-4B45-BD55-EFB3BB905443}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
