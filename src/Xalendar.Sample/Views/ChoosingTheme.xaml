@@ -12,16 +12,16 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <ViewCell.View>
-                            <Frame
-                                Margin="10"
-                                Padding="15,0"
-                                BorderColor="#dddddd"
-                                HasShadow="false"
-                                HeightRequest="50">
-                                <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
-                            </Frame>
-                        </ViewCell.View>
+                        <Border
+                            Margin="10"
+                            HeightRequest="50"
+                            Stroke="#dddddd"
+                            StrokeThickness="4"
+                            StrokeShape="RoundRectangle 5,5,5,5"
+                            Padding="15,0"
+                            HorizontalOptions="Fill">
+                            <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
